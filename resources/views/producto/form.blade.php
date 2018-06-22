@@ -23,7 +23,7 @@
     </div>
     <div class="col">
         <div class="md-form">
-            <textarea type="text" id="descripcion" name="descripcion" class="md-textarea form-control" rows="2" value="{{ $producto->descripcion or '' }}"></textarea>
+            <textarea type="text" id="descripcion" name="descripcion" class="md-textarea form-control" rows="2">{{ $producto->descripcion or '' }}</textarea>
             <label for="descripcion">Descripcion</label>
         </div>
     </div>
