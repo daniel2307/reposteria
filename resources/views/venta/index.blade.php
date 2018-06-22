@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ url('/admin/categoriaproducto/create') }}" class="btn btn-success" title="Add New Categoria Producto">
-    <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nueva Categoria
+<a href="{{ url('/admin/venta/create') }}" class="btn btn-success" title="Agregar Nueva Venta">
+    <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nueva Venta
 </a>
 
 <div class="table-responsive-lg">
@@ -12,10 +12,23 @@
                 <th class="th-sm">ID
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">Nombre
+                <th class="th-sm">Cliente
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">Imagen
+                <th class="th-sm">Fecha
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Hora
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Total
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Descuento
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Total Importe
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">accion
                 </th>
@@ -27,8 +40,12 @@
         <tfoot>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Imagen</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Total</th>
+                <th>Descuento</th>
+                <th>Total Importe</th>
                 <th>accion</th>
             </tr>
         </tfoot>
@@ -50,13 +67,15 @@
         $('#dtModel').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url("categoriaproducto/getDataTable") }}',
+            ajax: '{{ url("venta/getDataTable") }}',
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'nombre', name: 'nombre'},
-                {data: 'imagen', name: 'imagen', render: function (data, type, full, meta) {
-                    return '<img src="/img/categoria/'+(data?data:'sid.jpg')+'" alt="imagen" height="100px">';
-                }, orderable: false, searchable: false},
+                {data: 'nombre', name: 'cliente.nombre'},
+                {data: 'fecha', name: 'fecha'},
+                {data: 'hora', name: 'hora'},
+                {data: 'total', name: 'total'},
+                {data: 'descuento', name: 'descuento'},
+                {data: 'total_importe', name: 'total_importe'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

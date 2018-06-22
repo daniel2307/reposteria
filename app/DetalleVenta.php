@@ -27,5 +27,15 @@ class DetalleVenta extends Model
      */
     protected $fillable = ['cantidad', 'subtotal', 'venta_id', 'producto_id'];
 	
-	public $timestamps = false;
+    public $timestamps = false;
+    
+    public function venta()
+    {
+        return $this->hasOne('App\Venta', 'id', 'venta_id');
+    }  
+    
+    public function producto()
+    {
+        return $this->hasOne('App\Producto', 'id', 'producto_id');
+    } 
 }

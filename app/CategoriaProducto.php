@@ -25,7 +25,7 @@ class CategoriaProducto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'imagen'];
+    protected $fillable = ['nombre', 'imagen', 'estado'];
 
     public $timestamps = false;
     

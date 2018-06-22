@@ -31,5 +31,13 @@ class Cliente extends Authenticatable
      */
     protected $fillable = ['nombre', 'ci', 'direccion', 'telefono', 'celular', 'email', 'password', 'tipo'];
 
-    
+    public function venta()
+    {
+        return $this->hasMany('App\Venta', 'cliente_id');
+    }
+
+    public function pedido()
+    {
+        return $this->hasMany('App\Pedido', 'cliente_id');
+    }
 }

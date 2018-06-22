@@ -34,7 +34,7 @@ class PedidoController extends Controller
             $pedido = Pedido::latest()->paginate($perPage);
         }
 
-        return view('admin.pedido.index', compact('pedido'));
+        return view('pedido.index', compact('pedido'));
     }
 
     /**
@@ -44,7 +44,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('admin.pedido.create');
+        return view('pedido.create');
     }
 
     /**
@@ -91,7 +91,7 @@ class PedidoController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
 
-        return view('admin.pedido.show', compact('pedido'));
+        return view('pedido.show', compact('pedido'));
     }
 
     /**
@@ -105,7 +105,7 @@ class PedidoController extends Controller
     {
         $pedido = Pedido::findOrFail($id);
 
-        return view('admin.pedido.edit', compact('pedido'));
+        return view('pedido.edit', compact('pedido'));
     }
 
     /**

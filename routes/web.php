@@ -47,6 +47,7 @@ Route::get('producto/getDataTable', 'ProductoController@getDataTable');
  */
 // Route::middleware(['auth', 'rol:vendedor']) ->group(function (){
     Route::resource('admin/venta', 'VentaController');
+    Route::get('venta/getDataTable', 'VentaController@getDataTable');
     Route::post('admin/cliente/searchByCi', 'ClienteController@searchByCi');
     
 // });

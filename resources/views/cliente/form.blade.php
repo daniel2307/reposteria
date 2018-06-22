@@ -2,14 +2,14 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $cliente->nombre or '' }}">
-            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $cliente->nombre or '' }}" autcomplete="off" required>
+            <label for="nombre">Nombre <b class="red-text">*</b></label>
         </div>
     </div>
     <div class="col">
         <div class="md-form">
-            <input type="text" id="ci" name="ci" class="form-control" value="{{ $cliente->ci or '' }}">
-            <label for="ci">CI</label>
+            <input type="text" id="ci" name="ci" class="form-control" value="{{ $cliente->ci or '' }}" autcomplete="off" required>
+            <label for="ci">CI <b class="red-text">*</b></label>
         </div>
     </div>
 </div>
@@ -17,13 +17,13 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $cliente->direccion or '' }}">
+            <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $cliente->direccion or '' }}" autcomplete="off">
             <label for="direccion">Direccion</label>
         </div>
     </div>
     <div class="col">
         <div class="md-form">
-            <input type="text" id="telefono" name="telefono" class="form-control" value="{{ $cliente->telefono or '' }}">
+            <input type="text" id="telefono" name="telefono" class="form-control" value="{{ $cliente->telefono or '' }}" autcomplete="off">
             <label for="telefono">Telefono</label>
         </div>
     </div>
@@ -32,13 +32,13 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="celular" name="celular" class="form-control" value="{{ $cliente->celular or '' }}">
+            <input type="text" id="celular" name="celular" class="form-control" value="{{ $cliente->celular or '' }}" autcomplete="off">
             <label for="celular">Celular</label>
         </div>
     </div>
     <div class="col">
         <div class="md-form">
-            <input type="email" id="email" name="email" class="form-control" value="{{ $cliente->email or '' }}">
+            <input type="email" id="email" name="email" class="form-control" value="{{ $cliente->email or '' }}" autcomplete="off">
             <label for="email">Email</label>
         </div>
     </div>

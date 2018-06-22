@@ -2,14 +2,14 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $producto->nombre or '' }}">
-            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $producto->nombre or '' }}" required>
+            <label for="nombre">Nombre <b class="red-text">*</b></label>
         </div>
     </div>
     <div class="col">
         <div class="md-form">
-            <input type="number" id="costo" name="costo" class="form-control" value="{{ $producto->costo or '' }}">
-            <label for="costo">Costo</label>
+            <input type="number" id="costo" name="costo" class="form-control" value="{{ $producto->costo or '' }}" required>
+            <label for="costo">Costo <b class="red-text">*</b></label>
         </div>
     </div>
 </div>
@@ -17,8 +17,8 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{ $producto->cantidad or '' }}">
-            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{ $producto->cantidad or '' }}" required>
+            <label for="cantidad">Cantidad <b class="red-text">*</b></label>
         </div>
     </div>
     <div class="col">
@@ -36,15 +36,13 @@
             <label for="duracion">Duracion</label>
         </div>
     </div>
-    <div class="col">
-        <select class="mdb-select colorful-select dropdown-primary" name="categoria_producto_id" id="categoria_producto_id">
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3" selected>Option 3</option>
-            <option value="4">Option 4</option>
-            <option value="5">Option 5</option>
+    <div class="col text-left">
+        <select class="mdb-select colorful-select dropdown-primary" name="categoria_producto_id" id="categoria_producto_id" required>
+            @foreach($categoria as $key => $value)
+            <option value="{{ $value->id }}">{{ $value->nombre }}</option>
+            @endforeach
         </select>
-        <label for="categoria_producto_id">Categoria</label>
+        <label for="categoria_producto_id">Categoria <b class="red-text">*</b></label>
     </div>
 </div>  
 

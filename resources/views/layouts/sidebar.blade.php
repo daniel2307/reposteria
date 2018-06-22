@@ -71,14 +71,21 @@
 
                 <li class="menu-item">
                     <a class="collapsible-header waves-effect" href="{{ url('admin/venta') }}">
-                        <i class="fas fa-photo"></i>
+                        <i class="fas fa-money mr-2"></i>
                         Venta
                     </a>
                 </li>
 
                 <li class="menu-item">
+                    <a class="collapsible-header waves-effect" href="{{ url('admin/pedido') }}">
+                        <i class="fas fa-email mr-2"></i>
+                        Pedidos
+                    </a>
+                </li>
+
+                <li class="menu-item">
                     <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fa fa-css3"></i>CSS<i class="fa fa-angle-down rotate-icon"></i>
+                        <i class="fas fa-print mr-2"></i>Reportes<i class="fa fa-angle-down rotate-icon"></i>
                     </a>
                     <div class="collapsible-body">
                         <ul class="sub-menu">

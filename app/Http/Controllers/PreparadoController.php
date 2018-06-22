@@ -37,7 +37,7 @@ class PreparadoController extends Controller
             $preparado = Preparado::latest()->paginate($perPage);
         }
 
-        return view('admin.preparado.index', compact('preparado'));
+        return view('preparado.index', compact('preparado'));
     }
 
     /**
@@ -50,7 +50,7 @@ class PreparadoController extends Controller
         $productos = Producto::all();
         $users = User::all();
         $pedidos = Pedido::where(['estado'=>'espera'])->get();
-        return view('admin.preparado.create', compact('productos', 'users', 'pedidos'));
+        return view('preparado.create', compact('productos', 'users', 'pedidos'));
     }
 
     /**
@@ -97,7 +97,7 @@ class PreparadoController extends Controller
     {
         $preparado = Preparado::findOrFail($id);
 
-        return view('admin.preparado.show', compact('preparado'));
+        return view('preparado.show', compact('preparado'));
     }
 
     /**
@@ -111,7 +111,7 @@ class PreparadoController extends Controller
     {
         $preparado = Preparado::findOrFail($id);
 
-        return view('admin.preparado.edit', compact('preparado'));
+        return view('preparado.edit', compact('preparado'));
     }
 
     /**

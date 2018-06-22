@@ -31,7 +31,7 @@ class PromocionController extends Controller
             $promocion = Promocion::latest()->paginate($perPage);
         }
 
-        return view('admin.promocion.index', compact('promocion'));
+        return view('promocion.index', compact('promocion'));
     }
 
     /**
@@ -41,7 +41,7 @@ class PromocionController extends Controller
      */
     public function create()
     {
-        return view('admin.promocion.create');
+        return view('promocion.create');
     }
 
     /**
@@ -86,7 +86,7 @@ class PromocionController extends Controller
     {
         $promocion = Promocion::findOrFail($id);
 
-        return view('admin.promocion.show', compact('promocion'));
+        return view('promocion.show', compact('promocion'));
     }
 
     /**
@@ -100,7 +100,7 @@ class PromocionController extends Controller
     {
         $promocion = Promocion::findOrFail($id);
 
-        return view('admin.promocion.edit', compact('promocion'));
+        return view('promocion.edit', compact('promocion'));
     }
 
     /**

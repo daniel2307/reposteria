@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Producto;
+use App\CategoriaProducto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -17,7 +18,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return view("admin.producto.index");
+        return view("producto.index");
     }
     
 
@@ -28,7 +29,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('admin.producto.create');
+        $categoria = CategoriaProducto::where('estado', '=', 'activo')->get();
+        return view('producto.create', compact('categoria'));
     }
 
     /**
@@ -59,7 +61,7 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
 
-        return view('admin.producto.show', compact('producto'));
+        return view('producto.show', compact('producto'));
     }
 
     /**
@@ -72,8 +74,8 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
-
-        return view('admin.producto.edit', compact('producto'));
+        $categoria = CategoriaProducto::where('estado', '=', 'activo')->get();
+        return view('producto.edit', compact('producto', 'categoria'));
     }
 
     /**

@@ -41,7 +41,7 @@ class CategoriaProductoController extends Controller
      */
     public function store(Request $request)
     {
-
+        $nombre_img = NULL;
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
 
@@ -50,16 +50,18 @@ class CategoriaProductoController extends Controller
             $path = public_path('img\categoria');
 
             $imagen->move($path, $nombre_img);
-            $variable = CategoriaProducto::create([
-                'nombre' => $request->nombre,
-                'imagen' => $nombre_img,
-            ]);
+        }
+        $res = CategoriaProducto::create([
+            'nombre' => $request->nombre,
+            'imagen' => $nombre_img,
+            'estado' => 'activo',
+        ]);
+        if ($res) {
             return redirect('admin/categoriaproducto');
         }
         else {
-            return view('admin/categoriaproducto/create');
+            return redirect('admin/categoriaproducto/create');
         }
-
             
     }
 
@@ -104,9 +106,11 @@ class CategoriaProductoController extends Controller
         $categoriaproducto = CategoriaProducto::findOrFail($id);
         $categoriaproducto->nombre = $request->nombre;
         if ($request->hasFile('imagen')) {
-            // elimina la imagen
-            Storage::disk('local')->delete("categoria/". $categoriaproducto->imagen);
-
+            if ($categoriaproducto->imagen) {
+                // elimina la imagen
+                Storage::disk('local')->delete("categoria/". $categoriaproducto->imagen);
+            }
+                
             $imagen = $request->file('imagen');
 
             $nombre_img = str_random(20) . '.' . $imagen->getClientOriginalExtension();
@@ -131,15 +135,18 @@ class CategoriaProductoController extends Controller
     public function destroy($id)
     {
         $categoriaproducto = CategoriaProducto::findOrFail($id);
-        CategoriaProducto::destroy($id);
-        Storage::disk('local')->delete("categoria/". $categoriaproducto->imagen);
+        $categoriaproducto->estado = "inactivo";
+        $categoriaproducto->save();
+        // CategoriaProducto::destroy($id);
+        // if ($categoriaproducto->imagen) {
+        //     Storage::disk('local')->delete("categoria/". $categoriaproducto->imagen);
+        // }
         return redirect('admin/categoriaproducto');
     }
 
     public function getDataTable()
     {
-        $model = CategoriaProducto::select(['id', 'nombre', 'imagen'])->orderBy('id', 'desc');
-        $path = storage_path('app\categoria');
+        $model = CategoriaProducto::select(['id', 'nombre', 'imagen'])->where(['estado' => 'activo']);
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 

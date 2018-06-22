@@ -2,8 +2,8 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $categoriaproducto->nombre or '' }}" required>
-            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $categoriaproducto->nombre or '' }}" autocomplete="off" required>
+            <label for="nombre">Nombre <b class="red-text">*</b></label>
         </div>
     </div>
     <div class="col">

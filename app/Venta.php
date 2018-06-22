@@ -27,5 +27,18 @@ class Venta extends Model
      */
     protected $fillable = ['fecha', 'hora', 'total', 'descuento', 'total_importe', 'iva', 'estado', 'cliente_id', 'users_id'];
 
-    
+    public function cliente()
+    {
+        return $this->hasOne('App\Cliente', 'id', 'cliente_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'users_id');
+    }
+
+    public function detalle_venta()
+    {
+        return $this->hasMany('App\DetalleVenta', 'venta_id');
+    }
 }

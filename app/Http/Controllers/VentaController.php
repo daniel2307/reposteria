@@ -19,27 +19,9 @@ class VentaController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $venta = Venta::where('fecha', 'LIKE', "%$keyword%")
-                ->orWhere('hora', 'LIKE', "%$keyword%")
-                ->orWhere('total', 'LIKE', "%$keyword%")
-                ->orWhere('descuento', 'LIKE', "%$keyword%")
-                ->orWhere('total_importe', 'LIKE', "%$keyword%")
-                ->orWhere('iva', 'LIKE', "%$keyword%")
-                ->orWhere('estado', 'LIKE', "%$keyword%")
-                ->orWhere('cliente_id', 'LIKE', "%$keyword%")
-                ->orWhere('users_id', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $venta = Venta::latest()->paginate($perPage);
-        }
-
-        return view('admin.venta.index', compact('venta'));
+        return view('venta.index');
     }
 
     /**
@@ -50,7 +32,7 @@ class VentaController extends Controller
     public function create()
     {
         $productos = Producto::get();
-        return view('admin.venta.create', compact('productos'));
+        return view('venta.create', compact('productos'));
     }
 
     /**
@@ -114,8 +96,8 @@ class VentaController extends Controller
     public function show($id)
     {
         $venta = Venta::findOrFail($id);
-
-        return view('admin.venta.show', compact('venta'));
+        dd($venta->cliente->nombre);
+        return view('venta.show', compact('venta'));
     }
 
     /**
@@ -129,7 +111,7 @@ class VentaController extends Controller
     {
         $venta = Venta::findOrFail($id);
 
-        return view('admin.venta.edit', compact('venta'));
+        return view('venta.edit', compact('venta'));
     }
 
     /**
@@ -163,5 +145,21 @@ class VentaController extends Controller
         Ventum::destroy($id);
 
         return redirect('admin/venta')->with('flash_message', 'Ventum deleted!');
+    }
+
+    public function getDataTable()
+    {
+        $model = Venta::select(['venta.id', 'cliente.nombre', 'fecha', 'hora', 'total', 'descuento', 'total_importe'])
+        ->join('cliente', 'venta.cliente_id', '=', 'cliente.id')
+        ->where(['venta.estado' => 'activo']);
+        return datatables()->of($model)
+            ->addColumn('action', function ($model) {
+                return 
+                '<a href="/admin/venta/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
+            ->make(true);
+
     }
 }

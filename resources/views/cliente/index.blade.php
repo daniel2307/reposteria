@@ -9,7 +9,7 @@
     <table id="dtModel" class="table table-striped" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="th-sm">id
+                <th class="th-sm">ID
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">Nombre
@@ -39,7 +39,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>id</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>CI</th>
                 <th>Direccion</th>
