@@ -93,7 +93,7 @@
                 </div>
             </div>
             
-            <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'GUARDAR' }}">
+            <input class="btn btn-primary btn-block" type="submit" value="{{ $submitButtonText or 'GUARDAR' }}">
 
         </form>
 
@@ -103,6 +103,11 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-venta').addClass('current-menu-item');
+        $('#a-venta').addClass('active');
+    });
+
     function agregar(){
         var producto_id = $('#producto').val();
         var producto = $("#producto option:selected").text()

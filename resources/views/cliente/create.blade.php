@@ -21,3 +21,11 @@
 
 </div>
 @endsection
+@push('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-cliente').addClass('current-menu-item');
+        $('#a-cliente').addClass('active');
+    });
+</script>
+@endpush

@@ -22,3 +22,11 @@
 
 </div>
 @endsection
+@push('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-categoria-producto').addClass('current-menu-item');
+        $('#a-categoria-producto').addClass('active');
+    });
+</script>
+@endpush

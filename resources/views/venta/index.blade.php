@@ -64,6 +64,9 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#cmi-venta').addClass('current-menu-item');
+        $('#a-venta').addClass('active');
+
         $('#dtModel').DataTable({
             processing: true,
             serverSide: true,

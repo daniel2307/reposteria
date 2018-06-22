@@ -51,3 +51,11 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-producto').addClass('current-menu-item');
+        $('#a-producto').addClass('active');
+    });
+</script>
+@endpush
