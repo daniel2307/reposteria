@@ -1,0 +1,16 @@
+https://yajrabox.com/docs/laravel-datatables/master/add-column
+https://datatables.yajrabox.com/eloquent/add-edit-remove-column
+
+
+// return datatables()->of(User::query())->toJson();
+// return datatables()->of(DB::table('users'))->toJson();
+// return datatables()->of(User::all())->toJson();
+
+// return datatables()->eloquent(User::query())->toJson();
+// return datatables()->query(DB::table('users'))->toJson();
+// return datatables()->collection(User::all())->toJson();
+
+// return datatables(User::query())->toJson();
+// return datatables(DB::table('users'))->toJson();
+// return datatables(User::all())->toJson();
+
