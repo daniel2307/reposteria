@@ -41,23 +41,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-
-        $v = \Validator::make($requestData, [
-            'nombre' => 'required|string|max:255',
-            'direccion' => 'required|string|max:255',
-            'telefono' => 'int',
-            'celular' => 'int',
-            'num_aux' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'tipo' => 'required|string|max:255',
-        ]);
- 
-        if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }
-        
+        $requestData = array_add($requestData, 'tipo', 'comun');
         Cliente::create($requestData);
         return redirect('admin/cliente')->with('flash_message', 'Cliente added!');
     }
