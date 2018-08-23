@@ -11,15 +11,16 @@
 
                         <form method="POST" action="{{ url('/admin/venta') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data" onsubmit="return validar_formulario();">
                             {{ csrf_field() }}
-
+                            <br>
+                            <br>
                             <div class="form-group">
-                                <label for="producto" class="col-md-4 control-label">Producto:</label>
                                 <div class="col-md-6">
-                                    <select  class="form-control" id="producto">
+                                    <select class="mdb-select colorful-select dropdown-primary" name="producto" id="producto">
                                         @foreach($productos as $key => $value)
                                             <option value="{{ $value->id }}" data-price="{{ $value->costo }}">{{ $value->nombre }}</option>
                                         @endforeach
                                     </select>
+                                    <label for="producto">Producto</label>
                                 </div>
                             </div>
                             <div class="form-group">

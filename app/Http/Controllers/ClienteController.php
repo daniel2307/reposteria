@@ -122,6 +122,11 @@ class ClienteController extends Controller
         return redirect('admin/cliente')->with('flash_message', 'Cliente deleted!');
     }
 
+    public function searchByCi(Request $request){
+        $cliente = Cliente::where('ci', '=', $request->ci)->first();
+        return response()->json(['cliente' => $cliente]);
+    }
+    
     public function getDataTable()
     {
         $model = Cliente::select(['id', 'nombre', 'ci', 'direccion', 'telefono', 'celular', 'email']);
