@@ -96,7 +96,6 @@ class VentaController extends Controller
     public function show($id)
     {
         $venta = Venta::findOrFail($id);
-        dd($venta->cliente->nombre);
         return view('venta.show', compact('venta'));
     }
 
@@ -110,7 +109,6 @@ class VentaController extends Controller
     public function edit($id)
     {
         $venta = Venta::findOrFail($id);
-
         return view('venta.edit', compact('venta'));
     }
 

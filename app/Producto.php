@@ -25,7 +25,7 @@ class Producto extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'categoria_producto_id', 'imagen'];
+    protected $fillable = ['categoria_producto_id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'imagen'];
 
     public function detalle_venta()
     {

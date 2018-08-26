@@ -25,7 +25,7 @@ class DetalleVenta extends Model
      *
      * @var array
      */
-    protected $fillable = ['cantidad', 'subtotal', 'venta_id', 'producto_id'];
+    protected $fillable = ['venta_id', 'producto_id', 'cantidad', 'subtotal'];
 	
     public $timestamps = false;
     

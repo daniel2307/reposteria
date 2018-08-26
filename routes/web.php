@@ -38,7 +38,7 @@ Route::get('producto/getDataTable', 'ProductoController@getDataTable');
     Route::resource('admin/cliente', 'ClienteController');
     Route::get('cliente/getDataTable', 'ClienteController@getDataTable');
     // Route::resource('admin/producto', 'ProductoController');
-    Route::resource('admin/pedido', 'PedidoController');
+    // Route::resource('admin/pedido', 'PedidoController');
     Route::resource('admin/promocion', 'PromocionController');
 // });
 

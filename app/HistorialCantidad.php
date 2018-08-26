@@ -25,7 +25,7 @@ class HistorialCantidad extends Model
      *
      * @var array
      */
-    protected $fillable = ['cantidad_anterior', 'cantidad_actual', 'fecha', 'hora', 'tipo', 'producto_id'];
+    protected $fillable = ['producto_id', 'cantidad_anterior', 'cantidad_actual', 'fecha', 'tipo'];
 
     
 }

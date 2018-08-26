@@ -25,7 +25,7 @@ class Pedido extends Model
      *
      * @var array
      */
-    protected $fillable = ['saldo', 'estado', 'fecha', 'fecha_entrega', 'hora_entrega', 'forma_de_pago', 'iva', 'cliente_id'];
+    protected $fillable = ['cliente_id', 'fecha', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe', 'iva', 'tipo', 'estado', 'forma_de_pago', 'comprobante'];
 
     
 }

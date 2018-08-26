@@ -96,6 +96,5 @@
         $('#dtModel_wrapper .mdb-select').material_select();
         $('#dtModel_wrapper .dataTables_filter').find('label').remove();
     });
-
 </script>
 @endpush

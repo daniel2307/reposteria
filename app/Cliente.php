@@ -9,7 +9,7 @@ class Cliente extends Authenticatable
 {
     use Notifiable;
 
-     protected $guard = 'api';
+    protected $guard = 'api';
     /**
      * The database table used by the model.
      *
@@ -29,7 +29,7 @@ class Cliente extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'ci', 'direccion', 'telefono', 'celular', 'email', 'password', 'tipo'];
+    protected $fillable = ['nombre', 'ci', 'password', 'direccion', 'telefono', 'celular', 'email', 'tipo'];
 
     public function venta()
     {

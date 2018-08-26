@@ -25,7 +25,7 @@ class Promocion extends Model
      *
      * @var array
      */
-    protected $fillable = ['descuento', 'fecha', 'duracion', 'estado', 'producto_id'];
+    protected $fillable = ['producto_id', 'descuento', 'fecha', 'duracion', 'unidad', 'estado'];
 
     
 }

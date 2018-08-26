@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function venta()
     {
-        return $this->hasMany('App\Centa', 'users_id');
+        return $this->hasMany('App\Venta', 'users_id');
     }
 }
