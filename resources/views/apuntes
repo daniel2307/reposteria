@@ -14,3 +14,7 @@ https://datatables.yajrabox.com/eloquent/add-edit-remove-column
 // return datatables(DB::table('users'))->toJson();
 // return datatables(User::all())->toJson();
 
+api/login => email y nommbre del cliente
+api/updateCliente => todos los datos que tenga el cliente en su form
+
+api/pedido => manda los datos del pedido ya sea promocion o productos normales, para los 2 seria lo mismo

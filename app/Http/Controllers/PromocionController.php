@@ -15,23 +15,9 @@ class PromocionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $promocion = Promocion::where('descuento', 'LIKE', "%$keyword%")
-                ->orWhere('fecha', 'LIKE', "%$keyword%")
-                ->orWhere('duracion', 'LIKE', "%$keyword%")
-                ->orWhere('estado', 'LIKE', "%$keyword%")
-                ->orWhere('producto_id', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $promocion = Promocion::latest()->paginate($perPage);
-        }
-
-        return view('promocion.index', compact('promocion'));
+        return view('promocion.index');
     }
 
     /**
@@ -148,5 +134,13 @@ class PromocionController extends Controller
         Promocion::destroy($id);
 
         return redirect('admin/promocion')->with('flash_message', 'Promocion deleted!');
+    }
+
+    public function getPromocion() 
+    {
+        return Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.descripcion', 'producto.imagen', 'descuento', 'promocion.duracion', 'promocion.unidad')
+        ->join('producto', 'promocion.producto_id', '=', 'producto.id')
+        ->where(['estado' => 'vigente'])
+        ->get();
     }
 }

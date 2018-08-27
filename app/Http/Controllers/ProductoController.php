@@ -125,4 +125,11 @@ class ProductoController extends Controller
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);
     }
+
+    public function getProductosByCategoria($categoria_id)
+    {
+        return Producto::select('id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'imagen')
+        ->where(['categoria_producto_id' => $categoria_id])
+        ->get();
+    }
 }

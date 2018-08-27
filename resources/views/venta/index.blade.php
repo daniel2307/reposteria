@@ -18,9 +18,6 @@
                 <th class="th-sm">Fecha
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">Hora
-                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
-                </th>
                 <th class="th-sm">Total
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
@@ -42,7 +39,6 @@
                 <th>ID</th>
                 <th>Cliente</th>
                 <th>Fecha</th>
-                <th>Hora</th>
                 <th>Total</th>
                 <th>Descuento</th>
                 <th>Total Importe</th>
@@ -75,7 +71,6 @@
                 {data: 'id', name: 'id'},
                 {data: 'nombre', name: 'cliente.nombre'},
                 {data: 'fecha', name: 'fecha'},
-                {data: 'hora', name: 'hora'},
                 {data: 'total', name: 'total'},
                 {data: 'descuento', name: 'descuento'},
                 {data: 'total_importe', name: 'total_importe'},

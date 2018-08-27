@@ -27,10 +27,6 @@
                         <td>{{ $venta->fecha }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Hora</th>
-                        <td>{{ $venta->hora }}</td>
-                    </tr>
-                    <tr>
                         <th colspan="2">
                             <table class="table">
                                 <thead>

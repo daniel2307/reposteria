@@ -40,13 +40,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="email" class="form-control" name="cliente_nombre" id="cliente_nombre" placeholder="...">
+                                        <input type="text" class="form-control" name="cliente_nombre" id="cliente_nombre" placeholder="...">
                                         <label for="cliente_nombre">Nombre Cliente</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form form-group">
-                                        <input type="email" class="form-control" name="cliente_ci" id="cliente_ci" placeholder="...">
+                                        <input type="text" class="form-control" name="cliente_ci" id="cliente_ci" placeholder="...">
                                         <label for="cliente_ci">CI Cliente</label>
                                     </div>
                                 </div>
@@ -92,8 +92,10 @@
                     </div>
                 </div>
             </div>
+            <div class="text-right">
+                <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'GUARDAR' }}">
+            </div>
             
-            <input class="btn btn-primary btn-block" type="submit" value="{{ $submitButtonText or 'GUARDAR' }}">
 
         </form>
 

@@ -58,8 +58,8 @@ class VentaController extends Controller
             }
             // insertamos la venta
             $venta = new Venta;
-            $venta->fecha = date("Y-m-d");
-            $venta->hora = date('h:i:s');
+            $venta->fecha = date("Y-m-d H:i:s");
+            // $venta->hora = date('h:i:s');
             $venta->total = $request->total;
             $venta->descuento = $request->descuento;
             $venta->total_importe = $request->total_importe;
@@ -125,10 +125,10 @@ class VentaController extends Controller
         
         $requestData = $request->all();
         
-        $venta = Ventum::findOrFail($id);
+        $venta = Venta::findOrFail($id);
         $venta->update($requestData);
 
-        return redirect('admin/venta')->with('flash_message', 'Ventum updated!');
+        return redirect('admin/venta')->with('flash_message', 'Venta updated!');
     }
 
     /**
@@ -140,14 +140,14 @@ class VentaController extends Controller
      */
     public function destroy($id)
     {
-        Ventum::destroy($id);
+        Venta::destroy($id);
 
-        return redirect('admin/venta')->with('flash_message', 'Ventum deleted!');
+        return redirect('admin/venta')->with('flash_message', 'Venta deleted!');
     }
 
     public function getDataTable()
     {
-        $model = Venta::select(['venta.id', 'cliente.nombre', 'fecha', 'hora', 'total', 'descuento', 'total_importe'])
+        $model = Venta::select(['venta.id', 'cliente.nombre', 'fecha', 'total', 'descuento', 'total_importe'])
         ->join('cliente', 'venta.cliente_id', '=', 'cliente.id')
         ->where(['venta.estado' => 'activo']);
         return datatables()->of($model)

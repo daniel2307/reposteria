@@ -159,4 +159,9 @@ class CategoriaProductoController extends Controller
 
     }
 
+    public function getCategoria() 
+    {
+        return CategoriaProducto::select('id', 'nombre', 'imagen')->where(['estado' => 'activo'])->get();
+    }
+
 }
