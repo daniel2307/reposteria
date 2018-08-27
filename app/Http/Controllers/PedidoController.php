@@ -77,7 +77,7 @@ class PedidoController extends Controller
 
         Pedido::create($requestData);
 
-        return redirect('admin/pedido')->with('flash_message', 'Pedido added!');
+        return redirect('pedido')->with('flash_message', 'Pedido added!');
     }
 
     /**
@@ -140,7 +140,7 @@ class PedidoController extends Controller
         $pedido = Pedido::findOrFail($id);
         $pedido->update($requestData);
 
-        return redirect('admin/pedido')->with('flash_message', 'Pedido updated!');
+        return redirect('pedido')->with('flash_message', 'Pedido updated!');
     }
 
     /**
@@ -154,7 +154,7 @@ class PedidoController extends Controller
     {
         Pedido::destroy($id);
 
-        return redirect('admin/pedido')->with('flash_message', 'Pedido deleted!');
+        return redirect('pedido')->with('flash_message', 'Pedido deleted!');
     }
     public function apiListpedidos (){
         header('Access-Control-Allow-Origin: *');

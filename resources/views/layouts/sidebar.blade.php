@@ -49,35 +49,35 @@
                 </li>
 
                 <li class="menu-item" id="cmi-producto">
-                    <a class="collapsible-header waves-effect"  href="{{ url('admin/producto') }}" id="a-producto">
+                    <a class="collapsible-header waves-effect"  href="{{ url('producto') }}" id="a-producto">
                         <i class="fas fa-boxes mr-2"></i> 
                         Productos
                     </a>
                 </li>
 
                 <li class="menu-item" id="cmi-categoria-producto">
-                    <a class="collapsible-header waves-effect"  href="{{ url('admin/categoriaproducto') }}" id="a-categoria-producto">
+                    <a class="collapsible-header waves-effect"  href="{{ url('categoriaproducto') }}" id="a-categoria-producto">
                         <i class="fas fa-tags mr-2"></i> 
                         Categoria de producto
                     </a>
                 </li>
 
                 <li class="menu-item" id="cmi-cliente">
-                    <a class="collapsible-header waves-effect" href="{{ url('admin/cliente') }}" id="a-cliente">
+                    <a class="collapsible-header waves-effect" href="{{ url('cliente') }}" id="a-cliente">
                         <i class="fas fa-users mr-2"></i>
                         Cliente
                     </a>
                 </li>
 
                 <li class="menu-item" id="cmi-venta">
-                    <a class="collapsible-header waves-effect" href="{{ url('admin/venta') }}" id="a-venta">
+                    <a class="collapsible-header waves-effect" href="{{ url('venta') }}" id="a-venta">
                         <i class="fas fa-money mr-2"></i>
                         Venta
                     </a>
                 </li>
 
                 <li class="menu-item" id="cmi-pedido">
-                    <a class="collapsible-header waves-effect" href="{{ url('admin/pedido') }}" id="a-pedido">
+                    <a class="collapsible-header waves-effect" href="{{ url('pedido') }}" id="a-pedido">
                         <i class="fas fa-email mr-2"></i>
                         Pedidos
                     </a>

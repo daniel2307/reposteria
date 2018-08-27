@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">Create New Promocion</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -20,7 +20,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/admin/promocion') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/promocion') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @include ('admin.promocion.form')

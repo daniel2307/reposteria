@@ -43,7 +43,7 @@ class ClienteController extends Controller
         $requestData = $request->all();
         $requestData = array_add($requestData, 'tipo', 'comun');
         Cliente::create($requestData);
-        return redirect('admin/cliente')->with('flash_message', 'Cliente added!');
+        return redirect('cliente')->with('flash_message', 'Cliente added!');
     }
 
     /**
@@ -105,7 +105,7 @@ class ClienteController extends Controller
         $cliente = Cliente::findOrFail($id);
         $cliente->update($requestData);
 
-        return redirect('admin/cliente')->with('flash_message', 'Cliente updated!');
+        return redirect('cliente')->with('flash_message', 'Cliente updated!');
     }
 
     /**
@@ -119,7 +119,7 @@ class ClienteController extends Controller
     {
         Cliente::destroy($id);
 
-        return redirect('admin/cliente')->with('flash_message', 'Cliente deleted!');
+        return redirect('cliente')->with('flash_message', 'Cliente deleted!');
     }
 
     public function searchByCi(Request $request){
@@ -134,9 +134,9 @@ class ClienteController extends Controller
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
-                '<a href="/admin/cliente/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>
-                <a href="/admin/cliente/'.$model->id.'/edit" class="btn btn-primary btn-sm waves-effect waves-light" title="Editar"><i class="far fa-edit"></i></a>
-                <a href="/admin/cliente/'.$model->id.'" class="btn btn-danger btn-sm waves-effect waves-light" title="Eliminar"><i class="far fa-trash-alt"></i></a>';
+                '<a href="/cliente/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>
+                <a href="/cliente/'.$model->id.'/edit" class="btn btn-primary btn-sm waves-effect waves-light" title="Editar"><i class="far fa-edit"></i></a>
+                <a href="/cliente/'.$model->id.'" class="btn btn-danger btn-sm waves-effect waves-light" title="Eliminar"><i class="far fa-trash-alt"></i></a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);

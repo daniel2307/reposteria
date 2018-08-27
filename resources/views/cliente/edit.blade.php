@@ -9,11 +9,11 @@
 
     <!--Card content-->
     <div class="card-body px-lg-5 pt-0">
-        <a href="{{ url('/admin/cliente') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="{{ url('/cliente') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
         
         <p><small class="red-text">* Obligatorio</small></p>
         
-        <form method="POST" class="text-center" action="{{ url('/admin/cliente/' . $cliente->id) }}" accept-charset="UTF-8" style="color: #757575;">
+        <form method="POST" class="text-center" action="{{ url('/cliente/' . $cliente->id) }}" accept-charset="UTF-8" style="color: #757575;">
             {{ method_field('PATCH') }}
             @include ('cliente.form', ['submitButtonText' => 'MODIFICAR'])
         </form>

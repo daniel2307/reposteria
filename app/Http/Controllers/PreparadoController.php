@@ -83,7 +83,7 @@ class PreparadoController extends Controller
         $requestData['hora'] = date('H:i:s');
         Preparado::create($requestData);
 
-        return redirect('admin/preparado')->with('flash_message', 'Preparado added!');
+        return redirect('preparado')->with('flash_message', 'Preparado added!');
     }
 
     /**
@@ -130,7 +130,7 @@ class PreparadoController extends Controller
         $preparado = Preparado::findOrFail($id);
         $preparado->update($requestData);
 
-        return redirect('admin/preparado')->with('flash_message', 'Preparado updated!');
+        return redirect('preparado')->with('flash_message', 'Preparado updated!');
     }
 
     /**
@@ -144,6 +144,6 @@ class PreparadoController extends Controller
     {
         Preparado::destroy($id);
 
-        return redirect('admin/preparado')->with('flash_message', 'Preparado deleted!');
+        return redirect('preparado')->with('flash_message', 'Preparado deleted!');
     }
 }

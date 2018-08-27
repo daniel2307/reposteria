@@ -58,7 +58,7 @@ class PromocionController extends Controller
         
         Promocion::create($requestData);
 
-        return redirect('admin/promocion')->with('flash_message', 'Promocion added!');
+        return redirect('promocion')->with('flash_message', 'Promocion added!');
     }
 
     /**
@@ -119,7 +119,7 @@ class PromocionController extends Controller
         $promocion = Promocion::findOrFail($id);
         $promocion->update($requestData);
 
-        return redirect('admin/promocion')->with('flash_message', 'Promocion updated!');
+        return redirect('promocion')->with('flash_message', 'Promocion updated!');
     }
 
     /**
@@ -133,7 +133,7 @@ class PromocionController extends Controller
     {
         Promocion::destroy($id);
 
-        return redirect('admin/promocion')->with('flash_message', 'Promocion deleted!');
+        return redirect('promocion')->with('flash_message', 'Promocion deleted!');
     }
 
     public function getPromocion() 

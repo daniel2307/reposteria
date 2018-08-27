@@ -9,10 +9,10 @@
 
     <!--Card content-->
     <div class="card-body px-lg-5 pt-0">
-        <a href="{{ url('/admin/cliente') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-        <a href="{{ url('/admin/cliente/' . $cliente->id . '/edit') }}" title="Edit Cliente"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
+        <a href="{{ url('/cliente') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="{{ url('/cliente/' . $cliente->id . '/edit') }}" title="Edit Cliente"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
 
-        <form method="POST" action="{{ url('admin/cliente' . '/' . $cliente->id) }}" accept-charset="UTF-8" style="display:inline">
+        <form method="POST" action="{{ url('cliente' . '/' . $cliente->id) }}" accept-charset="UTF-8" style="display:inline">
             {{ method_field('DELETE') }}
             @csrf
             <button type="submit" class="btn btn-danger btn-sm" title="Delete Cliente" onclick="return confirm('Confirm delete?')"><i class="far fa-trash-alt" aria-hidden="true"></i> Delete</button>

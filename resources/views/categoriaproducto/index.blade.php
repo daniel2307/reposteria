@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ url('/admin/categoriaproducto/create') }}" class="btn btn-success" title="Add New Categoria Producto">
+<a href="{{ url('/categoriaproducto/create') }}" class="btn btn-success" title="Add New Categoria Producto">
     <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nueva Categoria
 </a>
 
@@ -53,7 +53,7 @@
         $('#dtModel').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url("categoriaproducto/getDataTable") }}',
+            ajax: '{{ url("categoriaproducto/get/DataTable") }}',
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nombre', name: 'nombre'},

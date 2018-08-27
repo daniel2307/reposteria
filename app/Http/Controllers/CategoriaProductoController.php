@@ -57,10 +57,10 @@ class CategoriaProductoController extends Controller
             'estado' => 'activo',
         ]);
         if ($res) {
-            return redirect('admin/categoriaproducto');
+            return redirect('categoriaproducto');
         }
         else {
-            return redirect('admin/categoriaproducto/create');
+            return redirect('categoriaproducto/create');
         }
             
     }
@@ -122,7 +122,7 @@ class CategoriaProductoController extends Controller
             $categoriaproducto->imagen = $nombre_img;
         }
         $categoriaproducto->save();
-        return redirect('admin/categoriaproducto');
+        return redirect('categoriaproducto');
     }
 
     /**
@@ -141,7 +141,7 @@ class CategoriaProductoController extends Controller
         // if ($categoriaproducto->imagen) {
         //     Storage::disk('local')->delete("categoria/". $categoriaproducto->imagen);
         // }
-        return redirect('admin/categoriaproducto');
+        return redirect('categoriaproducto');
     }
 
     public function getDataTable()
@@ -150,9 +150,9 @@ class CategoriaProductoController extends Controller
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
-                '<a href="/admin/categoriaproducto/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>
-                <a href="/admin/categoriaproducto/'.$model->id.'/edit" class="btn btn-primary btn-sm waves-effect waves-light" title="Editar"><i class="far fa-edit"></i></a>
-                <a href="/admin/categoriaproducto/'.$model->id.'" class="btn btn-danger btn-sm waves-effect waves-light" title="Eliminar"><i class="far fa-trash-alt"></i></a>';
+                '<a href="/categoriaproducto/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>
+                <a href="/categoriaproducto/'.$model->id.'/edit" class="btn btn-primary btn-sm waves-effect waves-light" title="Editar"><i class="far fa-edit"></i></a>
+                <a href="/categoriaproducto/'.$model->id.'" class="btn btn-danger btn-sm waves-effect waves-light" title="Eliminar"><i class="far fa-trash-alt"></i></a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);

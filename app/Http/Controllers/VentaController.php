@@ -79,10 +79,10 @@ class VentaController extends Controller
                 $detalle_venta->save();
             }
             DB::commit();
-            return redirect('admin/venta');
+            return redirect('venta');
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect('admin/venta/create');
+            return redirect('venta/create');
         }
     }
 
@@ -128,7 +128,7 @@ class VentaController extends Controller
         $venta = Venta::findOrFail($id);
         $venta->update($requestData);
 
-        return redirect('admin/venta')->with('flash_message', 'Venta updated!');
+        return redirect('venta')->with('flash_message', 'Venta updated!');
     }
 
     /**
@@ -142,7 +142,7 @@ class VentaController extends Controller
     {
         Venta::destroy($id);
 
-        return redirect('admin/venta')->with('flash_message', 'Venta deleted!');
+        return redirect('venta')->with('flash_message', 'Venta deleted!');
     }
 
     public function getDataTable()
@@ -153,7 +153,7 @@ class VentaController extends Controller
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
-                '<a href="/admin/venta/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>';
+                '<a href="/venta/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })

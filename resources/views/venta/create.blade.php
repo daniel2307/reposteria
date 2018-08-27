@@ -4,9 +4,9 @@
 <div class="card">
     <h3 class="card-header primary-color white-text">Realizar Venta</h3>
     <div class="card-body">
-        <a href="{{ url('/admin/venta') }}" title="Back"><button class="btn btn-warning btn-sm mb-4"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="{{ url('/venta') }}" title="Back"><button class="btn btn-warning btn-sm mb-4"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
         
-        <form method="POST" action="{{ url('/admin/venta') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data" onsubmit="return validar_formulario();">
+        <form method="POST" action="{{ url('/venta') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data" onsubmit="return validar_formulario();">
             @csrf
             <div class="row">
                 <div class="col-lg-5">
@@ -174,7 +174,7 @@
         if (ci) {
             $.ajax({
                 method: "POST",
-                url: "/admin/cliente/searchByCi",
+                url: "/cliente/searchByCi",
                 data: { ci: ci, _token: "{{ csrf_token() }}", },
                 success: function(result) {
                     if (result.cliente) {

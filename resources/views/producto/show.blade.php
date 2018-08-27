@@ -9,10 +9,10 @@
 
     <!--Card content-->
     <div class="card-body px-lg-5 pt-0">
-        <a href="{{ url('/admin/producto') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-        <a href="{{ url('/admin/producto/' . $producto->id . '/edit') }}" title="Edit Producto"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
+        <a href="{{ url('/producto') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="{{ url('/producto/' . $producto->id . '/edit') }}" title="Edit Producto"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
 
-        <form method="POST" action="{{ url('admin/producto' . '/' . $producto->id) }}" accept-charset="UTF-8" style="display:inline">
+        <form method="POST" action="{{ url('producto' . '/' . $producto->id) }}" accept-charset="UTF-8" style="display:inline">
             {{ method_field('DELETE') }}
             @csrf
             <button type="submit" class="btn btn-danger btn-sm" title="Delete Producto" onclick="return confirm('Confirm delete?')"><i class="far fa-trash-alt" aria-hidden="true"></i> Delete</button>

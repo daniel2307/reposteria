@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ url('/admin/venta/create') }}" class="btn btn-success" title="Agregar Nueva Venta">
+<a href="{{ url('/venta/create') }}" class="btn btn-success" title="Agregar Nueva Venta">
     <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nueva Venta
 </a>
 
@@ -66,7 +66,7 @@
         $('#dtModel').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url("venta/getDataTable") }}',
+            ajax: '{{ url("venta/get/DataTable") }}',
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nombre', name: 'cliente.nombre'},

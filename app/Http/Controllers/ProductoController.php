@@ -47,7 +47,7 @@ class ProductoController extends Controller
         
         Producto::create($requestData);
 
-        return redirect('admin/producto')->with('flash_message', 'Producto added!');
+        return redirect('producto')->with('flash_message', 'Producto added!');
     }
 
     /**
@@ -94,7 +94,7 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         $producto->update($requestData);
 
-        return redirect('admin/producto')->with('flash_message', 'Producto updated!');
+        return redirect('producto')->with('flash_message', 'Producto updated!');
     }
 
     /**
@@ -108,7 +108,7 @@ class ProductoController extends Controller
     {
         Producto::destroy($id);
 
-        return redirect('admin/producto')->with('flash_message', 'Producto deleted!');
+        return redirect('producto')->with('flash_message', 'Producto deleted!');
     }
 
     public function getDataTable()
@@ -118,9 +118,9 @@ class ProductoController extends Controller
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
-                '<a href="/admin/producto/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>
-                <a href="/admin/producto/'.$model->id.'/edit" class="btn btn-primary btn-sm waves-effect waves-light" title="Editar"><i class="far fa-edit"></i></a>
-                <a href="/admin/producto/'.$model->id.'" class="btn btn-danger btn-sm waves-effect waves-light" title="Eliminar"><i class="far fa-trash-alt"></i></a>';
+                '<a href="/producto/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>
+                <a href="/producto/'.$model->id.'/edit" class="btn btn-primary btn-sm waves-effect waves-light" title="Editar"><i class="far fa-edit"></i></a>
+                <a href="/producto/'.$model->id.'" class="btn btn-danger btn-sm waves-effect waves-light" title="Eliminar"><i class="far fa-trash-alt"></i></a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);

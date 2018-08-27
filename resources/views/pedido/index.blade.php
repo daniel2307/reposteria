@@ -8,11 +8,11 @@
                 <div class="card">
                     <div class="card-header">Pedido</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/pedido/create') }}" class="btn btn-success btn-sm" title="Add New Pedido">
+                        <a href="{{ url('/pedido/create') }}" class="btn btn-success btn-sm" title="Add New Pedido">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        <form method="GET" action="{{ url('/admin/pedido') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
+                        <form method="GET" action="{{ url('/pedido') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
                                 <span class="input-group-append">
@@ -38,10 +38,10 @@
                                         <td>{{ $loop->iteration or $item->id }}</td>
                                         <td>{{ $item->saldo }}</td><td>{{ $item->estado }}</td><td>{{ $item->fecha }}</td><td>{{ $item->fecha_entrega }}</td><td>{{ $item->hora_entrega }}</td><td>{{ $item->forma_de_pago }}</td><td>{{ $item->iva }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/pedido/' . $item->id) }}" title="View Pedido"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/pedido/' . $item->id . '/edit') }}" title="Edit Pedido"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <a href="{{ url('/pedido/' . $item->id) }}" title="View Pedido"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/pedido/' . $item->id . '/edit') }}" title="Edit Pedido"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
-                                            <form method="POST" action="{{ url('/admin/pedido' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST" action="{{ url('/pedido' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Pedido" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>

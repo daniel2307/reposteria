@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">Edit Pedido #{{ $pedido->id }}</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/pedido') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/pedido') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -20,7 +20,7 @@
                             </ul>
                         @endif
 
-                        <form method="POST" action="{{ url('/admin/pedido/' . $pedido->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/pedido/' . $pedido->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
