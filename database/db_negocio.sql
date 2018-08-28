@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-<<<<<<< HEAD
 -- Tiempo de generación: 28-08-2018 a las 10:20:24
-=======
--- Tiempo de generación: 27-08-2018 a las 04:21:09
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -44,23 +40,12 @@ CREATE TABLE `categoria_producto` (
 --
 
 INSERT INTO `categoria_producto` (`id`, `nombre`, `imagen`, `estado`) VALUES
-<<<<<<< HEAD
 (1, 'Tartas', '5f9Xtk2WPRgQy4VTOuGf.jpg', 'activo'),
 (16, 'Tartaletas', '0HXfZF1pZsPAgjoU56cI.jpg', 'activo'),
 (17, 'Gelatinas', 'gh3jVqeeve7syk3TACCR.gif', 'activo'),
 (18, 'Pastelitos', 'KAlmROvmDaLOmYbdyVzs.jpg', 'activo'),
 (19, 'Galletas', 'P70XHLwrOO755bnYSg0m.jpg', 'activo'),
 (20, 'Helados', 'Eu7PbkJu4eZBuC01MsvZ.jpg', 'activo');
-=======
-(1, 'pasteles', '5f9Xtk2WPRgQy4VTOuGf.jpg', 'activo'),
-(2, 'empanadas', NULL, 'inactivo'),
-(4, 'Tartas', NULL, 'inactivo'),
-(16, 'pasteles', '0HXfZF1pZsPAgjoU56cI.jpg', 'activo'),
-(17, 'empanadas', 'gh3jVqeeve7syk3TACCR.gif', 'activo'),
-(18, 'patatas', 'KAlmROvmDaLOmYbdyVzs.jpg', 'activo'),
-(19, 'patatas1', 'P70XHLwrOO755bnYSg0m.jpg', 'activo'),
-(20, 'rosquillas', 'Eu7PbkJu4eZBuC01MsvZ.jpg', 'activo');
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 
 -- --------------------------------------------------------
 
@@ -87,21 +72,12 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nombre`, `ci`, `password`, `direccion`, `telefono`, `celular`, `email`, `tipo`, `created_at`, `updated_at`) VALUES
-<<<<<<< HEAD
 (1, 'dario', '123', NULL, 'sdfsd', 2423, 234, 'asd@asd.com', 'comun', '2018-06-16 02:56:19', '2018-06-16 02:56:19'),
 (6, 'juan', '456', NULL, 'dsfsdfds', 4567, 675, 'juan@juan.com', 'comun', '2018-08-01 02:24:00', '2018-08-01 02:24:00'),
 (7, 'filemon', '987', NULL, 'sin dir', 4567736, 77652353, 'filemon@filemon.com', 'comun', '2018-08-24 05:34:36', '2018-08-24 05:34:36'),
 (8, 'pedro', '789', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
 (9, 'fer', '321', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-26 19:55:53', '2018-08-26 19:55:53'),
 (10, 'carlos', '654', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-27 00:14:02', '2018-08-27 00:14:02');
-=======
-(1, 'dss', '123', NULL, 'sdfsd', 2423, 234, 'asd@asd.com', 'comun', '2018-06-16 02:56:19', '2018-06-16 02:56:19'),
-(6, 'juan', '456', NULL, 'dsfsdfds', 4567, 675, 'juan@juan.com', 'comun', '2018-08-01 02:24:00', '2018-08-01 02:24:00'),
-(7, 'filemon', '87876767', NULL, 'sin dir', 4567736, 77652353, 'filemon@filemon.com', 'comun', '2018-08-24 05:34:36', '2018-08-24 05:34:36'),
-(8, 'juan', '456', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
-(9, 'dss', '123', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-26 19:55:53', '2018-08-26 19:55:53'),
-(10, 'dss', '123', NULL, NULL, NULL, NULL, NULL, NULL, '2018-08-27 00:14:02', '2018-08-27 00:14:02');
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 
 -- --------------------------------------------------------
 
@@ -209,7 +185,6 @@ CREATE TABLE `lote` (
   `estado` enum('activo','inactivo') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `lote`
 --
@@ -220,8 +195,6 @@ INSERT INTO `lote` (`id`, `producto_id`, `cantidad`, `fecha`, `estado`) VALUES
 (3, 2, 40, '2018-08-22 00:00:00', 'activo'),
 (4, 3, 15, '2018-08-22 00:00:00', 'activo');
 
-=======
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 -- --------------------------------------------------------
 
 --
@@ -265,15 +238,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `cliente_id`, `fecha`, `fecha_entrega`, `hora_entrega`, `acuenta`, `saldo`, `total`, `descuento`, `total_importe`, `iva`, `tipo`, `estado`, `forma_de_pago`, `comprobante`, `created_at`, `updated_at`) VALUES
-<<<<<<< HEAD
 (1, 1, '2018-07-06', '2018-07-07', '11:26:34', NULL, '12.30', '200.00', NULL, NULL, '12.30', 'tienda', 'espera', 'tienda', NULL, '2018-07-07 01:59:49', '2018-07-07 01:59:49'),
 (2, 7, '2018-07-07', '2018-07-10', '12:30:00', NULL, '30.30', '300.00', NULL, NULL, '50.10', 'movil', 'entregado', 'banco', NULL, '2018-07-07 02:15:54', '2018-07-07 02:15:54'),
 (3, 6, '2018-08-16', '2018-08-09', '14:02:00', NULL, '12.20', '100.00', NULL, NULL, '12.00', 'tienda', 'preparado', 'tienda', NULL, '2018-08-15 02:34:40', '2018-08-15 02:34:40');
-=======
-(1, 1, '2018-07-06', '2018-07-07', '00:00:00', NULL, '12.30', '200.00', NULL, NULL, '12.30', 'tienda', 'espera', 'tienda', NULL, '2018-07-07 01:59:49', '2018-07-07 01:59:49'),
-(2, 1, '2018-07-07', '2018-07-10', '12:30:00', NULL, '30.30', '300.00', NULL, NULL, '50.10', 'movil', 'entregado', 'banco', NULL, '2018-07-07 02:15:54', '2018-07-07 02:15:54'),
-(3, 1, '2018-08-16', '2018-08-09', '14:02:00', NULL, '12.20', '100.00', NULL, NULL, '12.00', 'tienda', 'preparado', 'tienda', NULL, '2018-08-15 02:34:40', '2018-08-15 02:34:40');
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
+
 
 -- --------------------------------------------------------
 
@@ -323,10 +291,7 @@ CREATE TABLE `producto` (
   `descripcion` varchar(45) DEFAULT NULL,
   `duracion` int(11) DEFAULT NULL,
   `imagen` varchar(45) DEFAULT NULL,
-<<<<<<< HEAD
   `estado` enum('activo','eliminado') NOT NULL DEFAULT 'activo',
-=======
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -335,7 +300,6 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-<<<<<<< HEAD
 INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `cantidad`, `descripcion`, `duracion`, `imagen`, `estado`, `created_at`, `updated_at`) VALUES
 (1, 1, '5 frutas', '20.30', 10, 'fdsfds', 2, NULL, 'activo', '2018-06-16 04:17:48', '2018-08-27 07:12:02'),
 (2, 1, 'Trebol', '2.50', 50, 'agdgrutu', 2, NULL, 'activo', '2018-07-20 03:50:46', '2018-08-27 07:12:31'),
@@ -378,12 +342,6 @@ INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `canti
 (39, 18, 'choux', '40.00', 20, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (40, 18, 'cisne', '30.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (41, 20, 'helados', '10.00', 40, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00');
-=======
-INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `cantidad`, `descripcion`, `duracion`, `imagen`, `created_at`, `updated_at`) VALUES
-(1, 2, 'chuntero', '20.30', 8, 'fdsfds', 2, NULL, '2018-06-16 04:17:48', '2018-07-26 03:35:48'),
-(2, 1, 'empanadas', '2.50', 32, 'agdgrutu', 2, NULL, '2018-07-20 03:50:46', '2018-07-26 03:29:05'),
-(3, 1, 'torta tres leches', '210.00', 10, 'descripcion de torta tres leches', 5, NULL, '2018-08-17 21:16:24', '2018-08-22 22:20:22');
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 
 -- --------------------------------------------------------
 
@@ -437,11 +395,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `direccion`, `telefono`, `celular`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `rol`) VALUES
-<<<<<<< HEAD
 (1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'e86HSFFAnKMFW9SP1SvKcM4gaslbzdShzyAwFrXSerVSgmnt1DX7Fl2rrWZ4', '2018-06-09 03:59:30', '2018-06-09 03:59:30', 'administrador'),
-=======
-(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', '221Xqpncp1iR5Fspqd4sWMYy4kH3eWKEV4CxBZAqhRFrYJG7eLnblcevo2JY', '2018-06-09 03:59:30', '2018-06-09 03:59:30', 'administrador'),
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 (2, 'said', 'asdas dsad sas dasd', 234, 234, 'saiddipp@hotmail.com', '$2y$10$unoELXeQi.jZbXNSVj4W2.iNl9PfBpEhcSMqXnSwmbEGByb6oPbBe', 'cJXkk7IFsoC4A1aRQyJgV0skBHSADOdDZdMAJHPGp878PnW1ILmRIfUxH2he', '2018-06-09 04:10:41', '2018-06-09 04:10:41', 'administrador'),
 (3, 'gerardo', 'zona norte', 44493245, 78785423, 'gerarld@gmail.com', '$2y$10$b4ln2FA7cc2DxiOjx.k.OOS.W66z14OSpnl7BQ9aChNz5X/RGmD0m', 'FR96JLi7bzCyDys9TDnLYu5xdyZNLd0bUiYP7UJbUUttPUL3pW4KSRDUSOVF', '2018-06-12 23:09:24', '2018-06-12 23:09:24', 'administrador'),
 (4, 'said', 'pacata', 354, 654654, 'said.dipp@rnova.net', '$2y$10$0Liw5R6t0ZRr.1s9E3hBN.1tTY6672On7HADwQPWCKuCWC.Kv6pgC', NULL, '2018-06-16 04:00:07', '2018-06-16 04:00:07', 'administrador'),
@@ -625,11 +579,7 @@ ALTER TABLE `ingredientes`
 -- AUTO_INCREMENT de la tabla `lote`
 --
 ALTER TABLE `lote`
-<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -647,11 +597,7 @@ ALTER TABLE `preparado`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
->>>>>>> b65a88b7a46af1b285f277143326d7c263ed831c
 
 --
 -- AUTO_INCREMENT de la tabla `promocion`
