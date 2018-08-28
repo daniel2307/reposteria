@@ -113,7 +113,8 @@ class ProductoController extends Controller
 
     public function getDataTable()
     {
-        $model = Producto::select(['id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion']);
+        $model = Producto::select(['producto.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'costo', 'cantidad'])
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id');
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {

@@ -31,7 +31,10 @@ class VentaController extends Controller
      */
     public function create()
     {
-        $productos = Producto::get();
+        $productos = Producto::select('producto.id', 'costo', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->orderBy('producto.nombre')
+        ->get();
         return view('venta.create', compact('productos'));
     }
 
@@ -44,6 +47,8 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
+        $cliente = Cliente::where('ci', '456')->first();
+        dd($cliente);
         try {
             DB::beginTransaction();
             // insertamos un cliente si no existe
@@ -52,14 +57,16 @@ class VentaController extends Controller
                 $cliente->id = $request->cliente_id;
             }
             else {
-                $cliente->nombre = $request->cliente_nombre;
-                $cliente->ci = $request->cliente_ci;
-                $cliente->save();
+                $cliente = Cliente::where('ci', $request->cliente_ci)->first();
+                if (!$cliente) {
+                    $cliente->nombre = $request->cliente_nombre;
+                    $cliente->ci = $request->cliente_ci;
+                    $cliente->save();
+                }
             }
             // insertamos la venta
             $venta = new Venta;
             $venta->fecha = date("Y-m-d H:i:s");
-            // $venta->hora = date('h:i:s');
             $venta->total = $request->total;
             $venta->descuento = $request->descuento;
             $venta->total_importe = $request->total_importe;

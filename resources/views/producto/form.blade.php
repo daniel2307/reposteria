@@ -53,7 +53,7 @@
             <input type="file">
         </div>
         <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" placeholder="Upload your file">
+            <!-- <input class="file-path validate" type="text" placeholder="Upload your file"> -->
         </div>
     </div>
 </div>

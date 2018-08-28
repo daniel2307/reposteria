@@ -15,16 +15,13 @@
                 <th class="th-sm">Nombre
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
+                <th class="th-sm">Categoria
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
                 <th class="th-sm">Costo
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">Cantidad
-                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
-                </th>
-                <th class="th-sm">Descripcion
-                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
-                </th>
-                <th class="th-sm">Duracion
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">accion
@@ -38,10 +35,9 @@
             <tr>
                 <th>id</th>
                 <th>Nombre</th>
+                <th>Categoria</th>
                 <th>Costo</th>
                 <th>Cantidad</th>
-                <th>Descripcion</th>
-                <th>Duracion</th>
                 <th>accion</th>
             </tr>
         </tfoot>
@@ -70,10 +66,9 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nombre', name: 'nombre'},
+                {data: 'categoria', name: 'categoria_producto.nombre'},
                 {data: 'costo', name: 'costo'},
                 {data: 'cantidad', name: 'cantidad'},
-                {data: 'descripcion', name: 'descripcion'},
-                {data: 'duracion', name: 'duracion'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });

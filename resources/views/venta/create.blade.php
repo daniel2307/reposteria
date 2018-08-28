@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-    <h3 class="card-header primary-color white-text">Realizar Venta</h3>
+    <h3 class="card-header primary-color white-text">Crear Nueva Venta</h3>
     <div class="card-body">
         <a href="{{ url('/venta') }}" title="Back"><button class="btn btn-warning btn-sm mb-4"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
         
@@ -14,7 +14,7 @@
                         <div class="col-12">
                             <select class="mdb-select colorful-select dropdown-primary" name="producto" id="producto">
                                 @foreach($productos as $key => $value)
-                                    <option value="{{ $value->id }}" data-price="{{ $value->costo }}">{{ $value->nombre }}</option>
+                                    <option value="{{ $value->id }}" data-price="{{ $value->costo }}">{{ $value->producto }}</option>
                                 @endforeach
                             </select>
                             <label for="producto">Producto</label>
@@ -51,6 +51,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="cliente_id"  id="cliente_id">
                         </div>
                     </div>
                     <!--/.Panel-->
@@ -199,21 +200,17 @@
         $(item).remove();
         calcular_total();
     }
+
     function validar_formulario(){
-        var res = false;
+        var res = true;
         if ($("#cliente_id").val() == "" && $("#cliente_ci").val() == "") {
             res = false;
             // mostrar errores, cliente no seleccionado
-        }
-        else {
-            res = true;
+            alert("Datos del cliente vacios!");
         }
         if ($("#lista_pedido").find("tr").length == 0) {
             res = false;
-            // mostrar errores, lista vacia de pedidos
-        }
-        else {
-            res = true;
+            alert("Lista vacia de productos!");
         }
         return res;
     }

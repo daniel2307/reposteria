@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
 use App\Pedido;
+use App\Producto;
+use App\Cliente;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -15,26 +18,9 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $pedido = Pedido::where('saldo', 'LIKE', "%$keyword%")
-                ->orWhere('estado', 'LIKE', "%$keyword%")
-                ->orWhere('fecha', 'LIKE', "%$keyword%")
-                ->orWhere('fecha_entrega', 'LIKE', "%$keyword%")
-                ->orWhere('hora_entrega', 'LIKE', "%$keyword%")
-                ->orWhere('forma_de_pago', 'LIKE', "%$keyword%")
-                ->orWhere('iva', 'LIKE', "%$keyword%")
-                ->orWhere('cliente_id', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $pedido = Pedido::latest()->paginate($perPage);
-        }
-
-        return view('pedido.index', compact('pedido'));
+        return view('pedido.index');
     }
 
     /**
@@ -44,7 +30,11 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('pedido.create');
+        $productos = Producto::select('producto.id', 'costo', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->orderBy('producto.nombre')
+        ->get();
+        return view('pedido.create', compact('productos'));
     }
 
     /**
@@ -56,28 +46,48 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        $v = \Validator::make($requestData, [
-            'saldo' => 'required|between:0,99.99',
-            'estado' => 'required|string|max:255',
-            'fecha' => 'required|date_format:Y-m-d',
-            'fecha_entrega' => 'required|date_format:Y-m-d',
-            'hora_entrega' => 'required',
-            'forma_de_pago' => 'required|string|max:255',
-            'iva' => 'required|between:0,99.99',
-            'cliente_id' => 'required|string|max:255',
-        ]);
- 
-        if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }
+        // try {
+        //     DB::beginTransaction();
+        //     // insertamos un cliente si no existe
+        //     $cliente = new Cliente;
+        //     if ($request->has('cliente_id')) {
+        //         $cliente->id = $request->cliente_id;
+        //     }
+        //     else {
+        //         $cliente = Cliente::where('ci', $request->cliente_ci)->first();
+        //         if (!$cliente) {
+        //             $cliente->nombre = $request->cliente_nombre;
+        //             $cliente->ci = $request->cliente_ci;
+        //             $cliente->save();
+        //         }
+        //     }
+        //     // insertamos la pedido
+        //     $pedido = new Pedido;
+        //     $pedido->fecha = date("Y-m-d H:i:s");
+        //     $pedido->total = $request->total;
+        //     $pedido->descuento = $request->descuento;
+        //     $pedido->total_importe = $request->total_importe;
+        //     $pedido->iva = "0";
+        //     $pedido->estado = "activo";
+        //     $pedido->cliente_id = $cliente->id;
+        //     $pedido->users_id = auth()->user()->id;
+        //     $pedido->save();
 
-        Pedido::create($requestData);
-
-        return redirect('pedido')->with('flash_message', 'Pedido added!');
+        //     foreach ($request->cantidad as $key => $value) {
+        //         // insertamos el detalle de pedido por cada producto vendido
+        //         $detalle_pedido = new DetallePedido;
+        //         $detalle_pedido->cantidad = $request->cantidad[$key];
+        //         $detalle_pedido->subtotal = $request->subtotal[$key];
+        //         $detalle_pedido->pedido_id = $pedido->id;
+        //         $detalle_pedido->producto_id = $key;
+        //         $detalle_pedido->save();
+        //     }
+        //     DB::commit();
+        //     return redirect('pedido');
+        // } catch (Exception $e) {
+        //     DB::rollBack();
+        //     return redirect('pedido/create');
+        // }
     }
 
     /**
@@ -140,7 +150,7 @@ class PedidoController extends Controller
         $pedido = Pedido::findOrFail($id);
         $pedido->update($requestData);
 
-        return redirect('pedido')->with('flash_message', 'Pedido updated!');
+        return redirect('pedido');
     }
 
     /**
@@ -154,10 +164,22 @@ class PedidoController extends Controller
     {
         Pedido::destroy($id);
 
-        return redirect('pedido')->with('flash_message', 'Pedido deleted!');
+        return redirect('pedido');
     }
-    public function apiListpedidos (){
-        header('Access-Control-Allow-Origin: *');
-        return Pedido::all();
+
+    public function getDataTable()
+    {
+        $model = Pedido::select(['pedido.id', 'cliente.nombre', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe'])
+        ->join('cliente', 'pedido.cliente_id', '=', 'cliente.id')
+        ->where('pedido.estado', '!=', 'cancelado');
+        return datatables()->of($model)
+            ->addColumn('action', function ($model) {
+                return 
+                '<a href="/pedido/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
+            ->make(true);
+
     }
 }

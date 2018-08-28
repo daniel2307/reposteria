@@ -1,6 +1,7 @@
 https://yajrabox.com/docs/laravel-datatables/master/add-column
 https://datatables.yajrabox.com/eloquent/add-edit-remove-column
 
+tartamiel.com
 
 // return datatables()->of(User::query())->toJson();
 // return datatables()->of(DB::table('users'))->toJson();

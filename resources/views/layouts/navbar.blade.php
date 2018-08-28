@@ -9,16 +9,16 @@
 
         <!--Angular-->
               
-            <a id="navbar-category-tutorial-jquery" class="btn btn-info btn-sm my-0" href="#" role="button">
+            <a class="btn btn-info btn-sm my-0" href="#" role="button">
                 <span class="d-none d-lg-inline-block mr-1">Tutorial</span>
                 <i class="fa fa-graduation-cap"></i>
             </a>
-            <a id="navbar-category-pro-jquery" class="btn btn-unique btn-sm my-0" href="#" role="button">
+            <a class="btn btn-unique btn-sm my-0" href="#" role="button">
                 <span class="d-none d-lg-inline-block mr-1">Go Pro</span>
                 <i class="fab fa-product-hunt"></i>
             </a>
             <!-- Dynamic content wrapper -->
-            <span id="dynamicContentWrapper-mainNavbar2"></span>
+            <span></span>
         </span>
     </div>
 

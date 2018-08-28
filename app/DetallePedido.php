@@ -28,5 +28,15 @@ class DetallePedido extends Model
     protected $fillable = ['pedido_id', 'producto_id', 'cantidad', 'subtotal', 'descripcion'];
 
     public $timestamps = false;
+
+    public function pedido()
+    {
+        return $this->hasOne('App\Pedido', 'id', 'pedido_id');
+    }  
+    
+    public function producto()
+    {
+        return $this->hasOne('App\Producto', 'id', 'producto_id');
+    } 
 }
 

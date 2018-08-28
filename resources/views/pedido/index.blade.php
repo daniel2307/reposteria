@@ -1,62 +1,111 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+<a href="{{ url('/pedido/create') }}" class="btn btn-success" title="Add New Pedido">
+    <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo Pedido
+</a>
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Pedido</div>
-                    <div class="card-body">
-                        <a href="{{ url('/pedido/create') }}" class="btn btn-success btn-sm" title="Add New Pedido">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
-
-                        <form method="GET" action="{{ url('/pedido') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-append">
-                                    <button class="btn btn-secondary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-
-                        <br/>
-                        <br/>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th><th>Saldo</th><th>Estado</th><th>Fecha </th><th>Fecha entrega</th><th>Hora entrega</th><th>Forma de pago</th><th>Iva</th><th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($pedido as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->saldo }}</td><td>{{ $item->estado }}</td><td>{{ $item->fecha }}</td><td>{{ $item->fecha_entrega }}</td><td>{{ $item->hora_entrega }}</td><td>{{ $item->forma_de_pago }}</td><td>{{ $item->iva }}</td>
-                                        <td>
-                                            <a href="{{ url('/pedido/' . $item->id) }}" title="View Pedido"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/pedido/' . $item->id . '/edit') }}" title="Edit Pedido"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
-                                            <form method="POST" action="{{ url('/pedido' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Pedido" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="pagination-wrapper"> {!! $pedido->appends(['search' => Request::get('search')])->render() !!} </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="table-responsive-lg">
+    <table id="dtModel" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">ID
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Cliente
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Fecha de Entrega
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Hora de Entrega
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Acuenta
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Saldo
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Total
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Descuento
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Total Importe
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">accion
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha de Entrega</th>
+                <th>Hora de Entrega</th>
+                <th>Acuenta</th>
+                <th>Saldo</th>
+                <th>Total</th>
+                <th>Descuento</th>
+                <th>Total Importe</th>
+                <th>accion</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 @endsection
+
+@push('links')
+<!-- MDBootstrap Datatables  -->
+<link href="/css/addons/datatables.min.css" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="/js/addons/datatables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-pedido').addClass('current-menu-item');
+        $('#a-pedido').addClass('active');
+
+        $('#dtModel').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ url("pedido/get/DataTable") }}',
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'nombre', name: 'cliente.nombre'},
+                {data: 'fecha_entrega', name: 'fecha_entrega'},
+                {data: 'hora_entrega', name: 'hora_entrega'},
+                {data: 'acuenta', name: 'acuenta'},
+                {data: 'saldo', name: 'saldo'},
+                {data: 'total', name: 'total'},
+                {data: 'descuento', name: 'descuento'},
+                {data: 'total_importe', name: 'total_importe'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+        $('#dtModel_wrapper').find('label').each(function () {
+            $(this).parent().append($(this).children());
+        });
+        $('#dtModel_wrapper .dataTables_filter').find('input').each(function () {
+            $('input').attr("placeholder", "Search");
+            $('input').removeClass('form-control-sm');
+        });
+        $('#dtModel_wrapper .dataTables_length').addClass('d-flex flex-row');
+        $('#dtModel_wrapper .dataTables_filter').addClass('md-form');
+        $('#dtModel_wrapper select').removeClass('custom-select custom-select-sm form-control form-control-sm');
+        $('#dtModel_wrapper select').addClass('mdb-select');
+        $('#dtModel_wrapper .mdb-select').material_select();
+        $('#dtModel_wrapper .dataTables_filter').find('label').remove();
+    });
+
+</script>
+@endpush
