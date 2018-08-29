@@ -8,15 +8,7 @@
         </li>
         <!--/. Logo -->
         <!--Search Form-->
-        <li>
-            <form class="search-form" onkeypress="return event.keyCode != 13;" role="search" method="GET" autocomplete="off">
-                <div class="form-group md-form mt-0 d-block waves-light">
-                    <input type="text" class="form-control pb-1 mb-0" name="mdw_serach" placeholder="Search" id="mdw_main_search" style="height: 1.8rem;">
-                    <label for="" class="sr-only">Search</label>
-                </div>
-                <div class="dropdown-wrapper"></div>
-            </form>
-        </li>
+        
         <!--/.Search Form-->
         <!-- Side navigation links -->
         <li>
@@ -27,26 +19,7 @@
                         Home
                     </a>
                 </li>
-                <li class="menu-item" id="cma-cmp-gs"> <!-- current-menu-ancestor current-menu-parent menu-item-has-children -->
-                    <a class="collapsible-header waves-effect arrow-r" id="a-gs"> <!-- active -->
-                        <i class="fa fa-download"></i>
-                        Getting started
-                        <i class="fa fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body"  style="display: block;">
-                        <ul class="sub-menu">
-                            <li class="menu-item" >
-                                <a class="collapsible-header waves-effect" href="#">Home page</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">About MDB</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Download</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+            
 
                 <li class="menu-item" id="cmi-producto">
                     <a class="collapsible-header waves-effect"  href="{{ url('producto') }}" id="a-producto">
@@ -90,13 +63,13 @@
                     <div class="collapsible-body">
                         <ul class="sub-menu">
                             <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Demonstration</a>
+                                <a class="collapsible-header waves-effect" href="#"></a>
                             </li>
                             <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Animations</a>
+                                <a class="collapsible-header waves-effect" href="#"></a>
                             </li>
                             <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Background Image</a>
+                                <a class="collapsible-header waves-effect" href="#"></a>
                             </li>
                         </ul>
                     </div>

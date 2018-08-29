@@ -9,15 +9,7 @@
 
         <!--Angular-->
               
-            <a class="btn btn-info btn-sm my-0" href="#" role="button">
-                <span class="d-none d-lg-inline-block mr-1">Tutorial</span>
-                <i class="fa fa-graduation-cap"></i>
-            </a>
-            <a class="btn btn-unique btn-sm my-0" href="#" role="button">
-                <span class="d-none d-lg-inline-block mr-1">Go Pro</span>
-                <i class="fab fa-product-hunt"></i>
-            </a>
-            <!-- Dynamic content wrapper -->
+          
             <span></span>
         </span>
     </div>

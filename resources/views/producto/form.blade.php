@@ -12,9 +12,9 @@
             <label for="costo">Costo <b class="red-text">*</b></label>
         </div>
     </div>
-</div>
 
-<div class="form-row">
+
+
     <div class="col">
         <div class="md-form">
             <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{ $producto->cantidad or '' }}" required>
@@ -27,9 +27,9 @@
             <label for="descripcion">Descripcion</label>
         </div>
     </div>
-</div>
 
-<div class="form-row">
+
+
     <div class="col">
         <div class="md-form">
             <input type="number" id="duracion" name="duracion" class="form-control" value="{{ $producto->duracion or '' }}">
@@ -44,18 +44,19 @@
         </select>
         <label for="categoria_producto_id">Categoria <b class="red-text">*</b></label>
     </div>
-</div>  
+
 
 <div class="md-form">
     <div class="file-field">
         <div class="btn btn-primary btn-sm float-left">
             <span>Imagen</span>
-            <input type="file">
+            <input type="file" name="imagen">
         </div>
         <div class="file-path-wrapper">
             <!-- <input class="file-path validate" type="text" placeholder="Upload your file"> -->
         </div>
     </div>
+</div>
 </div>
 
 <button class="btn btn-success btn-block my-4 waves-effect z-depth-0" type="submit">
