@@ -161,7 +161,6 @@ class CategoriaProductoController extends Controller
 
     public function getCategoria() 
     {
-        header('Access-Control-Allow-Origin: *');
         $data = CategoriaProducto::select('id', 'nombre', 'imagen')->where(['estado' => 'activo'])->get();
         foreach ($data as $key => $value) {
             $value->imagen = asset('img/categoria/'.$value->imagen);
