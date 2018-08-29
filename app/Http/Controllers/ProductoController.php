@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Producto;
 use App\CategoriaProducto;
 use Illuminate\Http\Request;
-
+use Storage;
+use File;
 class ProductoController extends Controller
 {
     /**
@@ -42,12 +43,41 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        Producto::create($requestData);
+        print($request);
+        $nombre_img = NULL;
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
 
-        return redirect('producto')->with('flash_message', 'Producto added!');
+            $nombre_img = str_random(20) . '.' . $imagen->getClientOriginalExtension();
+
+            $path = public_path('img\producto');
+
+            $imagen->move($path, $nombre_img);
+        }
+
+        $res = Producto::create([
+            'categoria_producto_id' => $request->categoria_producto_id,
+            'nombre' => $request->nombre,
+            'costo' => $request->costo,
+            'cantidad' => $request->cantidad,
+            'descripcion' => $request->descripcion,
+            'duracion' => $request->duracion,
+            'imagen' => $nombre_img
+            
+        ]);
+
+        if ($res) {
+            return redirect('producto')->with('flash_message', 'Producto added!');
+        }
+        else {
+            return redirect('producto/create');
+        }
+
+       // $requestData = $request->all();
+        
+        //Producto::create($requestData);
+
+        //return redirect('producto')->with('flash_message', 'Producto added!');
     }
 
     /**
@@ -129,8 +159,11 @@ class ProductoController extends Controller
 
     public function getProductosByCategoria($categoria_id)
     {
-        return Producto::select('id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'imagen')
+        header('Access-Control-Allow-Origin: *');
+        $data = Producto::select('id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'imagen')
         ->where(['categoria_producto_id' => $categoria_id])
         ->get();
+
+        return $data;
     }
 }
