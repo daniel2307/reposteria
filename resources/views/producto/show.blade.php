@@ -45,6 +45,10 @@
                         <th scope="row">Duracion</th>
                         <td>{{ $producto->duracion }}</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Imagen</th>
+                        <td><img src="/img/producto/{{ $producto->imagen or 'sid.jpg'}}" alt="imagen" height="300px"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

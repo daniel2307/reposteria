@@ -14,7 +14,7 @@
         <p><small class="red-text">* Obligatorio</small></p>
 
         <form method="POST" class="text-center" action="{{ url('/categoriaproducto') }}" accept-charset="UTF-8" style="color: #757575;" enctype="multipart/form-data">
-            @include ('categoriaproducto.form', ['submitButtonText' => 'GUARDAR'])
+            @include('categoriaproducto.form', ['submitButtonText' => 'GUARDAR'])
         </form>
 
     </div>

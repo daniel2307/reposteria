@@ -163,7 +163,7 @@ class CategoriaProductoController extends Controller
     {
         $data = CategoriaProducto::select('id', 'nombre', 'imagen')->where(['estado' => 'activo'])->get();
         foreach ($data as $key => $value) {
-            $value->imagen = asset('img/categoria/'.$value->imagen);
+            $value->imagen = $value->imagen ? asset('img/categoria/'.$value->imagen) : asset('img/categoria/sid.jpg');
         }
         return $data;
     }    

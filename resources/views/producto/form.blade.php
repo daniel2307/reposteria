@@ -50,7 +50,7 @@
     <div class="file-field">
         <div class="btn btn-primary btn-sm float-left">
             <span>Imagen</span>
-            <input type="file">
+            <input type="file" id="imagen" name="imagen">
         </div>
         <div class="file-path-wrapper">
             <!-- <input class="file-path validate" type="text" placeholder="Upload your file"> -->

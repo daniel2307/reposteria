@@ -43,7 +43,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        print($request);
+        // dd($request);
         $nombre_img = NULL;
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
@@ -67,7 +67,7 @@ class ProductoController extends Controller
         ]);
 
         if ($res) {
-            return redirect('producto')->with('flash_message', 'Producto added!');
+            return redirect('producto');
         }
         else {
             return redirect('producto/create');
@@ -118,13 +118,26 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-        
         $producto = Producto::findOrFail($id);
-        $producto->update($requestData);
+        $producto->nombre = $request->nombre;
+        if ($request->hasFile('imagen')) {
+            if ($producto->imagen) {
+                // elimina la imagen
+                Storage::disk('local')->delete("producto/". $producto->imagen);
+            }
+                
+            $imagen = $request->file('imagen');
 
-        return redirect('producto')->with('flash_message', 'Producto updated!');
+            $nombre_img = str_random(20) . '.' . $imagen->getClientOriginalExtension();
+
+            $path = public_path('img\producto');
+
+            $imagen->move($path, $nombre_img);
+
+            $producto->imagen = $nombre_img;
+        }
+        $producto->save();
+        return redirect('producto');
     }
 
     /**
@@ -136,15 +149,18 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        Producto::destroy($id);
-
-        return redirect('producto')->with('flash_message', 'Producto deleted!');
+        // Producto::destroy($id);
+        $producto = Producto::findOrFail($id);
+        $producto->estado = "eliminado";
+        $producto->save();
+        return redirect('producto');
     }
 
     public function getDataTable()
     {
         $model = Producto::select(['producto.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'costo', 'cantidad'])
-        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id');
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->where(['producto.estado' => 'activo']);
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
@@ -159,11 +175,15 @@ class ProductoController extends Controller
 
     public function getProductosByCategoria($categoria_id)
     {
-        header('Access-Control-Allow-Origin: *');
         $data = Producto::select('id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'imagen')
-        ->where(['categoria_producto_id' => $categoria_id])
+        ->where([
+            'categoria_producto_id' => $categoria_id,
+            'estado' => 'activo',
+            ])
         ->get();
-
+        foreach ($data as $key => $value) {
+            $value->imagen = $value->imagen ? asset('img/producto/'.$value->imagen) : asset('img/producto/sid.jpg');
+        }
         return $data;
     }
 }

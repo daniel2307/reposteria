@@ -47,8 +47,6 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        $cliente = Cliente::where('ci', '456')->first();
-        dd($cliente);
         try {
             DB::beginTransaction();
             // insertamos un cliente si no existe

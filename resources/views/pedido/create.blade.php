@@ -74,22 +74,16 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="3"></th>
                                     <th>Acuenta</th>
-                                    <th><input type="text" name="acuenta" id="total" style="width:120px;" value="0.00" class="form-control"></th>
-                                </tr>
-                                <tr>
-                                    <th colspan="3"></th>
-                                    <th>Saldo</th>
-                                    <th><input type="text" name="saldo" id="saldo" style="width:120px;" value="0.00" class="form-control"></th>
-                                </tr>
-                                <tr>
-                                    <th colspan="3"></th>
+                                    <th><input type="text" name="acuenta" id="acuenta" style="width:120px;" value="0.00" class="form-control"></th>
+                                    <th></th>
                                     <th>Total</th>
                                     <th><input type="text" name="total" id="total" style="width:120px;" value="0.00" class="form-control" readonly></th>
                                 </tr>
                                 <tr>
-                                    <th colspan="3"></th>
+                                    <th>Saldo</th>
+                                    <th><input type="text" name="saldo" id="saldo" style="width:120px;" value="0.00" class="form-control"></th>
+                                    <th></th>
                                     <th>Descuento</th>
                                     <th><input type="number" name="descuento" id="descuento" style="width:120px;" value="0.00" class="form-control" onchange="calcular_total_importe();" min="0"></th>
                                 </tr>
