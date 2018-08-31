@@ -3,7 +3,7 @@
         <!-- Logo -->
         <li class="logo-sn d-block waves-effect">
             <div class="text-center">
-                <a class="pl-0" href="index.html"><img id="MDB-logo" src="/img/logo-mdb-jquery-small.png" alt="MDB Logo"></a>
+                <a class="pl-0" href="#"><img id="MDB-logo" src="/img/logo.png" alt="Logo Reposteria"></a>
             </div>
         </li>
         <!--/. Logo -->
