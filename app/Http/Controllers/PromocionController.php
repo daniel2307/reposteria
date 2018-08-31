@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Promocion;
+use App\Producto;
+use DB;
 use Illuminate\Http\Request;
 
 class PromocionController extends Controller
@@ -27,7 +29,12 @@ class PromocionController extends Controller
      */
     public function create()
     {
-        return view('promocion.create');
+        $productos = Producto::select('producto.id', 'costo', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->where(['producto.estado' => 'activo'])
+        ->orderBy('producto.nombre')
+        ->get();
+        return view('promocion.create', compact('productos'));
     }
 
     /**
@@ -154,7 +161,7 @@ class PromocionController extends Controller
 
     public function getPromocion() 
     {
-        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'descuento', 'promocion.duracion', 'promocion.unidad')
+        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'promocion.precio', 'promocion.duracion', 'promocion.unidad')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
         ->where([
             'promocion.estado' => 'vigente',
