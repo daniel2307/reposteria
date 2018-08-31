@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2018 a las 10:20:24
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.10
+-- Tiempo de generación: 31-08-2018 a las 22:08:29
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,12 +40,12 @@ CREATE TABLE `categoria_producto` (
 --
 
 INSERT INTO `categoria_producto` (`id`, `nombre`, `imagen`, `estado`) VALUES
-(1, 'Tartas', '5f9Xtk2WPRgQy4VTOuGf.jpg', 'activo'),
-(16, 'Tartaletas', '0HXfZF1pZsPAgjoU56cI.jpg', 'activo'),
-(17, 'Gelatinas', 'gh3jVqeeve7syk3TACCR.gif', 'activo'),
-(18, 'Pastelitos', 'KAlmROvmDaLOmYbdyVzs.jpg', 'activo'),
-(19, 'Galletas', 'P70XHLwrOO755bnYSg0m.jpg', 'activo'),
-(20, 'Helados', 'Eu7PbkJu4eZBuC01MsvZ.jpg', 'activo');
+(1, 'Tartas', 'dSGd4l25vvTejhVmoMbO.jpg', 'activo'),
+(16, 'Tartaletas', 'mfvLL7fxxr2ijheRVBE7.jpg', 'activo'),
+(17, 'Gelatinas', 'L99eqoG0hN4Y78oxplQm.jpg', 'activo'),
+(18, 'Pastelitos', 'Z0hqv85DVpc39ZDKh1dr.jpg', 'activo'),
+(19, 'Galletas', 'UqlfjBkWE31t94POiq8w.jpg', 'activo'),
+(20, 'Helados', 'SQ3ihQlGAsv63Kx1rsh8.jpg', 'activo');
 
 -- --------------------------------------------------------
 
@@ -242,7 +242,6 @@ INSERT INTO `pedido` (`id`, `cliente_id`, `fecha`, `fecha_entrega`, `hora_entreg
 (2, 7, '2018-07-07', '2018-07-10', '12:30:00', NULL, '30.30', '300.00', NULL, NULL, '50.10', 'movil', 'entregado', 'banco', NULL, '2018-07-07 02:15:54', '2018-07-07 02:15:54'),
 (3, 6, '2018-08-16', '2018-08-09', '14:02:00', NULL, '12.20', '100.00', NULL, NULL, '12.00', 'tienda', 'preparado', 'tienda', NULL, '2018-08-15 02:34:40', '2018-08-15 02:34:40');
 
-
 -- --------------------------------------------------------
 
 --
@@ -301,32 +300,32 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `cantidad`, `descripcion`, `duracion`, `imagen`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, '5 frutas', '20.30', 10, 'fdsfds', 2, NULL, 'activo', '2018-06-16 04:17:48', '2018-08-27 07:12:02'),
-(2, 1, 'Trebol', '2.50', 50, 'agdgrutu', 2, NULL, 'activo', '2018-07-20 03:50:46', '2018-08-27 07:12:31'),
-(3, 1, 'frutas extra', '210.00', 10, 'descripcion de torta tres leches', 5, NULL, 'activo', '2018-08-17 21:16:24', '2018-08-27 07:12:57'),
-(4, 1, 'mosaico', '10.00', 10, 'asd', NULL, NULL, 'activo', '2018-08-27 07:13:43', '2018-08-27 07:13:43'),
-(5, 1, 'queso', '100.00', 10, 'fgh', NULL, NULL, 'activo', '2018-08-27 07:14:23', '2018-08-27 07:14:23'),
-(6, 1, 'queso con zarzamora', '200.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:15:05', '2018-08-27 07:15:05'),
-(7, 1, 'limon', '100.00', 12, NULL, NULL, NULL, 'activo', '2018-08-27 07:15:30', '2018-08-27 07:15:30'),
-(8, 1, 'manzana', '400.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:15:45', '2018-08-27 07:15:45'),
-(9, 1, 'manzana con hojaldre', '121.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:16:11', '2018-08-27 07:16:11'),
-(10, 1, 'turca', '101.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:16:28', '2018-08-27 07:16:28'),
-(11, 1, 'uva', '200.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:16:45', '2018-08-27 07:16:45'),
+(1, 1, '5 frutas', '20.30', 10, 'fdsfds', 2, 'UhVirT94oLLLVazILdiX.jpg', 'activo', '2018-06-16 04:17:48', '2018-08-31 19:01:29'),
+(2, 1, 'Trebol', '2.50', 50, 'agdgrutu', 2, NULL, 'eliminado', '2018-07-20 03:50:46', '2018-08-31 19:06:56'),
+(3, 1, 'frutas extra', '210.00', 10, 'descripcion de torta tres leches', 5, 'MP62H1wzF9ako7yvndQt.jpg', 'activo', '2018-08-17 21:16:24', '2018-08-31 19:10:01'),
+(4, 1, 'mosaico', '10.00', 10, 'asd', NULL, NULL, 'eliminado', '2018-08-27 07:13:43', '2018-08-31 19:07:30'),
+(5, 1, 'queso', '100.00', 10, 'fgh', NULL, NULL, 'eliminado', '2018-08-27 07:14:23', '2018-08-31 19:07:45'),
+(6, 1, 'Tarta de queso', '200.00', 10, NULL, NULL, 'ZD1VluaxXtacVKR0cfmy.jpg', 'activo', '2018-08-27 07:15:05', '2018-08-31 19:12:57'),
+(7, 1, 'Tarta de limon', '100.00', 12, NULL, NULL, 'eoVfFZOjpYDoDUfY9i6s.jpg', 'activo', '2018-08-27 07:15:30', '2018-08-31 19:14:10'),
+(8, 1, 'tarta de manzana', '400.00', 10, NULL, NULL, 'gEchTHMa9Xe3pdEXhm91.jpg', 'activo', '2018-08-27 07:15:45', '2018-08-31 19:15:29'),
+(9, 1, 'tartaleta de manzana', '121.00', 10, NULL, NULL, 'ECTeqMujs95z2fWmEzjy.jpg', 'activo', '2018-08-27 07:16:11', '2018-08-31 19:17:27'),
+(10, 1, 'tarta de durazno', '101.00', 10, NULL, NULL, 'lGjS93P5jBTU0mmY216P.jpg', 'activo', '2018-08-27 07:16:28', '2018-08-31 19:25:46'),
+(11, 1, 'tarta de uva', '200.00', 10, NULL, NULL, 'HOQBPIjxORxeqrcokY7w.jpg', 'activo', '2018-08-27 07:16:45', '2018-08-31 19:24:13'),
 (12, 1, 'fresa', '300.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:17:22', '2018-08-27 07:17:22'),
 (13, 16, 'barcos', '45.00', 20, NULL, NULL, NULL, 'activo', '2018-08-27 07:18:42', '2018-08-27 07:18:42'),
-(14, 16, 'nuez', '64.00', 32, NULL, NULL, NULL, 'activo', '2018-08-27 07:19:04', '2018-08-27 07:19:04'),
+(14, 16, 'tartaleta de ceresas', '64.00', 32, NULL, NULL, 'CYGmOsgG2SvUr0qwlRhz.jpg', 'activo', '2018-08-27 07:19:04', '2018-08-31 19:20:17'),
 (15, 16, 'queso', '75.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (16, 16, 'chocolate', '74.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (17, 16, 'limon', '45.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (18, 16, 'manzana con hojaldre', '68.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
-(19, 16, 'durazno', '32.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
-(20, 16, 'piña', '89.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
+(19, 16, 'Gelatinas clasicas', '32.00', 10, NULL, NULL, '0ANdb0GyMmPhj2ZZOEo5.png', 'activo', '2018-08-27 04:00:00', '2018-08-31 19:29:22'),
+(20, 16, 'gelatina de piña', '89.00', 10, NULL, NULL, 'CDSDkWBKzk5zciQAUlyk.jpg', 'activo', '2018-08-27 04:00:00', '2018-08-31 19:31:03'),
 (21, 16, 'combinada', '45.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (22, 16, 'fresa', '25.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (23, 16, 'mango', '28.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (24, 16, 'uva', '65.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (25, 17, 'corazon', '32.00', 12, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
-(26, 17, 'figuras o decoradas', '15.00', 12, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
+(26, 17, 'figuras o decoradas', '15.00', 12, NULL, NULL, '1g3nE4TP6hA6d1LBpG1X.jpg', 'activo', '2018-08-27 04:00:00', '2018-08-31 19:39:19'),
 (27, 17, 'individuales de leche', '15.00', 12, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (28, 17, 'rosca durazno', '65.00', 12, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (29, 17, 'rosca mosaico', '8.00', 12, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
@@ -341,7 +340,9 @@ INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `canti
 (38, 19, 'merengue', '30.00', 20, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (39, 18, 'choux', '40.00', 20, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (40, 18, 'cisne', '30.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
-(41, 20, 'helados', '10.00', 40, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00');
+(41, 20, 'helados', '10.00', 40, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
+(42, 16, 'tartas con frutas', '20.00', 30, 'wtwetwywy', 4, 'C2Cs4K6G222bmMJPuKof.jpg', 'activo', '2018-08-31 19:06:32', '2018-08-31 19:06:32'),
+(43, 17, 'Gelatina de piña', '10.00', 30, 'asgatata', 12, 'lXRv2RBO4Kj91dJAuuTQ.jpg', 'activo', '2018-08-31 19:32:51', '2018-08-31 19:32:51');
 
 -- --------------------------------------------------------
 
@@ -544,79 +545,66 @@ ALTER TABLE `venta`
 --
 ALTER TABLE `categoria_producto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT de la tabla `his_cantidad`
 --
 ALTER TABLE `his_cantidad`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `lote`
 --
 ALTER TABLE `lote`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `preparado`
 --
 ALTER TABLE `preparado`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT de la tabla `promocion`
 --
 ALTER TABLE `promocion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- Restricciones para tablas volcadas
 --
