@@ -27,5 +27,8 @@ class Promocion extends Model
      */
     protected $fillable = ['producto_id', 'precio', 'fecha', 'duracion', 'unidad', 'estado'];
 
-    
+    public function producto()
+    {
+        return $this->hasOne('App\Producto', 'id', 'producto_id');
+    } 
 }

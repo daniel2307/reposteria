@@ -10,7 +10,6 @@
                     <div class="card-body">
 
                         <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/promocion/' . $promocion->id . '/edit') }}" title="Edit Promocion"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
                         <form method="POST" action="{{ url('promocion' . '/' . $promocion->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
@@ -26,7 +25,13 @@
                                     <tr>
                                         <th>ID</th><td>{{ $promocion->id }}</td>
                                     </tr>
-                                    <tr><th> Descuento </th><td> {{ $promocion->descuento }} </td></tr><tr><th> Fecha </th><td> {{ $promocion->fecha }} </td></tr><tr><th> Duracion </th><td> {{ $promocion->duracion }} </td></tr>
+                                    <tr>
+                                        <th>Producto</th><td>{{ $promocion->producto->nombre }}</td>
+                                    </tr>
+                                    <tr><th> Precio de Promocion </th><td> {{ $promocion->precio }} </td></tr><tr><th> Fecha </th><td> {{ $promocion->fecha }} </td></tr><tr><th> Duracion </th><td> {{ $promocion->duracion }} {{ $promocion->unidad }} </td></tr>
+                                    <tr>
+                                        <th>Estado</th><td>{{ $promocion->estado }}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
