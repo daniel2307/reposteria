@@ -138,9 +138,16 @@ class PromocionController extends Controller
 
     public function getPromocion() 
     {
-        return Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.descripcion', 'producto.imagen', 'descuento', 'promocion.duracion', 'promocion.unidad')
+        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'descuento', 'promocion.duracion', 'promocion.unidad')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
-        ->where(['estado' => 'vigente'])
+        ->where([
+            'promocion.estado' => 'vigente',
+            'producto.estado' => 'activo',
+        ])
         ->get();
+        foreach ($data as $key => $value) {
+            $value->imagen = $value->imagen ? asset('img/producto/'.$value->imagen) : asset('img/producto/sid.jpg');
+        }
+        return $data;
     }
 }
