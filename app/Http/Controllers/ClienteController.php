@@ -42,8 +42,11 @@ class ClienteController extends Controller
     {
         $requestData = $request->all();
         $requestData = array_add($requestData, 'tipo', 'comun');
-        Cliente::create($requestData);
-        return redirect('cliente')->with('flash_message', 'Cliente added!');
+        $cliente = Cliente::create($requestData);
+        if ($request->key == "pasteleria_el_amor_es_dulce") {
+            return response()->json(['message' => 'Usuario registrado', 'id' => $cliente->id]);
+        }
+        return redirect('cliente');
     }
 
     /**
@@ -66,10 +69,12 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($id, $key = NULL)
     {
         $cliente = Cliente::findOrFail($id);
-
+        if ($key == "pasteleria_el_amor_es_dulce") {
+            return response()->json(['cliente' => $cliente]);
+        }
         return view('cliente.edit', compact('cliente'));
     }
 
@@ -83,29 +88,14 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $requestData = $request->all();
         
-        $v = \Validator::make($requestData, [
-            'nombre' => 'required|string|max:255',
-            'direccion' => 'required|string|max:255',
-            'telefono' => 'int',
-            'celular' => 'int',
-            'num_aux' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'tipo' => 'required|string|max:255',
-        ]);
- 
-        if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }
-
         $cliente = Cliente::findOrFail($id);
         $cliente->update($requestData);
-
-        return redirect('cliente')->with('flash_message', 'Cliente updated!');
+        if ($request->key == "pasteleria_el_amor_es_dulce") {
+            return response()->json(['message' => 'Usuario modificado']);
+        }
+        return redirect('cliente');
     }
 
     /**

@@ -1,62 +1,91 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+<a href="{{ url('/promocion/create') }}" class="btn btn-success" title="Add New Promocion">
+    <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nueva Promocion
+</a>
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Promocion</div>
-                    <div class="card-body">
-                        <a href="{{ url('/promocion/create') }}" class="btn btn-success btn-sm" title="Add New Promocion">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
-
-                        <form method="GET" action="{{ url('/promocion') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-append">
-                                    <button class="btn btn-secondary" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-
-                        <br/>
-                        <br/>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th><th>Descuento</th><th>Fecha</th><th>Duracion</th><th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($promocion as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->descuento }}</td><td>{{ $item->fecha }}</td><td>{{ $item->duracion }}</td>
-                                        <td>
-                                            <a href="{{ url('/promocion/' . $item->id) }}" title="View Promocion"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/promocion/' . $item->id . '/edit') }}" title="Edit Promocion"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
-                                            <form method="POST" action="{{ url('/promocion' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Promocion" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="pagination-wrapper"> {!! $promocion->appends(['search' => Request::get('search')])->render() !!} </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="table-responsive-lg">
+    <table id="dtModel" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">id
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Producto
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Precio
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Duracion
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Unidad
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">accion
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Duracion</th>
+                <th>Unidad</th>
+                <th>accion</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 @endsection
+
+@push('links')
+<!-- MDBootstrap Datatables  -->
+<link href="/css/addons/datatables.min.css" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="/js/addons/datatables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-promocion').addClass('current-menu-item');
+        $('#a-promocion').addClass('active');
+
+        $('#dtModel').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ url("promocion/get/DataTable") }}',
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'nombre', name: 'nombre'},
+                {data: 'precio', name: 'precio'},
+                {data: 'duracion', name: 'duracion'},
+                {data: 'unidad', name: 'unidad'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+        $('#dtModel_wrapper').find('label').each(function () {
+            $(this).parent().append($(this).children());
+        });
+        $('#dtModel_wrapper .dataTables_filter').find('input').each(function () {
+            $('input').attr("placeholder", "Search");
+            $('input').removeClass('form-control-sm');
+        });
+        $('#dtModel_wrapper .dataTables_length').addClass('d-flex flex-row');
+        $('#dtModel_wrapper .dataTables_filter').addClass('md-form');
+        $('#dtModel_wrapper select').removeClass('custom-select custom-select-sm form-control form-control-sm');
+        $('#dtModel_wrapper select').addClass('mdb-select');
+        $('#dtModel_wrapper .mdb-select').material_select();
+        $('#dtModel_wrapper .dataTables_filter').find('label').remove();
+    });
+
+</script>
+@endpush

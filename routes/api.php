@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('getPromocion', 'PromocionController@getPromocion');
+
+Route::post('cliente', 'ClienteController@store');
+Route::put('cliente/{cliente_id}', 'ClienteController@update');
+Route::get('cliente/{cliente_id}/edit', 'ClienteController@edit');
 Route::get('getCategoria', 'CategoriaProductoController@getCategoria');
+
 Route::get('getProductosByCategoria/{categoria_id}', 'ProductoController@getProductosByCategoria');
 

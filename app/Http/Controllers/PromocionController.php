@@ -136,6 +136,22 @@ class PromocionController extends Controller
         return redirect('promocion')->with('flash_message', 'Promocion deleted!');
     }
 
+    public function getDataTable()
+    {
+        $model = Promocion::select('promocion.id', 'producto.nombre', 'promocion.precio', 'promocion.duracion', 'promocion.unidad')
+        ->join('producto', 'promocion.producto_id', '=', 'producto.id')
+        ->where(['promocion.estado' => 'vigente']);
+        return datatables()->of($model)
+            ->addColumn('action', function ($model) {
+                return 
+                '<a href="/promocion/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
+            ->make(true);
+
+    }
+
     public function getPromocion() 
     {
         $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'descuento', 'promocion.duracion', 'promocion.unidad')

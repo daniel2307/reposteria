@@ -1,35 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+<div class="card">
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Create New Promocion</div>
-                    <div class="card-body">
-                        <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <br />
-                        <br />
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Crear Nueva Promocion</strong>
+    </h5>
 
-                        @if ($errors->any())
-                            <ul class="alert alert-danger">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+        <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
 
-                        <form method="POST" action="{{ url('/promocion') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+        <p><small class="red-text">* Obligatorio</small></p>
 
-                            @include ('admin.promocion.form')
+        <form method="POST" class="text-center" action="{{ url('/promocion') }}" accept-charset="UTF-8" style="color: #757575;">
+            @include('promocion.form', ['submitButtonText' => 'GUARDAR'])
+        </form>
 
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+</div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-promocion').addClass('current-menu-item');
+        $('#a-promocion').addClass('active');
+    });
+</script>
+@endpush

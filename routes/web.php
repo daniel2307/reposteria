@@ -39,6 +39,7 @@ Route::get('producto/get/DataTable', 'ProductoController@getDataTable');
     Route::resource('pedido', 'PedidoController');
     Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
     Route::resource('promocion', 'PromocionController');
+    Route::get('promocion/get/DataTable', 'PromocionController@getDataTable');
 // });
 
 /**
