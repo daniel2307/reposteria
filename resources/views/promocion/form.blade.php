@@ -11,7 +11,7 @@
     <div class="col">
         <div class="md-form">
             <input type="number" id="precio" name="precio" class="form-control" value="{{ $promocion->precio or '' }}" required>
-            <label for="precio">Precio Promocion <b class="red-text">*</b></label>
+            <label for="precio">Precio de Promocion <b class="red-text">*</b></label>
         </div>
     </div>
 </div>

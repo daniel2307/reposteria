@@ -44,7 +44,11 @@ class ClienteController extends Controller
         $requestData = array_add($requestData, 'tipo', 'comun');
         $cliente = Cliente::create($requestData);
         if ($request->key == "pasteleria_el_amor_es_dulce") {
-            return response()->json(['message' => 'Usuario registrado', 'id' => $cliente->id]);
+            return response()->json([
+                'message' => 'Usuario registrado', 
+                'id' => $cliente->id,
+                '_token' => csrf_token(),
+            ]);
         }
         return redirect('cliente');
     }

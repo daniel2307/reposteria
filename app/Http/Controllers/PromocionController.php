@@ -46,26 +46,12 @@ class PromocionController extends Controller
      */
     public function store(Request $request)
     {
-        
         $requestData = $request->all();
-        
-        $v = \Validator::make($requestData, [
-            'descuento' => 'required|between:0,99.99',
-            'fecha' => 'required|date_format:Y-m-d',
-            'duracion' => 'required||string|max:255',
-            'estado' => 'required|string|max:255',
-            'producto_id' => 'required|string|max:255',
-
-        ]);
- 
-        if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }
-        
+        $requestData = array_add($requestData, 'fecha', date("Y-m-d H:i:s"));
+        $requestData = array_add($requestData, 'estado', 'vigente');
         Promocion::create($requestData);
 
-        return redirect('promocion')->with('flash_message', 'Promocion added!');
+        return redirect('promocion');
     }
 
     /**
