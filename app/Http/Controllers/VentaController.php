@@ -70,7 +70,6 @@ class VentaController extends Controller
             $venta->descuento = $request->descuento;
             $venta->total_importe = $request->total_importe;
             $venta->iva = "0";
-            $venta->estado = "activo";
             $venta->cliente_id = $cliente->id;
             $venta->users_id = auth()->user()->id;
             $venta->save();
@@ -154,8 +153,7 @@ class VentaController extends Controller
     public function getDataTable()
     {
         $model = Venta::select(['venta.id', 'cliente.nombre', 'fecha', 'total', 'descuento', 'total_importe'])
-        ->join('cliente', 'venta.cliente_id', '=', 'cliente.id')
-        ->where(['venta.estado' => 'activo']);
+        ->join('cliente', 'venta.cliente_id', '=', 'cliente.id');
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
@@ -164,6 +162,5 @@ class VentaController extends Controller
             ->editColumn('id', 'ID: {{$id}}')
             // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
             ->make(true);
-
     }
 }

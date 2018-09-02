@@ -3,6 +3,13 @@ https://datatables.yajrabox.com/eloquent/add-edit-remove-column
 
 tartamiel.com
 
+https://laraget.com/blog/select2-and-laravel-ajax-autocomplete
+https://styde.net/etiquetas-dinamicas-con-select2-y-ajax-en-laravel/
+http://www.codebyjigs.com/select2-laravel/
+https://laracasts.com/discuss/channels/general-discussion/select2-ajax-on-laravel?page=1
+https://hdtuto.com/article/php-laravel-select2-js-example-from-scratch
+
+
 // return datatables()->of(User::query())->toJson();
 // return datatables()->of(DB::table('users'))->toJson();
 // return datatables()->of(User::all())->toJson();

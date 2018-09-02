@@ -1,44 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+<div class="card">
 
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">Promocion {{ $promocion->id }}</div>
-                    <div class="card-body">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Detalle Promocion</strong>
+    </h5>
 
-                        <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+        <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="{{ url('/promocion/' . $promocion->id . '/edit') }}" title="Edit Promocion"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
 
-                        <form method="POST" action="{{ url('promocion' . '/' . $promocion->id) }}" accept-charset="UTF-8" style="display:inline">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Promocion" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                        </form>
-                        <br/>
-                        <br/>
-
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th>ID</th><td>{{ $promocion->id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Producto</th><td>{{ $promocion->producto->nombre }}</td>
-                                    </tr>
-                                    <tr><th> Precio de Promocion </th><td> {{ $promocion->precio }} </td></tr><tr><th> Fecha </th><td> {{ $promocion->fecha }} </td></tr><tr><th> Duracion </th><td> {{ $promocion->duracion }} {{ $promocion->unidad }} </td></tr>
-                                    <tr>
-                                        <th>Estado</th><td>{{ $promocion->estado }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <form method="POST" action="{{ url('promocion' . '/' . $promocion->id) }}" accept-charset="UTF-8" style="display:inline">
+            {{ method_field('DELETE') }}
+            @csrf
+            <button type="submit" class="btn btn-danger btn-sm" title="Delete Promocion" onclick="return confirm('Confirm delete?')"><i class="far fa-trash-alt" aria-hidden="true"></i> Delete</button>
+        </form>
+        
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="row">ID</th>
+                        <td>{{ $promocion->id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Producto</th>
+                        <td>
+                            {{ $promocion->producto->nombre }} - 
+                            {{ $promocion->producto->categoria->nombre }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Precio</th>
+                        <td>{{ $promocion->precio }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha</th>
+                        <td>{{ $promocion->fecha }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Duracion</th>
+                        <td>{{ $promocion->duracion }} {{ $promocion->unidad }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Estado</th>
+                        <td>{{ $promocion->estado }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Imagen</th>
+                        <td><img src="/img/producto/{{ $promocion->producto->imagen or 'sid.jpg'}}" alt="imagen" height="300px"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 @endsection
+@push('scripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#cmi-promocion').addClass('current-menu-item');
+        $('#a-promocion').addClass('active');
+    });
+</script>
+@endpush

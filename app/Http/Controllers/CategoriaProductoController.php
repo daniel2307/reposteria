@@ -146,7 +146,8 @@ class CategoriaProductoController extends Controller
 
     public function getDataTable()
     {
-        $model = CategoriaProducto::select(['id', 'nombre', 'imagen'])->where(['estado' => 'activo']);
+        $model = CategoriaProducto::select(['id', 'nombre', 'imagen'])
+        ->where(['estado' => 'activo']);
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
@@ -161,7 +162,9 @@ class CategoriaProductoController extends Controller
 
     public function getCategoria() 
     {
-        $data = CategoriaProducto::select('id', 'nombre', 'imagen')->where(['estado' => 'activo'])->get();
+        $data = CategoriaProducto::select('id', 'nombre', 'imagen')
+        ->where(['estado' => 'activo'])
+        ->get();
         foreach ($data as $key => $value) {
             $value->imagen = $value->imagen ? asset('img/categoria/'.$value->imagen) : asset('img/categoria/sid.jpg');
         }

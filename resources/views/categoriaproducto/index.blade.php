@@ -61,7 +61,8 @@
                     return '<img src="/img/categoria/'+(data?data:'sid.jpg')+'" alt="imagen" height="100px">';
                 }, orderable: false, searchable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
+            ],
+            order: [[ 0, 'desc' ]],
         });
         $('#dtModel_wrapper').find('label').each(function () {
             $(this).parent().append($(this).children());

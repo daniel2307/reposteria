@@ -31,5 +31,10 @@ class Producto extends Model
     {
         return $this->hasMany('App\DetalleVenta', 'producto_id');
     }
+
+    public function categoria()
+    {
+        return $this->hasOne('App\CategoriaProducto', 'id', 'categoria_producto_id');
+    }
     
 }

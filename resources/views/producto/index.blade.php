@@ -70,7 +70,8 @@
                 {data: 'costo', name: 'costo'},
                 {data: 'cantidad', name: 'cantidad'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
+            ],
+            order: [[ 0, 'desc' ]],
         });
         $('#dtModel_wrapper').find('label').each(function () {
             $(this).parent().append($(this).children());

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use DB;
 use App\Pedido;
+use App\DetallePedido;
 use App\Producto;
 use App\Cliente;
 use Illuminate\Http\Request;
@@ -46,48 +47,52 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
-        //     DB::beginTransaction();
-        //     // insertamos un cliente si no existe
-        //     $cliente = new Cliente;
-        //     if ($request->has('cliente_id')) {
-        //         $cliente->id = $request->cliente_id;
-        //     }
-        //     else {
-        //         $cliente = Cliente::where('ci', $request->cliente_ci)->first();
-        //         if (!$cliente) {
-        //             $cliente->nombre = $request->cliente_nombre;
-        //             $cliente->ci = $request->cliente_ci;
-        //             $cliente->save();
-        //         }
-        //     }
-        //     // insertamos la pedido
-        //     $pedido = new Pedido;
-        //     $pedido->fecha = date("Y-m-d H:i:s");
-        //     $pedido->total = $request->total;
-        //     $pedido->descuento = $request->descuento;
-        //     $pedido->total_importe = $request->total_importe;
-        //     $pedido->iva = "0";
-        //     $pedido->estado = "activo";
-        //     $pedido->cliente_id = $cliente->id;
-        //     $pedido->users_id = auth()->user()->id;
-        //     $pedido->save();
+        try {
+            DB::beginTransaction();
+            // insertamos un cliente si no existe
+            $cliente = new Cliente;
+            if ($request->has('cliente_id')) {
+                $cliente->id = $request->cliente_id;
+            }
+            else {
+                $cliente = Cliente::where('ci', $request->cliente_ci)->first();
+                if (!$cliente) {
+                    $cliente->nombre = $request->cliente_nombre;
+                    $cliente->ci = $request->cliente_ci;
+                    $cliente->save();
+                }
+            }
+            // insertamos la pedido
+            $pedido = new Pedido;
+            $pedido->cliente_id = $cliente->id;
+            $pedido->fecha = date("Y-m-d");
+            $pedido->fecha_entrega = $request->fecha_entrega;
+            $pedido->hora_entrega = $request->hora_entrega;
+            $pedido->acuenta = $request->acuenta;
+            $pedido->saldo = $request->saldo;
+            $pedido->total = $request->total;
+            $pedido->descuento = $request->descuento;
+            $pedido->total_importe = $request->total_importe;
+            $pedido->tipo = "tienda";
+            $pedido->estado = "espera";
+            $pedido->forma_de_pago = $request->forma_de_pago;
+            $pedido->save();
 
-        //     foreach ($request->cantidad as $key => $value) {
-        //         // insertamos el detalle de pedido por cada producto vendido
-        //         $detalle_pedido = new DetallePedido;
-        //         $detalle_pedido->cantidad = $request->cantidad[$key];
-        //         $detalle_pedido->subtotal = $request->subtotal[$key];
-        //         $detalle_pedido->pedido_id = $pedido->id;
-        //         $detalle_pedido->producto_id = $key;
-        //         $detalle_pedido->save();
-        //     }
-        //     DB::commit();
-        //     return redirect('pedido');
-        // } catch (Exception $e) {
-        //     DB::rollBack();
-        //     return redirect('pedido/create');
-        // }
+            foreach ($request->cantidad as $key => $value) {
+                // insertamos el detalle de pedido por cada producto vendido
+                $detalle_pedido = new DetallePedido;
+                $detalle_pedido->cantidad = $request->cantidad[$key];
+                $detalle_pedido->subtotal = $request->subtotal[$key];
+                $detalle_pedido->pedido_id = $pedido->id;
+                $detalle_pedido->producto_id = $key;
+                $detalle_pedido->save();
+            }
+            DB::commit();
+            return redirect('pedido');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect('pedido/create');
+        }
     }
 
     /**
@@ -169,7 +174,7 @@ class PedidoController extends Controller
 
     public function getDataTable()
     {
-        $model = Pedido::select(['pedido.id', 'cliente.nombre', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe'])
+        $model = Pedido::select(['pedido.id', 'cliente.nombre', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total_importe'])
         ->join('cliente', 'pedido.cliente_id', '=', 'cliente.id')
         ->where('pedido.estado', '!=', 'cancelado');
         return datatables()->of($model)

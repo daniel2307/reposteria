@@ -8,4 +8,5 @@
 <link rel="shortcut icon" href="/favicon.ico" />
 
 <link rel='stylesheet' href="{{ asset('css/compiled-4.5.9.minface.css?ver=4.5.9') }}" type='text/css' media='all' />
+<link rel='stylesheet' href="{{ asset('css/select2.min.css') }}" type='text/css' />
 @stack('links')
