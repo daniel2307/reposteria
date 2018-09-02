@@ -14,7 +14,7 @@
         <p><small class="red-text">* Obligatorio</small></p>
 
         <form method="POST" class="text-center" action="{{ url('/cliente') }}" accept-charset="UTF-8" style="color: #757575;">
-            @include ('cliente.form', ['submitButtonText' => 'GUARDAR'])
+            @include('cliente.form', ['submitButtonText' => 'GUARDAR'])
         </form>
 
     </div>

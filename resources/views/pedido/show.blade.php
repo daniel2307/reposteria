@@ -78,6 +78,18 @@
                         <th scope="row">Total Importe</th>
                         <td>{{ $pedido->total_importe }}</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Tipo</th>
+                        <td>{{ $pedido->tipo }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Estado</th>
+                        <td>{{ $pedido->estado }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Forma de pago</th>
+                        <td>{{ $pedido->forma_de_pago }}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
