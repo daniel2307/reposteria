@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2018 a las 04:24:58
+-- Tiempo de generación: 03-09-2018 a las 18:40:40
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -130,7 +130,9 @@ INSERT INTO `detalle_venta` (`id`, `venta_id`, `producto_id`, `cantidad`, `subto
 (5, 4, 1, 1, '20.30'),
 (6, 5, 3, 2, '420.00'),
 (7, 6, 1, 6, '121.80'),
-(8, 7, 2, 10, '25.00');
+(8, 7, 2, 10, '25.00'),
+(9, 8, 43, 10, '100.00'),
+(10, 9, 12, 1, '300.00');
 
 -- --------------------------------------------------------
 
@@ -313,7 +315,7 @@ INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `canti
 (9, 1, 'tartaleta de manzana', '121.00', 10, NULL, NULL, 'ECTeqMujs95z2fWmEzjy.jpg', 'activo', '2018-08-27 07:16:11', '2018-08-31 19:17:27'),
 (10, 1, 'tarta de durazno', '101.00', 10, NULL, NULL, 'lGjS93P5jBTU0mmY216P.jpg', 'activo', '2018-08-27 07:16:28', '2018-08-31 19:25:46'),
 (11, 1, 'tarta de uva', '200.00', 10, NULL, NULL, 'HOQBPIjxORxeqrcokY7w.jpg', 'activo', '2018-08-27 07:16:45', '2018-08-31 19:24:13'),
-(12, 1, 'fresa', '300.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 07:17:22', '2018-08-27 07:17:22'),
+(12, 1, 'fresa', '300.00', 9, NULL, NULL, NULL, 'activo', '2018-08-27 07:17:22', '2018-09-03 16:20:47'),
 (13, 16, 'barcos', '45.00', 20, NULL, NULL, NULL, 'activo', '2018-08-27 07:18:42', '2018-08-27 07:18:42'),
 (14, 16, 'tartaleta de ceresas', '64.00', 32, NULL, NULL, 'CYGmOsgG2SvUr0qwlRhz.jpg', 'activo', '2018-08-27 07:19:04', '2018-08-31 19:20:17'),
 (15, 16, 'queso', '75.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
@@ -344,7 +346,7 @@ INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `canti
 (40, 18, 'cisne', '30.00', 10, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (41, 20, 'helados', '10.00', 40, NULL, NULL, NULL, 'activo', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
 (42, 16, 'tartas con frutas', '20.00', 30, 'wtwetwywy', 4, 'C2Cs4K6G222bmMJPuKof.jpg', 'activo', '2018-08-31 19:06:32', '2018-08-31 19:06:32'),
-(43, 17, 'Gelatina de piña', '10.00', 30, 'asgatata', 12, 'lXRv2RBO4Kj91dJAuuTQ.jpg', 'activo', '2018-08-31 19:32:51', '2018-08-31 19:32:51');
+(43, 17, 'Gelatina de piña', '10.00', 20, 'asgatata', 12, 'lXRv2RBO4Kj91dJAuuTQ.jpg', 'activo', '2018-08-31 19:32:51', '2018-09-02 15:28:57');
 
 -- --------------------------------------------------------
 
@@ -443,7 +445,9 @@ INSERT INTO `venta` (`id`, `cliente_id`, `users_id`, `fecha`, `total`, `descuent
 (4, 6, 1, '2018-06-22 00:00:00', '20.30', '0.00', '20.30', '2018-06-23 05:08:15', '2018-06-23 05:08:15'),
 (5, 8, 1, '2018-08-26 00:00:00', '420.00', '20.00', '400.00', '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
 (6, 9, 1, '2018-08-26 15:55:53', '121.80', '0.00', '121.80', '2018-08-26 19:55:53', '2018-08-26 19:55:53'),
-(7, 10, 1, '2018-08-26 20:14:02', '25.00', '0.00', '25.00', '2018-08-27 00:14:02', '2018-08-27 00:14:02');
+(7, 10, 1, '2018-08-26 20:14:02', '25.00', '0.00', '25.00', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
+(8, 8, 1, '2018-09-02 11:28:57', '100.00', '0.00', '100.00', '2018-09-02 15:28:57', '2018-09-02 15:28:57'),
+(9, 8, 1, '2018-09-03 12:20:47', '300.00', '0.00', '300.00', '2018-09-03 16:20:47', '2018-09-03 16:20:47');
 
 --
 -- Índices para tablas volcadas
@@ -563,7 +567,7 @@ ALTER TABLE `detalle_pedido`
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `his_cantidad`
 --
@@ -608,7 +612,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --

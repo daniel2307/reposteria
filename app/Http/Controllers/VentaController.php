@@ -69,7 +69,6 @@ class VentaController extends Controller
             $venta->total = $request->total;
             $venta->descuento = $request->descuento;
             $venta->total_importe = $request->total_importe;
-            $venta->iva = "0";
             $venta->cliente_id = $cliente->id;
             $venta->users_id = auth()->user()->id;
             $venta->save();
@@ -82,6 +81,9 @@ class VentaController extends Controller
                 $detalle_venta->venta_id = $venta->id;
                 $detalle_venta->producto_id = $key;
                 $detalle_venta->save();
+                // disminuir el stock del producto
+                Producto::where(['id' => $key])
+                ->decrement('cantidad', $request->cantidad[$key]);
             }
             DB::commit();
             return redirect('venta');

@@ -45,6 +45,18 @@
                         <td>{{ $promocion->duracion }} {{ $promocion->unidad }}</td>
                     </tr>
                     <tr>
+                        <th scope="row">Cantidad</th>
+                        <td>{{ $promocion->cantidad }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha Inicio</th>
+                        <td>{{ $promocion->fecha_inicio }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fecha Fin</th>
+                        <td>{{ $promocion->fecha_fin }}</td>
+                    </tr>
+                    <tr>
                         <th scope="row">Estado</th>
                         <td>{{ $promocion->estado }}</td>
                     </tr>

@@ -71,6 +71,13 @@
                     </a>
                 </li>
 
+                <li class="menu-item" id="cmi-update-stock">
+                    <a class="collapsible-header waves-effect" href="{{ url('update-stock') }}" id="a-update-stock">
+                        <i class="fas fa-boxes mr-2"></i>
+                        Actualizar Existencias
+                    </a>
+                </li>
+
             </ul>
         </li>
         <!-- /. Side navigation links -->
