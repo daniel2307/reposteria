@@ -75,7 +75,36 @@
         $('#dtModel_wrapper select').addClass('mdb-select');
         $('#dtModel_wrapper .mdb-select').material_select();
         $('#dtModel_wrapper .dataTables_filter').find('label').remove();
+
+
     });
 
+    function guardar(btn, producto_id) {
+        var td = $(btn).parents('td');
+        var input = $(td).find('input');
+        var cantidad = input.val();
+        if (cantidad > 0 && cantidad != "") {
+            $.ajax({
+                method: "POST",
+                url: "/update-stock",
+                data: { 
+                    producto_id: producto_id, 
+                    cantidad: cantidad, 
+                    _token: "{{ csrf_token() }}", 
+                },
+                success: function(result) {
+                    $('#dtModel').DataTable().draw();
+                    toastr["success"]("Se guardo correctamente!")
+                },
+                error: function() {
+                    console.log("No se completo la operacion!");
+                }
+            });
+        }
+        else {
+            alert("Dato inadecuado para guardar!");
+        }
+            
+    }
 </script>
 @endpush

@@ -36,7 +36,13 @@ class LoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        $requestData = array_add($requestData, 'fecha', date("Y-m-d H:i:s"));
+        $requestData = array_add($requestData, 'estado', 'activo');
+        Lote::create($requestData);
+        Producto::where(['id' => $request->producto_id])
+                ->increment('cantidad', $request->cantidad);
+        return response()->json(['message' => 'ok']);
     }
 
     /**
@@ -92,9 +98,14 @@ class LoteController extends Controller
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
-                return 
-                '<input type="text" class="form-control" style="width:120px;">
-                <a href="/venta/'.$model->id.'" class="btn btn-success btn-sm waves-effect waves-light" title="Ver"><i class="far fa-save"></i></a>';
+                return '
+                <div class="md-form input-group m-0">
+                    <input type="number" class="form-control txt_cantidad" style="width:10px;" min="1">
+                    <div class="input-group-append">
+                        <button onclick="guardar(this,'.$model->id.');" class="btn btn-success btn-sm waves-effect m-0" type="button" title="Guardar"><i class="far fa-save" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                ';
             })
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);
