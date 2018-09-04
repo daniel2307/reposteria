@@ -143,7 +143,6 @@ class PedidoController extends Controller
             'fecha_entrega' => 'required|date_format:Y-m-d',
             'hora_entrega' => 'required',
             'forma_de_pago' => 'required|string|max:255',
-            'iva' => 'required',
             'cliente_id' => 'required|string|max:255',
         ]);
  

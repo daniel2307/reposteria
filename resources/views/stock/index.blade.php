@@ -97,7 +97,7 @@
                     toastr["success"]("Se guardo correctamente!")
                 },
                 error: function() {
-                    console.log("No se completo la operacion!");
+                    toastr["error"]("No se completo la operacion!")
                 }
             });
         }

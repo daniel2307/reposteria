@@ -36,13 +36,21 @@ class LoteController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->all();
-        $requestData = array_add($requestData, 'fecha', date("Y-m-d H:i:s"));
-        $requestData = array_add($requestData, 'estado', 'activo');
-        Lote::create($requestData);
-        Producto::where(['id' => $request->producto_id])
-                ->increment('cantidad', $request->cantidad);
-        return response()->json(['message' => 'ok']);
+        try {
+            DB::beginTransaction();
+
+            $requestData = $request->all();
+            $requestData = array_add($requestData, 'fecha', date("Y-m-d H:i:s"));
+            $requestData = array_add($requestData, 'estado', 'activo');
+            Lote::create($requestData);
+            Producto::where(['id' => $request->producto_id])->increment('cantidad', $request->cantidad);
+
+            DB::commit();
+            return response()->json(['message' => 'ok']);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json(['code' => 500, 'message' => 'error'], 500);
+        }
     }
 
     /**
