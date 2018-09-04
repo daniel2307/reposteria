@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Venta;
 use App\Producto;
+use App\Lote;
 use App\Cliente;
 use App\DetalleVenta;
 use DB;
@@ -84,6 +85,25 @@ class VentaController extends Controller
                 // disminuir el stock del producto
                 Producto::where(['id' => $key])
                 ->decrement('cantidad', $request->cantidad[$key]);
+                $lotes = Lote::where(['producto_id' => $key])
+                ->where('cantidad', '>', 0)
+                ->orderBy('id')
+                ->get();
+                $cantidad_ = $request->cantidad[$key];
+                foreach ($lotes as $k => $lote) {
+                    $aux = $lote->cantidad - $cantidad_;
+                    if ($aux >= 0) {
+                        Lote::where(['id' => $lote->id])
+                        ->decrement('cantidad', $cantidad_);
+                        $cantidad_ = 0;
+                        break;
+                    }
+                    else {
+                        Lote::where(['id' => $lote->id])
+                        ->decrement('cantidad', $lote->cantidad);
+                        $cantidad_ -= $lote->cantidad;
+                    }
+                }   
             }
             DB::commit();
             return redirect('venta');
