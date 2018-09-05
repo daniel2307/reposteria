@@ -25,7 +25,7 @@
 
     function agregar(){
         var producto_id = $('#producto').val();
-        var producto = $("#producto option:selected").text()
+        var producto = $("#producto option:selected").text();
         var costo = $("#producto option:selected").data("price");
         var item = "item"+producto_id;
         if($("#"+item).length == 0) {
