@@ -10,13 +10,10 @@
     <!--Card content-->
     <div class="card-body px-lg-5 pt-0">
         <a href="{{ url('/promocion') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+
         <a href="{{ url('/promocion/' . $promocion->id . '/edit') }}" title="Edit Promocion"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
 
-        <form method="POST" action="{{ url('promocion' . '/' . $promocion->id) }}" accept-charset="UTF-8" style="display:inline">
-            {{ method_field('DELETE') }}
-            @csrf
-            <button type="submit" class="btn btn-danger btn-sm" title="Delete Promocion" onclick="return confirm('Confirm delete?')"><i class="far fa-trash-alt" aria-hidden="true"></i> Delete</button>
-        </form>
+        <button type="button" class="btn btn-outline-danger btn-sm waves-effect" onclick="expirado();" title="Expirar Promocion"><i class="fas fa-ban" aria-hidden="true"></i> Expirado</button>
         
         <div class="table-responsive">
             <table class="table">
@@ -76,5 +73,24 @@
         $('#cmi-promocion').addClass('current-menu-item');
         $('#a-promocion').addClass('active');
     });
+
+    function expirado() {        
+        if (confirm("Se cambiara el estado a expirado esta Promoción!")) {
+            $.ajax({
+                method: "POST",
+                url: "/promocion/expirado",
+                data: { 
+                    id: "{{ $promocion->id }}", 
+                    _token: "{{ csrf_token() }}", 
+                },
+                success: function(result) {
+                    toastr["success"]("Se ejecuto correctamente!")
+                },
+                error: function() {
+                    toastr["error"]("No se completo la operación!")
+                }
+            });
+        }
+    }
 </script>
 @endpush

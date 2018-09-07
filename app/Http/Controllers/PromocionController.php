@@ -159,4 +159,13 @@ class PromocionController extends Controller
         }
         return $data;
     }
+
+    public function setEstado(Request $request) 
+    {
+        Promocion::where('id', $request->id)
+        ->update(['estado' => 'expirado']);
+        return response()->json([
+            'message' => 'ok'
+        ]);
+    }
 }

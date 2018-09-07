@@ -30,5 +30,5 @@ class Promocion extends Model
     public function producto()
     {
         return $this->hasOne('App\Producto', 'id', 'producto_id');
-    } 
+    }
 }

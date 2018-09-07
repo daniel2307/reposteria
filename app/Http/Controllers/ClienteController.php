@@ -123,7 +123,7 @@ class ClienteController extends Controller
     
     public function getDataTable()
     {
-        $model = Cliente::select(['id', 'nombre', 'ci', 'direccion', 'telefono', 'celular', 'email']);
+        $model = Cliente::select(['id', 'nombre', 'ci', 'celular', 'email']);
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {

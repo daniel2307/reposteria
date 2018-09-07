@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card">
+<div class="card mb-5">
 
     <h5 class="card-header info-color white-text text-center py-4">
         <strong>Crear Nueva Promocion</strong>

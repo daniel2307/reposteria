@@ -18,12 +18,6 @@
                 <th class="th-sm">CI
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">Direccion
-                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
-                </th>
-                <th class="th-sm">Telefono
-                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
-                </th>
                 <th class="th-sm">Celular
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
@@ -42,8 +36,6 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>CI</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
                 <th>Celular</th>
                 <th>Email</th>
                 <th>accion</th>
@@ -75,8 +67,6 @@
                 {data: 'id', name: 'id'},
                 {data: 'nombre', name: 'nombre'},
                 {data: 'ci', name: 'ci'},
-                {data: 'direccion', name: 'direccion'},
-                {data: 'telefono', name: 'telefono'},
                 {data: 'celular', name: 'celular'},
                 {data: 'email', name: 'email'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card">
+<div class="card mb-5">
     <h3 class="card-header primary-color white-text">Crear Nuevo Pedido</h3>
     <div class="card-body">
         <a href="{{ url('/pedido') }}" title="Back"><button class="btn btn-warning btn-sm mb-4"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
