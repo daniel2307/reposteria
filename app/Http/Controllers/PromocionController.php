@@ -92,27 +92,11 @@ class PromocionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $requestData = $request->all();
-        
-        $v = \Validator::make($requestData, [
-            'descuento' => 'required|between:0,99.99',
-            'fecha' => 'required|date_format:Y-m-d',
-            'duracion' => 'required||string|max:255',
-            'estado' => 'required|string|max:255',
-            'producto_id' => 'required|string|max:255',
-
-        ]);
- 
-        if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }
-        
         $promocion = Promocion::findOrFail($id);
         $promocion->update($requestData);
 
-        return redirect('promocion')->with('flash_message', 'Promocion updated!');
+        return redirect('promocion');
     }
 
     /**
@@ -131,8 +115,9 @@ class PromocionController extends Controller
 
     public function getDataTable()
     {
-        $model = Promocion::select('promocion.id', 'producto.nombre', 'promocion.precio', 'promocion.duracion', 'promocion.unidad')
+        $model = Promocion::select('promocion.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'promocion.precio', 'promocion.duracion', 'promocion.unidad')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
         ->where(['promocion.estado' => 'vigente']);
         return datatables()->of($model)
             ->addColumn('action', function ($model) {

@@ -21,6 +21,8 @@
     $(document).ready(function () {
         $('#cmi-pedido').addClass('current-menu-item');
         $('#a-pedido').addClass('active');
+
+        $('#producto').select2();
     });
 
     function agregar(){

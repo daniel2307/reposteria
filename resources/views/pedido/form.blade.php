@@ -3,12 +3,13 @@
     <div class="col-lg-5">
         <div class="row">
             <div class="col-12">
-                <select class="mdb-select colorful-select dropdown-primary" name="producto" id="producto">
+                <label for="producto">Producto <b class="red-text">*</b></label>
+                <select class="mdb-select colorful-select dropdown-primary" name="producto" id="producto" style="width: 100%;">
                     @foreach($productos as $key => $value)
                         <option value="{{ $value->id }}" data-price="{{ $value->costo }}">{{ $value->producto }}</option>
                     @endforeach
                 </select>
-                <label for="producto">Producto <b class="red-text">*</b></label>
+                <!-- <label for="producto">Producto <b class="red-text">*</b></label> -->
             </div>
             <div class="col-12">
                 <button type="button" class="btn btn-success" onclick="agregar();">Agregar en Lista</button>

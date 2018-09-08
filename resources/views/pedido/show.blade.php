@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card">
+<div class="card mb-5">
 
     <h5 class="card-header info-color white-text text-center py-4">
         <strong>Detalle Pedido</strong>
@@ -40,6 +40,7 @@
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
+                                        <th>Descripcion</th>
                                         <th>Cantidad</th>
                                         <th>Precio Unitario</th>
                                         <th>Sub Total</th>
@@ -49,6 +50,7 @@
                                     @foreach($pedido->detalle_pedido as $key => $value)
                                     <tr>
                                         <td>{{ $value->producto->nombre }}</td>
+                                        <td>{{ $value->descripcion }}</td>
                                         <td>{{ $value->cantidad }}</td>
                                         <td>{{ $value->producto->costo }}</td>
                                         <td>{{ $value->subtotal }}</td>

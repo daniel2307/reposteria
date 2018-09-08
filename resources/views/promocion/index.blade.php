@@ -15,6 +15,9 @@
                 <th class="th-sm">Producto
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
+                <th class="th-sm">Categoria
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
                 <th class="th-sm">Precio
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
@@ -35,6 +38,7 @@
             <tr>
                 <th>id</th>
                 <th>Producto</th>
+                <th>Categoria</th>
                 <th>Precio</th>
                 <th>Duracion</th>
                 <th>Unidad</th>
@@ -65,7 +69,8 @@
             ajax: '{{ url("promocion/get/DataTable") }}',
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'nombre', name: 'nombre'},
+                {data: 'nombre', name: 'producto.nombre'},
+                {data: 'categoria', name: 'categoria_producto.nombre'},
                 {data: 'precio', name: 'precio'},
                 {data: 'duracion', name: 'duracion'},
                 {data: 'unidad', name: 'unidad'},
