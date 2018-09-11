@@ -113,7 +113,7 @@ class ClienteController extends Controller
     {
         Cliente::destroy($id);
 
-        return redirect('cliente')->with('flash_message', 'Cliente deleted!');
+        return redirect('cliente');
     }
 
     public function searchByCi(Request $request){

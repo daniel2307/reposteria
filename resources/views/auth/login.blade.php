@@ -8,7 +8,7 @@
     </style>
 </head>
 
-<body style="background-image: url('/img/sidenav3.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+<body style="background-image: url('/img/fondo/587323.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
     <br>
     <br>
     <br>
@@ -24,7 +24,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
                         <!--Header-->
-                        <div class="form-header blue-grey purple-gradient">
+                        <div class="form-header blue-grey blue-gradient">
                             <h3>
                                 <i class="fa fa-lock white-text"></i> {{ __('Login:') }}
                             </h3>
@@ -48,7 +48,7 @@
                         <br>
 
                         <div class="text-center">
-                            <button class="btn btn-  blue-grey purple-gradient waves-effect waves-light">Login</button>
+                            <button class="btn btn-  blue-grey blue-gradient waves-effect waves-light">Login</button>
                         </div>
                     </form>
                     <!-- Form -->

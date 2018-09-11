@@ -25,6 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('producto', 'ProductoController');
 Route::get('producto/get/DataTable', 'ProductoController@getDataTable');
 
+Route::resource('users', 'UserController');
+Route::get('users/get/DataTable', 'UserController@getDataTable');
 /**
  * middleware para los qu estan autentificados y que tienen el rol adminsitrador
  */

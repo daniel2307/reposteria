@@ -149,7 +149,6 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        // Producto::destroy($id);
         $producto = Producto::findOrFail($id);
         $producto->estado = "eliminado";
         $producto->save();

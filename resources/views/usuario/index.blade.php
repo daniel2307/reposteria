@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ url('/cliente/create') }}" class="btn btn-success" title="Add New Client">
-    <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo Cliente
+<a href="{{ url('/users/create') }}" class="btn btn-success" title="Add New User">
+    <i class="fa fa-plus" aria-hidden="true"></i> Agregar Nuevo Usuario
 </a>
 
 <div class="table-responsive-lg">
@@ -15,13 +15,13 @@
                 <th class="th-sm">Nombre
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">CI
-                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
-                </th>
                 <th class="th-sm">Celular
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">Email
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Rol
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">accion
@@ -35,9 +35,9 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>CI</th>
                 <th>Celular</th>
                 <th>Email</th>
+                <th>Rol</th>
                 <th>accion</th>
             </tr>
         </tfoot>
@@ -56,19 +56,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#cmi-cliente').addClass('current-menu-item');
-        $('#a-cliente').addClass('active');
+        $('#cmi-users').addClass('current-menu-item');
+        $('#a-users').addClass('active');
 
         $('#dtModel').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ url("cliente/get/DataTable") }}',
+            ajax: '{{ url("users/get/DataTable") }}',
             columns: [
                 {data: 'id', name: 'id'},
-                {data: 'nombre', name: 'nombre'},
-                {data: 'ci', name: 'ci'},
+                {data: 'name', name: 'name'},
                 {data: 'celular', name: 'celular'},
                 {data: 'email', name: 'email'},
+                {data: 'rol', name: 'rol'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             order: [[ 0, 'desc' ]],
