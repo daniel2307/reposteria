@@ -3,7 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+
 class Rol
 {
     /**
@@ -14,7 +15,7 @@ class Rol
      * @return mixed
      */
     public function handle($request, Closure $next, $rol)
-    {
+    {    
         if (Auth::User()->rol == $rol) {
             return $next($request);
         }else{

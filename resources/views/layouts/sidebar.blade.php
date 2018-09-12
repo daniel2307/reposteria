@@ -85,6 +85,27 @@
                     </a>
                 </li>
 
+                <li class="menu-item" id="cmi-users">
+                    <a class="collapsible-header waves-effect" href="{{ url('users') }}" id="a-users">
+                        <i class="fas fa-users mr-2"></i>
+                        Pedidos en linea
+                    </a>
+                </li>
+
+                <li class="menu-item" id="cmi-users">
+                    <a class="collapsible-header waves-effect" href="{{ url('users') }}" id="a-users">
+                        <i class="fas fa-users mr-2"></i>
+                        historial de clientes
+                    </a>
+                </li>
+
+                <li class="menu-item" id="cmi-users">
+                    <a class="collapsible-header waves-effect" href="{{ url('users') }}" id="a-users">
+                        <i class="fas fa-users mr-2"></i>
+                        pedidos en espera
+                    </a>
+                </li>
+
             </ul>
         </li>
         <!-- /. Side navigation links -->

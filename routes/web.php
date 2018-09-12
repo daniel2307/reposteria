@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,57 +9,60 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'HomeController@index');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-/**
- * middleware para los que estan autentificados
- */
-// Route::middleware(['auth']) ->group(function (){
-//     Route::resource('producto', 'ProductoController');
-// });
-Route::resource('producto', 'ProductoController');
-Route::get('producto/get/DataTable', 'ProductoController@getDataTable');
+Route::middleware(['auth'])->group(function (){
 
-Route::resource('users', 'UserController');
-Route::get('users/get/DataTable', 'UserController@getDataTable');
-/**
- * middleware para los qu estan autentificados y que tienen el rol adminsitrador
- */
-// Route::middleware(['auth', 'rol:administrador']) ->group(function (){
-    Route::resource('categoriaproducto', 'CategoriaProductoController');
-    Route::get('categoriaproducto/get/DataTable', 'CategoriaProductoController@getDataTable');
+    Route::get('/', 'HomeController@index');
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::middleware(['rol:administrador'])->group(function (){
+        Route::resource('producto', 'ProductoController');
+        Route::get('producto/get/DataTable', 'ProductoController@getDataTable');
+
+        Route::resource('users', 'UserController');
+        Route::get('users/get/DataTable', 'UserController@getDataTable');
+
+        Route::resource('categoriaproducto', 'CategoriaProductoController');
+        Route::get('categoriaproducto/get/DataTable', 'CategoriaProductoController@getDataTable');
+
+        Route::resource('promocion', 'PromocionController');
+        Route::post('promocion/expirado', 'PromocionController@setEstado');
+        Route::get('promocion/get/DataTable', 'PromocionController@getDataTable');
+    });
+
+    Route::middleware(['rol:vendedor'])->group(function (){
+        Route::resource('venta', 'VentaController');
+        Route::get('venta/get/DataTable', 'VentaController@getDataTable');
+
+        Route::resource('pedido', 'PedidoController');
+        Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
+    });
+
+    Route::middleware(['rol:panadero'])->group(function (){
+        
+    });
     
-
     Route::resource('cliente', 'ClienteController');
     Route::get('cliente/get/DataTable', 'ClienteController@getDataTable');
-    // Route::resource('producto', 'ProductoController');
-    Route::resource('pedido', 'PedidoController');
-    Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
-    Route::resource('promocion', 'PromocionController');
-    Route::post('promocion/expirado', 'PromocionController@setEstado');
-    Route::get('promocion/get/DataTable', 'PromocionController@getDataTable');
-// });
-
-/**
- * middleware para los que estan autentificados y que tienen el rol vendedor
- */
-// Route::middleware(['auth', 'rol:vendedor']) ->group(function (){
-    Route::resource('venta', 'VentaController');
-    Route::get('venta/get/DataTable', 'VentaController@getDataTable');
-    
     Route::post('cliente/searchByCi', 'ClienteController@searchByCi');
     
     Route::resource('update-stock', 'LoteController');
     Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');
-// });
+
+    Route::resource('preparado', 'PreparadoController');
+});
+
+/**
+ * middleware para los qu estan autentificados y que tienen el rol adminsitrador
+ */
+
+
+/**
+ * middleware para los que estan autentificados y que tienen el rol vendedor
+ */
+
 
 /**
  * middleware para los qu estan autentificados y que tienen el rol panadero
  */
-// Route::middleware(['auth', 'rol:panadero']) ->group(function (){
-    Route::resource('preparado', 'PreparadoController');
-// });

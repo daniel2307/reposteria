@@ -22,7 +22,7 @@
                         @endif
 
                         <form method="POST" action="{{ url('/preparado/' . $preparado->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                            @method('PATCH')
                             {{ csrf_field() }}
 
                             @include ('admin.preparado.form', ['submitButtonText' => 'Update'])

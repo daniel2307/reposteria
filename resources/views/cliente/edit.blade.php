@@ -14,7 +14,7 @@
         <p><small class="red-text">* Obligatorio</small></p>
         
         <form method="POST" class="text-center" action="{{ url('/cliente/' . $cliente->id) }}" accept-charset="UTF-8" style="color: #757575;">
-            {{ method_field('PATCH') }}
+            @method('PATCH')
             @include ('cliente.form', ['submitButtonText' => 'MODIFICAR'])
         </form>
 

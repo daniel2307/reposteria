@@ -14,7 +14,7 @@
         <p><small class="red-text">* Obligatorio</small></p>
         
         <form method="POST" class="text-center" action="{{ url('/producto/' . $producto->id) }}" accept-charset="UTF-8" style="color: #757575;" enctype="multipart/form-data">
-            {{ method_field('PATCH') }}
+            @method('PATCH')
             @include ('producto.form', ['submitButtonText' => 'MODIFICAR'])
         </form>
 
