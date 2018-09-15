@@ -24,8 +24,10 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#cmi-categoria-producto').addClass('current-menu-item');
+        $('#cma-cmp-categoria-producto').addClass('current-menu-ancestor current-menu-parent menu-item-has-children active');
         $('#a-categoria-producto').addClass('active');
+        $("#css-categoria-producto").css("display", "block");
+        $('#cmi-categoria-producto-create').addClass('current-menu-item');
     });
 </script>
 @endpush

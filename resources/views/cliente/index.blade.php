@@ -56,8 +56,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#cmi-cliente').addClass('current-menu-item');
+        $('#cma-cmp-cliente').addClass('current-menu-ancestor current-menu-parent menu-item-has-children active');
         $('#a-cliente').addClass('active');
+        $("#css-cliente").css("display", "block");
+        $('#cmi-cliente').addClass('current-menu-item');
 
         $('#dtModel').DataTable({
             processing: true,

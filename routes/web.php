@@ -29,6 +29,9 @@ Route::middleware(['auth'])->group(function (){
         Route::resource('promocion', 'PromocionController');
         Route::post('promocion/expirado', 'PromocionController@setEstado');
         Route::get('promocion/get/DataTable', 'PromocionController@getDataTable');
+
+        Route::resource('update-stock', 'LoteController');
+        Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');   
     });
 
     Route::middleware(['rol:vendedor'])->group(function (){
@@ -37,18 +40,17 @@ Route::middleware(['auth'])->group(function (){
 
         Route::resource('pedido', 'PedidoController');
         Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
+
+        Route::resource('cliente', 'ClienteController');
+        Route::get('cliente/get/DataTable', 'ClienteController@getDataTable');
+        Route::post('cliente/searchByCi', 'ClienteController@searchByCi');
     });
 
     Route::middleware(['rol:panadero'])->group(function (){
-        
+        // Route::resource('update-stock', 'LoteController');
+        // Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');    
     });
     
-    Route::resource('cliente', 'ClienteController');
-    Route::get('cliente/get/DataTable', 'ClienteController@getDataTable');
-    Route::post('cliente/searchByCi', 'ClienteController@searchByCi');
-    
-    Route::resource('update-stock', 'LoteController');
-    Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');
 
     Route::resource('preparado', 'PreparadoController');
 });

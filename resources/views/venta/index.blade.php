@@ -60,8 +60,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#cmi-venta').addClass('current-menu-item');
+        $('#cma-cmp-venta').addClass('current-menu-ancestor current-menu-parent menu-item-has-children active');
         $('#a-venta').addClass('active');
+        $("#css-venta").css("display", "block");
+        $('#cmi-venta').addClass('current-menu-item');
 
         $('#dtModel').DataTable({
             processing: true,

@@ -67,3 +67,31 @@ api/pedido => manda los datos del pedido ya sea promocion o productos normales, 
                         </ul>
                     </div>
                 </li>
+
+                <li class="menu-item  current-menu-ancestor current-menu-parent menu-item-has-children active">
+                    <a class="collapsible-header waves-effect arrow-r active">
+                        <i class="fa  fa-th-large"></i>Layout<i class="fa fa-angle-down rotate-icon"></i>
+                    </a>
+                    <div class="collapsible-body" style="display: block;">
+                        <ul class="sub-menu">
+                            <li class="menu-item">
+                                <a class="collapsible-header waves-effect" >Layout overview</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="collapsible-header waves-effect" >Grid usage</a>
+                            </li>
+                            <li class="menu-item current-menu-item">
+                                <a class="collapsible-header waves-effect" >Grid examples</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="collapsible-header waves-effect" >Media object</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="collapsible-header waves-effect" >Media queries</a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="collapsible-header waves-effect" >Utilities for layout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>

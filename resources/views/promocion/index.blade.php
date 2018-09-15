@@ -60,8 +60,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#cmi-promocion').addClass('current-menu-item');
+        $('#cma-cmp-promocion').addClass('current-menu-ancestor current-menu-parent menu-item-has-children active');
         $('#a-promocion').addClass('active');
+        $("#css-promocion").css("display", "block");
+        $('#cmi-promocion').addClass('current-menu-item');
 
         $('#dtModel').DataTable({
             processing: true,
