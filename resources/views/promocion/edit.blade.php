@@ -17,9 +17,18 @@
             @method('PATCH')
             @csrf
             <div class="form-row">
-                <div class="col text-left">
+                <div class="col-12">
                     <div class="md-form">
-                        <label for="precio">Producto: <b>{{ $promocion->producto->nombre }} - {{ $promocion->producto->categoria->nombre }}</b></label>
+                        <label>Producto: </label><h3>{{ $promocion->producto->nombre }} - {{ $promocion->producto->categoria->nombre }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <div class="md-form">
+                        <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{ $promocion->cantidad or '' }}" required>
+                        <label for="cantidad">Cantidad <b class="red-text">*</b></label>
                     </div>
                 </div>
                 <div class="col">
@@ -29,33 +38,24 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-row">
-                <div class="col">
-                    <div class="md-form">
-                        <input type="number" id="cantidad" name="cantidad" class="form-control" value="{{ $promocion->cantidad or '' }}">
-                        <label for="cantidad">Cantidad</label>
-                    </div>
-                </div>
-            </div>
             
             <div class="form-row text-left">
                 <div class="col">
                     <div class="form-group row">
-                        <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha Inicio</label>
+                        <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha Inicio <b class="red-text">*</b></label>
                         <div class="col-sm-8">
                             <div class="md-form mt-0">
-                                <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="{{ $promocion->fecha_inicio }}">
+                                <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="{{ $promocion->fecha_inicio }}" required>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group row">
-                        <label for="fecha_fin" class="col-sm-4 col-form-label">Fecha Fin</label>
+                        <label for="fecha_fin" class="col-sm-4 col-form-label">Fecha Fin <b class="red-text">*</b></label>
                         <div class="col-sm-8">
                             <div class="md-form mt-0">
-                                <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="{{ $promocion->fecha_fin }}">
+                                <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="{{ $promocion->fecha_fin }}" required>
                             </div>
                         </div>
                     </div>

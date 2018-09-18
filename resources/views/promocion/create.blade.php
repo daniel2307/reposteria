@@ -29,6 +29,16 @@
         $('#a-promocion').addClass('active');
         $("#css-promocion").css("display", "block");
         $('#cmi-promocion-create').addClass('current-menu-item');
+
+        $('#producto_id').select2();
     });
+
+    function getDatos(){
+        var producto_id = $('#producto_id').val();
+        var costo = $("#producto_id option:selected").data("price");
+        var cantidad = $("#producto_id option:selected").data("quantity");
+        $('#precio').val(costo);
+        $('#cantidad').val(cantidad);
+    }
 </script>
 @endpush
