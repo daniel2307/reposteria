@@ -183,6 +183,7 @@ class PedidoController extends Controller
     {
         $model = Pedido::select(['pedido.id', 'cliente.nombre', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total_importe'])
         ->join('cliente', 'pedido.cliente_id', '=', 'cliente.id')
+        ->where('pedido.tipo', '=', 'tienda')
         ->where('pedido.estado', '!=', 'cancelado');
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
@@ -193,5 +194,34 @@ class PedidoController extends Controller
             // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
             ->make(true);
 
+    }
+
+    public function getPendientes() 
+    {
+        return view('pedido.pendientes');
+    }
+
+    public function getDataTablePendiente()
+    {
+        $model = Pedido::select(['pedido.id', 'cliente.nombre', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total_importe', 'pedido.tipo'])
+        ->join('cliente', 'pedido.cliente_id', '=', 'cliente.id')
+        ->where('pedido.estado', '=', 'espera');
+        return datatables()->of($model)
+            ->addColumn('action', function ($model) {
+                return 
+                '<a class="btn btn-success btn-sm waves-effect waves-light" title="Entregar" onclick="entregar('.$model->id.');"><i class="fas fa-paper-plane"></i></a>';
+            })
+            ->editColumn('id', 'ID: {{$id}}')
+            // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
+            ->make(true);
+
+    }
+
+    public function updatePendiente(Request $request)
+    {
+        $pedido = Pedido::findOrFail($request->id);
+        $pedido->estado = "entregado";
+        $pedido->save();
+        return response()->json([ 'message' => 'ok' ]);
     }
 }

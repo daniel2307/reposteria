@@ -34,22 +34,25 @@ Route::middleware(['auth'])->group(function (){
         Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');   
     });
 
+    Route::resource('venta', 'VentaController');
+    Route::get('venta/get/DataTable', 'VentaController@getDataTable');
+
+    Route::get('pedido-pendiente', 'PedidoController@getPendientes');
+    Route::post('pedido-pendiente', 'PedidoController@updatependiente');
+    Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
+    Route::get('pedido/get/DataTablePendiente', 'PedidoController@getDataTablePendiente');
+
     Route::middleware(['rol:vendedor'])->group(function (){
+        Route::resource('cliente', 'ClienteController');
+        Route::get('cliente/get/DataTable', 'ClienteController@getDataTable');
+        Route::post('cliente/searchByCi', 'ClienteController@searchByCi');
+
         Route::resource('venta', 'VentaController');
         Route::get('venta/get/DataTable', 'VentaController@getDataTable');
 
         Route::resource('pedido', 'PedidoController');
-        Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
-
-        Route::resource('cliente', 'ClienteController');
-        Route::get('cliente/get/DataTable', 'ClienteController@getDataTable');
-        Route::post('cliente/searchByCi', 'ClienteController@searchByCi');
-    });
-
-    Route::middleware(['rol:panadero'])->group(function (){
-          
-    });
-    
+        
+    });    
 
     Route::resource('preparado', 'PreparadoController');
 });
