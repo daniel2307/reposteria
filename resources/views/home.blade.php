@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <img src="/img/trabajando2.png" alt="">
 @endsection
 
 @push('scripts')

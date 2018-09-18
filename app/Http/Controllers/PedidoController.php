@@ -81,6 +81,7 @@ class PedidoController extends Controller
             foreach ($request->cantidad as $key => $value) {
                 // insertamos el detalle de pedido por cada producto vendido
                 $detalle_pedido = new DetallePedido;
+                $detalle_pedido->descripcion = $request->descripcion[$key];
                 $detalle_pedido->cantidad = $request->cantidad[$key];
                 $detalle_pedido->subtotal = $request->subtotal[$key];
                 $detalle_pedido->pedido_id = $pedido->id;
@@ -88,7 +89,7 @@ class PedidoController extends Controller
                 $detalle_pedido->save();
             }
             DB::commit();
-            return redirect('pedido');
+            return redirect('pedido/'.$pedido->id);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect('pedido/create');
@@ -119,8 +120,13 @@ class PedidoController extends Controller
     public function edit($id)
     {
         $pedido = Pedido::findOrFail($id);
+        $productos = Producto::select('producto.id', 'costo', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->orderBy('producto.nombre')
+        ->get();
 
-        return view('pedido.edit', compact('pedido'));
+        return view('pedido.edit', compact('pedido', 'productos'));
+        
     }
 
     /**
@@ -133,28 +139,30 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $requestData = $request->all();
-        
-         $v = \Validator::make($requestData, [
-            'saldo' => 'required',
-            'estado' => 'required|string|max:255',
-            'fecha' => 'required|date_format:Y-m-d',
-            'fecha_entrega' => 'required|date_format:Y-m-d',
-            'hora_entrega' => 'required',
-            'forma_de_pago' => 'required|string|max:255',
-            'cliente_id' => 'required|string|max:255',
-        ]);
- 
-        if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
+        try {
+            DB::beginTransaction();
+            $requestData = $request->all();
+            $pedido = Pedido::findOrFail($id);
+            $pedido->update($requestData);
+
+            DetallePedido::where('pedido_id', '=', $id)->delete();
+
+            foreach ($request->cantidad as $key => $value) {
+                // insertamos el detalle de pedido por cada producto vendido
+                $detalle_pedido = new DetallePedido;
+                $detalle_pedido->descripcion = $request->descripcion[$key];
+                $detalle_pedido->cantidad = $request->cantidad[$key];
+                $detalle_pedido->subtotal = $request->subtotal[$key];
+                $detalle_pedido->pedido_id = $pedido->id;
+                $detalle_pedido->producto_id = $key;
+                $detalle_pedido->save();
+            }
+            DB::commit();
+            return redirect('pedido/'.$pedido->id);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect('pedido/create');
         }
-
-        $pedido = Pedido::findOrFail($id);
-        $pedido->update($requestData);
-
-        return redirect('pedido');
     }
 
     /**
@@ -166,7 +174,7 @@ class PedidoController extends Controller
      */
     public function destroy($id)
     {
-        Pedido::destroy($id);
+        // Pedido::destroy($id);
 
         return redirect('pedido');
     }

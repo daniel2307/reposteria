@@ -47,8 +47,7 @@ Route::middleware(['auth'])->group(function (){
     });
 
     Route::middleware(['rol:panadero'])->group(function (){
-        // Route::resource('update-stock', 'LoteController');
-        // Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');    
+          
     });
     
 

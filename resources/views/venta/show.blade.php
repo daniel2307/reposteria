@@ -9,7 +9,9 @@
 
     <!--Card content-->
     <div class="card-body px-lg-5 pt-0">
-        <a href="{{ url('/venta') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+        <a href="{{ url('/venta') }}" title="Back"><button class="btn btn-warning btn-sm noPrint"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+
+        <a href="javascript:window.print();"  title="print"><button class="btn btn-default btn-sm noPrint"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button></a>
         
         <div class="table-responsive">
             <table class="table">

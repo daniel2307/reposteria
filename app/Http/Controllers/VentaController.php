@@ -106,7 +106,7 @@ class VentaController extends Controller
                 }   
             }
             DB::commit();
-            return redirect('venta');
+            return redirect('venta/'.$venta->id);
         } catch (Exception $e) {
             DB::rollBack();
             return redirect('venta/create');

@@ -16,24 +16,6 @@
     </div>
 </div>
 
-<div class="card card-body">
-    <div class="form-row">
-        <div class="col">
-            <div class="md-form">
-                <input type="number" id="duracion" name="duracion" class="form-control" value="{{ $promocion->duracion or '' }}">
-                <label for="duracion">Duracion</label>
-            </div>
-        </div>
-        <div class="col text-left">
-            <select class="mdb-select colorful-select dropdown-primary" name="unidad" id="unidad">
-                <option value="horas">Horas</option>
-                <option value="dias">Dias</option>
-            </select>
-            <label for="unidad">Unidad</label>
-        </div>
-    </div>
-</div>
-
 <div class="form-row">
     <div class="col">
         <div class="md-form">
@@ -42,31 +24,51 @@
         </div>
     </div>
 </div>
-<br>
-<div class="card card-body">
-    <div class="form-row text-left">
-        <div class="col">
-            <div class="form-group row">
-                <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha Inicio</label>
-                <div class="col-sm-8">
-                    <div class="md-form mt-0">
-                        <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="{{ $promocion->fecha_inicio or '' }}">
-                    </div>
+
+<div class="form-row text-left">
+    <div class="col">
+        <div class="form-group row">
+            <label for="fecha_inicio" class="col-sm-4 col-form-label">Fecha Inicio</label>
+            <div class="col-sm-8">
+                <div class="md-form mt-0">
+                    <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="{{ $promocion->fecha_inicio or '' }}">
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="form-group row">
-                <label for="fecha_fin" class="col-sm-4 col-form-label">Fecha Fin</label>
-                <div class="col-sm-8">
-                    <div class="md-form mt-0">
-                        <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="{{ $promocion->fecha_fin or '' }}">
-                    </div>
+    </div>
+    <div class="col">
+        <div class="form-group row">
+            <label for="fecha_fin" class="col-sm-4 col-form-label">Fecha Fin</label>
+            <div class="col-sm-8">
+                <div class="md-form mt-0">
+                    <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="{{ $promocion->fecha_fin or '' }}">
                 </div>
             </div>
         </div>
-    </div> 
-</div>
+    </div>
+</div> 
+<div class="form-row text-left">
+    <div class="col">
+        <div class="form-group row">
+            <label for="hora_inicio" class="col-sm-4 col-form-label">Hora Inicio</label>
+            <div class="col-sm-8">
+                <div class="md-form mt-0">
+                    <input type="time" class="form-control" name="hora_inicio" id="hora_inicio" value="{{ $promocion->hora_inicio or '' }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-group row">
+            <label for="hora_fin" class="col-sm-4 col-form-label">Hora Fin</label>
+            <div class="col-sm-8">
+                <div class="md-form mt-0">
+                    <input type="time" class="form-control" name="hora_fin" id="hora_fin" value="{{ $promocion->hora_fin or '' }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
 
 <button class="btn btn-success btn-block my-4 waves-effect z-depth-0" type="submit">
     {{ $submitButtonText or 'GUARDAR' }}

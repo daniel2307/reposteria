@@ -21,10 +21,10 @@
                 <th class="th-sm">Precio
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">Duracion
+                <th class="th-sm">Fecha Inicio
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
-                <th class="th-sm">Unidad
+                <th class="th-sm">Fecha Fin
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
                 <th class="th-sm">accion
@@ -40,8 +40,8 @@
                 <th>Producto</th>
                 <th>Categoria</th>
                 <th>Precio</th>
-                <th>Duracion</th>
-                <th>Unidad</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
                 <th>accion</th>
             </tr>
         </tfoot>
@@ -74,8 +74,8 @@
                 {data: 'nombre', name: 'producto.nombre'},
                 {data: 'categoria', name: 'categoria_producto.nombre'},
                 {data: 'precio', name: 'precio'},
-                {data: 'duracion', name: 'duracion'},
-                {data: 'unidad', name: 'unidad'},
+                {data: 'fecha_inicio', name: 'fecha_inicio'},
+                {data: 'fecha_fin', name: 'fecha_fin'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             order: [[ 0, 'desc' ]],
@@ -94,6 +94,26 @@
         $('#dtModel_wrapper .mdb-select').material_select();
         $('#dtModel_wrapper .dataTables_filter').find('label').remove();
     });
+
+    function expirado(promocion_id) {        
+        if (confirm("Se cambiara el estado a expirado esta Promoción!")) {
+            $.ajax({
+                method: "POST",
+                url: "/promocion/expirado",
+                data: { 
+                    id: promocion_id, 
+                    _token: "{{ csrf_token() }}", 
+                },
+                success: function(result) {
+                    toastr["success"]("Se ejecuto correctamente!");
+                    $('#dtModel').DataTable().draw();
+                },
+                error: function() {
+                    toastr["error"]("No se completo la operación!");
+                }
+            });
+        }
+    }
 
 </script>
 @endpush

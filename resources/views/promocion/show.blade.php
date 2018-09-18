@@ -13,7 +13,7 @@
 
         <a href="{{ url('/promocion/' . $promocion->id . '/edit') }}" title="Edit Promocion"><button class="btn btn-primary btn-sm"><i class="far fa-edit" aria-hidden="true"></i> Edit</button></a>
 
-        <button type="button" class="btn btn-outline-danger btn-sm waves-effect" onclick="expirado();" title="Expirar Promocion"><i class="fas fa-ban" aria-hidden="true"></i> Expirado</button>
+        <button type="button" class="btn btn-outline-danger btn-sm waves-effect" onclick="expirar();" title="Expirar Promocion"><i class="fas fa-power-off"></i> Expirar</button>
         
         <div class="table-responsive">
             <table class="table">
@@ -38,20 +38,16 @@
                         <td>{{ $promocion->fecha }}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Duracion</th>
-                        <td>{{ $promocion->duracion }} {{ $promocion->unidad }}</td>
-                    </tr>
-                    <tr>
                         <th scope="row">Cantidad</th>
                         <td>{{ $promocion->cantidad }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Fecha Inicio</th>
-                        <td>{{ $promocion->fecha_inicio }}</td>
+                        <td>{{ $promocion->fecha_inicio }} {{ $promocion->hora_inicio }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Fecha Fin</th>
-                        <td>{{ $promocion->fecha_fin }}</td>
+                        <td>{{ $promocion->fecha_fin }} {{ $promocion->hora_fin }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Estado</th>
@@ -76,7 +72,7 @@
         $('#cmi-promocion').addClass('current-menu-item');
     });
 
-    function expirado() {        
+    function expirar() {        
         if (confirm("Se cambiara el estado a expirado esta Promoción!")) {
             $.ajax({
                 method: "POST",
@@ -86,10 +82,10 @@
                     _token: "{{ csrf_token() }}", 
                 },
                 success: function(result) {
-                    toastr["success"]("Se ejecuto correctamente!")
+                    toastr["success"]("Se ejecuto correctamente!");
                 },
                 error: function() {
-                    toastr["error"]("No se completo la operación!")
+                    toastr["error"]("No se completo la operación!");
                 }
             });
         }

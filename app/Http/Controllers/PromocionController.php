@@ -115,14 +115,15 @@ class PromocionController extends Controller
 
     public function getDataTable()
     {
-        $model = Promocion::select('promocion.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'promocion.precio', 'promocion.duracion', 'promocion.unidad')
+        $model = Promocion::select('promocion.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'promocion.precio', 'promocion.fecha_inicio', 'promocion.fecha_fin')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
         ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
         ->where(['promocion.estado' => 'vigente']);
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
-                '<a href="/promocion/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>';
+                '<a href="/promocion/'.$model->id.'" class="btn btn-info btn-sm waves-effect waves-light" title="Ver"><i class="far fa-eye"></i></a>'.
+                '<a class="btn btn-danger btn-sm waves-effect waves-light" title="Expirar" onclick="expirado('.$model->id.');"><i class="fas fa-power-off"></i></a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
@@ -132,7 +133,7 @@ class PromocionController extends Controller
 
     public function getPromocion() 
     {
-        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'promocion.precio', 'promocion.duracion', 'promocion.unidad')
+        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'promocion.precio', 'promocion.fecha_inicio', 'promocion.fecha_fin')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
         ->where([
             'promocion.estado' => 'vigente',

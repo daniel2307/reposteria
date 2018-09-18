@@ -1,0 +1,8 @@
+@media print {
+    .noPrint {
+        display: none;
+    }
+}
+@page {
+    margin-top: 50px;
+  }

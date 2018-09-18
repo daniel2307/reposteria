@@ -84,7 +84,7 @@ class UserController extends Controller
     {
         $requestData = $request->all();
         if (!$request->password) {
-            $password = array_pull($requestData, 'password');
+            array_set($array, 'password', Hash::make($request['password']));
         }
         $user = User::findOrFail($id);
         $user->update($requestData);

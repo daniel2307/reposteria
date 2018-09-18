@@ -1,4 +1,4 @@
-<div id="slide-out" class="side-nav sn-bg-4 mdb-sidenav fixed">
+<div id="slide-out" class="side-nav sn-bg-4 mdb-sidenav fixed noPrint">
     <ul class="custom-scrollbar list-unstyled" style="max-height:100vh;">
         <!-- Logo -->
         <li class="logo-sn d-block waves-effect">
@@ -7,17 +7,11 @@
             </div>
         </li>
         <!--/. Logo -->
-        <!--Search Form-->
+        <hr>
         <li>
-            <form class="search-form" onkeypress="return event.keyCode != 13;" role="search" method="GET" autocomplete="off">
-                <div class="form-group md-form mt-0 d-block waves-light">
-                    <input type="text" class="form-control pb-1 mb-0" name="mdw_serach" placeholder="Search" id="mdw_main_search" style="height: 1.8rem;">
-                    <label for="" class="sr-only">Search</label>
-                </div>
-                <div class="dropdown-wrapper"></div>
-            </form>
+            <p class="text-center text-uppercase text-black-50">{{ Auth::user()->rol }}</p>
         </li>
-        <!--/.Search Form-->
+        <hr>
         <!-- Side navigation links -->
         <li>
             <ul class="collapsible collapsible-accordion">

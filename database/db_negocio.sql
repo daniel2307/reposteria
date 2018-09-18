@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-09-2018 a las 00:24:00
+-- Tiempo de generación: 18-09-2018 a las 19:32:10
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -100,9 +100,10 @@ CREATE TABLE `detalle_pedido` (
 
 INSERT INTO `detalle_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `subtotal`, `descripcion`) VALUES
 (1, 1, 3, 2, '200.00', 'sin descrip'),
-(2, 5, 37, 1, '30.00', 'no tiene descripcion'),
-(3, 5, 4, 1, '10.00', 'no tiene descripcion'),
-(4, 6, 13, 1, '45.00', 'no tiene descripcion');
+(4, 6, 13, 1, '45.00', 'no tiene descripcion'),
+(15, 5, 37, 2, '60.00', 'ddddddddddddd'),
+(16, 5, 4, 2, '20.00', 'aaaaaaaaaaa'),
+(17, 5, 1, 1, '20.30', 'wwwwwwwwwwww');
 
 -- --------------------------------------------------------
 
@@ -134,7 +135,9 @@ INSERT INTO `detalle_venta` (`id`, `venta_id`, `producto_id`, `cantidad`, `subto
 (9, 8, 43, 10, '100.00'),
 (10, 9, 12, 1, '300.00'),
 (12, 11, 43, 5, '50.00'),
-(13, 12, 43, 10, '100.00');
+(13, 12, 43, 10, '100.00'),
+(14, 13, 3, 1, '210.00'),
+(15, 14, 4, 10, '100.00');
 
 -- --------------------------------------------------------
 
@@ -214,7 +217,7 @@ INSERT INTO `lote` (`id`, `producto_id`, `cantidad`, `fecha`, `estado`) VALUES
 (28, 13, 50, '2018-09-07 15:02:55', 'activo'),
 (29, 6, 40, '2018-09-07 15:03:13', 'activo'),
 (30, 1, 50, '2018-09-07 15:03:19', 'activo'),
-(31, 3, 60, '2018-09-07 15:03:27', 'activo'),
+(31, 3, 59, '2018-09-07 15:03:27', 'activo'),
 (32, 7, 40, '2018-09-07 15:03:34', 'activo'),
 (33, 10, 60, '2018-09-07 15:03:45', 'activo'),
 (34, 12, 60, '2018-09-07 15:03:53', 'activo'),
@@ -239,7 +242,7 @@ INSERT INTO `lote` (`id`, `producto_id`, `cantidad`, `fecha`, `estado`) VALUES
 (53, 26, 21, '2018-09-07 15:05:55', 'activo'),
 (54, 2, 32, '2018-09-07 21:14:30', 'activo'),
 (55, 5, 56, '2018-09-07 21:14:44', 'activo'),
-(56, 4, 33, '2018-09-07 21:14:51', 'activo');
+(56, 4, 23, '2018-09-07 21:14:51', 'activo');
 
 -- --------------------------------------------------------
 
@@ -286,7 +289,7 @@ INSERT INTO `pedido` (`id`, `cliente_id`, `fecha`, `fecha_entrega`, `hora_entreg
 (1, 1, '2018-07-06', '2018-07-07', '11:26:34', NULL, '12.30', '200.00', NULL, NULL, 'tienda', 'espera', 'tienda', NULL, '2018-07-07 01:59:49', '2018-07-07 01:59:49'),
 (2, 7, '2018-07-07', '2018-07-10', '12:30:00', NULL, '30.30', '300.00', NULL, NULL, 'movil', 'entregado', 'banco', NULL, '2018-07-07 02:15:54', '2018-07-07 02:15:54'),
 (3, 6, '2018-08-16', '2018-08-09', '14:02:00', NULL, '12.20', '100.00', NULL, NULL, 'tienda', 'preparado', 'tienda', NULL, '2018-08-15 02:34:40', '2018-08-15 02:34:40'),
-(5, 6, '2018-09-01', '2018-09-01', '00:00:00', '20.00', '10.00', '40.00', '0.00', '40.00', 'tienda', 'espera', 'tienda', NULL, '2018-09-01 23:51:09', '2018-09-01 23:51:09'),
+(5, 6, '2018-09-01', '2018-09-27', '12:00:00', '20.00', '80.30', '100.30', '0.00', '100.30', 'tienda', 'espera', 'banco', NULL, '2018-09-01 23:51:09', '2018-09-18 17:19:33'),
 (6, 6, '2018-09-01', '2018-09-27', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'espera', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-02 00:47:55');
 
 -- --------------------------------------------------------
@@ -347,8 +350,8 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `cantidad`, `descripcion`, `duracion`, `imagen`, `estado`, `created_at`, `updated_at`) VALUES
 (1, 1, '5 frutas', '20.30', 50, 'fdsfds', 2, 'UhVirT94oLLLVazILdiX.jpg', 'activo', '2018-06-16 04:17:48', '2018-09-07 19:03:19'),
 (2, 1, 'Trebol', '2.50', 32, 'agdgrutu', 2, NULL, 'activo', '2018-07-20 03:50:46', '2018-09-08 01:14:30'),
-(3, 1, 'frutas extra', '210.00', 60, 'descripcion de torta tres leches', 5, 'MP62H1wzF9ako7yvndQt.jpg', 'activo', '2018-08-17 21:16:24', '2018-09-07 19:03:27'),
-(4, 1, 'mosaico', '10.00', 33, 'asd', NULL, NULL, 'activo', '2018-08-27 07:13:43', '2018-09-08 01:14:51'),
+(3, 1, 'frutas extra', '210.00', 59, 'descripcion de torta tres leches', 5, 'MP62H1wzF9ako7yvndQt.jpg', 'activo', '2018-08-17 21:16:24', '2018-09-17 13:31:53'),
+(4, 1, 'mosaico', '10.00', 23, 'asd', NULL, NULL, 'activo', '2018-08-27 07:13:43', '2018-09-17 13:33:18'),
 (5, 1, 'queso', '100.00', 56, 'fgh', NULL, NULL, 'activo', '2018-08-27 07:14:23', '2018-09-08 01:14:44'),
 (6, 1, 'Tarta de queso', '200.00', 40, NULL, NULL, 'ZD1VluaxXtacVKR0cfmy.jpg', 'activo', '2018-08-27 07:15:05', '2018-09-07 19:03:13'),
 (7, 1, 'Tarta de limon', '100.00', 40, NULL, NULL, 'eoVfFZOjpYDoDUfY9i6s.jpg', 'activo', '2018-08-27 07:15:30', '2018-09-07 19:03:34'),
@@ -399,12 +402,12 @@ CREATE TABLE `promocion` (
   `id` int(11) NOT NULL,
   `producto_id` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
-  `duracion` int(11) DEFAULT '0',
-  `unidad` enum('dias','horas') DEFAULT NULL,
   `cantidad` int(11) DEFAULT '0',
   `precio` decimal(11,2) DEFAULT '0.00',
-  `fecha_inicio` datetime DEFAULT NULL,
-  `fecha_fin` datetime DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `hora_inicio` time DEFAULT '00:00:00',
+  `hora_fin` time DEFAULT '00:00:00',
   `estado` enum('vigente','expirado') DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -414,13 +417,14 @@ CREATE TABLE `promocion` (
 -- Volcado de datos para la tabla `promocion`
 --
 
-INSERT INTO `promocion` (`id`, `producto_id`, `fecha`, `duracion`, `unidad`, `cantidad`, `precio`, `fecha_inicio`, `fecha_fin`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, '2018-07-06 00:00:00', 5, 'dias', 0, '12.30', NULL, NULL, 'vigente', '2018-07-07 03:32:18', '2018-07-07 03:47:28'),
-(2, 1, '2018-07-07 00:00:00', 3, 'dias', 0, '10.00', NULL, NULL, 'vigente', '2018-07-07 03:37:59', '2018-07-07 03:37:59'),
-(3, 1, '2018-08-14 00:00:00', 10, 'dias', 0, '5.00', NULL, NULL, 'vigente', '2018-08-15 02:35:39', '2018-08-15 02:35:39'),
-(4, 37, '2018-08-31 16:36:51', 1, 'horas', 0, '20.00', NULL, NULL, 'vigente', '2018-08-31 21:36:51', '2018-08-31 21:36:51'),
-(5, 32, '2018-08-31 16:45:45', 2, 'dias', 0, '5.00', NULL, NULL, 'vigente', '2018-08-31 21:45:45', '2018-09-07 20:59:45'),
-(6, 35, '2018-09-01 22:22:54', 4, 'dias', 10, '5.00', '2018-09-01 00:00:00', '2018-09-05 00:00:00', 'vigente', '2018-09-02 02:22:54', '2018-09-08 01:49:31');
+INSERT INTO `promocion` (`id`, `producto_id`, `fecha`, `cantidad`, `precio`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `hora_fin`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 1, '2018-07-06 00:00:00', 0, '12.30', NULL, NULL, NULL, NULL, 'expirado', '2018-07-07 03:32:18', '2018-09-18 16:53:02'),
+(2, 1, '2018-07-07 00:00:00', 0, '10.00', NULL, NULL, NULL, NULL, 'vigente', '2018-07-07 03:37:59', '2018-09-18 14:30:52'),
+(3, 1, '2018-08-14 00:00:00', 0, '5.00', '2018-09-18', '2018-09-18', '13:00:00', '20:59:00', 'vigente', '2018-08-15 02:35:39', '2018-09-18 17:22:14'),
+(4, 37, '2018-08-31 16:36:51', 0, '20.00', '2018-09-18', '2018-10-24', '20:09:00', '20:09:00', 'vigente', '2018-08-31 21:36:51', '2018-09-18 17:16:45'),
+(5, 32, '2018-08-31 16:45:45', 0, '5.00', NULL, NULL, NULL, NULL, 'vigente', '2018-08-31 21:45:45', '2018-09-07 20:59:45'),
+(6, 35, '2018-09-01 22:22:54', 10, '5.00', '2018-09-01', '2018-09-05', NULL, NULL, 'vigente', '2018-09-02 02:22:54', '2018-09-18 16:47:57'),
+(7, 35, '2018-09-18 13:18:28', 20, '5.00', '2018-09-18', '2018-09-20', '00:00:00', '23:59:00', 'vigente', '2018-09-18 17:18:28', '2018-09-18 17:18:28');
 
 -- --------------------------------------------------------
 
@@ -448,16 +452,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `direccion`, `telefono`, `celular`, `email`, `password`, `remember_token`, `rol`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'BNxPAQZOlKgwc23VCw5NTI3bgzir28tZmNb82cMvLxo0JOGs4YQ2zpDTlaNd', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
+(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'yCE5afBrzp6wyITjs1hgnAYv3UH7x7SUeHX8aGHRdkDXMy8X19oEboyX5S0y', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
 (2, 'said', 'asdas dsad sas dasd', 234, 234, 'saiddipp@hotmail.com', '$2y$10$unoELXeQi.jZbXNSVj4W2.iNl9PfBpEhcSMqXnSwmbEGByb6oPbBe', 'cJXkk7IFsoC4A1aRQyJgV0skBHSADOdDZdMAJHPGp878PnW1ILmRIfUxH2he', 'administrador', 'activo', '2018-06-09 04:10:41', '2018-06-09 04:10:41'),
 (3, 'gerardo', 'zona norte', 44493245, 78785423, 'gerarld@gmail.com', '$2y$10$b4ln2FA7cc2DxiOjx.k.OOS.W66z14OSpnl7BQ9aChNz5X/RGmD0m', 'FR96JLi7bzCyDys9TDnLYu5xdyZNLd0bUiYP7UJbUUttPUL3pW4KSRDUSOVF', 'administrador', 'activo', '2018-06-12 23:09:24', '2018-06-12 23:09:24'),
 (4, 'said', 'pacata', 354, 654654, 'said.dipp@rnova.net', '$2y$10$0Liw5R6t0ZRr.1s9E3hBN.1tTY6672On7HADwQPWCKuCWC.Kv6pgC', NULL, 'administrador', 'activo', '2018-06-16 04:00:07', '2018-06-16 04:00:07'),
 (5, 'roberto', 'askjfhasjkf', 124115, 334536, 'roberto@gmail.com', '$2y$10$Me0xzo/7u6zw3tZ0JvzWg.UfUzS2qpZ6S.z1dnJo1xycb2TgSbPGK', 'noWbyESlrtJMro0jXbiHpWueRElpTJGmYYg8X2SN15voRoSGNeTUKm6WBzIh', 'administrador', 'activo', '2018-06-18 23:59:15', '2018-06-18 23:59:15'),
 (6, 'said', 'zsfagf', 1231515, 534636, 'saiddipp@hotmail.comsaid', '$2y$10$Fh2FMIdmyJUwFACsjW/f7uCbRHs0rqVkYG7Z8dmLJsqASEOMIq9Hu', NULL, 'administrador', 'activo', '2018-06-19 00:00:43', '2018-06-19 00:00:43'),
-(7, 'dipp', 'dasrar', 12124, 4124125, 'said@gmail.com', '$2y$10$IZkyNCMuQlNsbAlzAQXcUep9A2HnLEyPLtxoJCU7R3xDFcsJ56Xcy', 'BnX3aVXfk62J82WSf9OBoWGvhycXSs7DCSyvU2aFomUPQTY5jLH5Pgby4Tyy', 'panadero', 'activo', '2018-08-11 00:02:20', '2018-08-11 00:02:20'),
-(8, 'willam', 'dsadsa', 3454, 435435, 'willam@mamani.com', '$2y$10$Ey9qzjgnEK4KiLTrty7DNeDWhz7k.ycgD8tjSUHp.hnfIrUkuHTIK', '0uzAco7v11ZGucljlTPEHx7szdgxjPpNQSya11hYCvoeZo9qiPaqByw2gjN0', 'panadero', 'activo', '2018-08-11 06:19:37', '2018-08-11 06:19:37'),
-(9, 'vendedor', 'sin dir', 4444444, 77777777, 'vendedor@rnova.net', '$2y$10$aVV3hfQXMc5DDBIQZKV9guicUMsJZBKlmqpWYwjhc9Ulw/FJvHFiK', NULL, 'vendedor', 'activo', '2018-08-17 21:23:01', '2018-08-17 21:23:01'),
-(10, 'oliver galarga', 'puntiti', 4444444, 77777777, 'oli@larga.com', '$2y$10$fXuDVjk2fFLoOZx.KWLsAOhDUECVOdyKzfHVhHBWuZak5aSWozWmC', 'TTm7uxbNlcg6gLXEsAqw24R0zVP0UZPUOPVdgqwLaZX240F7SjzYuAWkXo25', 'vendedor', 'activo', '2018-09-11 04:07:42', '2018-09-11 04:07:42');
+(11, 'vendedor', NULL, NULL, NULL, 'vendedor@vendedor.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', 'K0T2owrR5GtTdP3en5Sy0x1Dsr6OQtOUU2CkpDtijR9d5KoowESGkqNnOaju', 'vendedor', 'activo', '2018-09-15 16:12:51', '2018-09-15 16:12:51');
 
 -- --------------------------------------------------------
 
@@ -492,7 +493,9 @@ INSERT INTO `venta` (`id`, `cliente_id`, `users_id`, `fecha`, `total`, `descuent
 (8, 8, 1, '2018-09-02 11:28:57', '100.00', '0.00', '100.00', '2018-09-02 15:28:57', '2018-09-02 15:28:57'),
 (9, 8, 1, '2018-09-03 12:20:47', '300.00', '0.00', '300.00', '2018-09-03 16:20:47', '2018-09-03 16:20:47'),
 (11, 7, 1, '2018-09-03 21:57:29', '50.00', '0.00', '50.00', '2018-09-04 01:57:29', '2018-09-04 01:57:29'),
-(12, 7, 1, '2018-09-03 22:45:42', '100.00', '0.00', '100.00', '2018-09-04 02:45:42', '2018-09-04 02:45:42');
+(12, 7, 1, '2018-09-03 22:45:42', '100.00', '0.00', '100.00', '2018-09-04 02:45:42', '2018-09-04 02:45:42'),
+(13, 10, 11, '2018-09-17 09:31:53', '210.00', '0.00', '210.00', '2018-09-17 13:31:53', '2018-09-17 13:31:53'),
+(14, 7, 11, '2018-09-17 09:33:18', '100.00', '0.00', '100.00', '2018-09-17 13:33:18', '2018-09-17 13:33:18');
 
 --
 -- Índices para tablas volcadas
@@ -609,13 +612,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `his_cantidad`
@@ -657,19 +660,19 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `promocion`
 --
 ALTER TABLE `promocion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
