@@ -3,7 +3,6 @@
 <script type="text/javascript" src="{{ asset('js/footer-functionsface.js') }}"></script>
 <!-- <script type="text/javascript" src="{{ asset('js/footer-functionsface.js?ver=4.5.9') }}"></script> -->
 <script type="text/javascript" src="{{ asset('fontawesome/js/all.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
 
 @yield('script')
 @stack('scripts')

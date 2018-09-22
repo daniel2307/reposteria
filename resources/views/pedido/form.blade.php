@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <label for="producto">Producto <b class="red-text">*</b></label>
-                <select class="mdb-select colorful-select dropdown-primary" name="producto" id="producto" style="width: 100%;">
+                <select class="mdb-select colorful-select dropdown-primary" name="producto" id="producto" searchable="Search here..">
                     @foreach($productos as $key => $value)
                         <option value="{{ $value->id }}" data-price="{{ $value->costo }}">{{ $value->producto }}</option>
                     @endforeach

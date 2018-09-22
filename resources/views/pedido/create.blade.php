@@ -23,8 +23,6 @@
         $('#a-pedido').addClass('active');
         $("#css-pedido").css("display", "block");
         $('#cmi-pedido-create').addClass('current-menu-item');
-
-        $('#producto').select2();
     });
 
     function agregar(){

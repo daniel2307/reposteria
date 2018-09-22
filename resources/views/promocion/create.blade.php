@@ -29,8 +29,6 @@
         $('#a-promocion').addClass('active');
         $("#css-promocion").css("display", "block");
         $('#cmi-promocion-create').addClass('current-menu-item');
-
-        $('#producto_id').select2();
     });
 
     function getDatos(){
