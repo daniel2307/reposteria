@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('venta/get/DataTable', 'VentaController@getDataTable');
 
     Route::get('pedido-pendiente', 'PedidoController@getPendientes');
-    Route::post('pedido-pendiente', 'PedidoController@updatependiente');
+    Route::post('pedido-pendiente', 'PedidoController@updatePendiente');
     Route::get('pedido/get/DataTable', 'PedidoController@getDataTable');
     Route::get('pedido/get/DataTablePendiente', 'PedidoController@getDataTablePendiente');
 

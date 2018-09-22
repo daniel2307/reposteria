@@ -209,7 +209,8 @@ class PedidoController extends Controller
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 
-                '<a class="btn btn-success btn-sm waves-effect waves-light" title="Entregar" onclick="entregar('.$model->id.');"><i class="fas fa-paper-plane"></i></a>';
+                '<a class="btn btn-success btn-sm waves-effect waves-light" title="Entregar" onclick="entregar('.$model->id.');"><i class="fas fa-paper-plane"></i></a>'.
+                '<a class="btn btn-danger btn-sm waves-effect waves-light" title="Cancelar" onclick="cancelar('.$model->id.');"><i class="fas fa-trash"></i></a>';
             })
             ->editColumn('id', 'ID: {{$id}}')
             // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
@@ -220,8 +221,9 @@ class PedidoController extends Controller
     public function updatePendiente(Request $request)
     {
         $pedido = Pedido::findOrFail($request->id);
-        $pedido->estado = "entregado";
+        $pedido->estado = $request->estado;
         $pedido->save();
         return response()->json([ 'message' => 'ok' ]);
     }
+    
 }

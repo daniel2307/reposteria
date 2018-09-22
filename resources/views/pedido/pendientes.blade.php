@@ -107,6 +107,28 @@
                 data: { 
                     id: pedido_id,
                     _token: "{{ csrf_token() }}", 
+                    estado: "entregado", 
+                },
+                success: function(result) {
+                    toastr["success"]("Se ejecuto correctamente!");
+                    $('#dtModel').DataTable().draw();
+                },
+                error: function() {
+                    toastr["error"]("No se completo la operación!");
+                }
+            });
+        }
+    }
+
+    function cancelar(pedido_id) {
+        if (confirm('El pedido se registrara como Cancelado!!')) {
+            $.ajax({
+                method: "POST",
+                url: "/pedido-pendiente",
+                data: { 
+                    id: pedido_id,
+                    _token: "{{ csrf_token() }}", 
+                    estado: "cancelado", 
                 },
                 success: function(result) {
                     toastr["success"]("Se ejecuto correctamente!");
