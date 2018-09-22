@@ -112,6 +112,7 @@
                 success: function(result) {
                     toastr["success"]("Se ejecuto correctamente!");
                     $('#dtModel').DataTable().draw();
+                    console.log(result);
                 },
                 error: function() {
                     toastr["error"]("No se completo la operación!");

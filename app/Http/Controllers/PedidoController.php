@@ -10,6 +10,7 @@ use App\Pedido;
 use App\DetallePedido;
 use App\Producto;
 use App\Cliente;
+use App\Lote;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -220,10 +221,46 @@ class PedidoController extends Controller
 
     public function updatePendiente(Request $request)
     {
-        $pedido = Pedido::findOrFail($request->id);
-        $pedido->estado = $request->estado;
-        $pedido->save();
-        return response()->json([ 'message' => 'ok' ]);
+        try {
+            DB::beginTransaction();
+            $pedido = Pedido::findOrFail($request->id);
+            if ($request->estado == "entregado") {
+                // return response()->json([ 'message' => $pedido->detalle_pedido]);
+                foreach ($pedido->detalle_pedido as $key => $value) {
+                    Producto::where(['id' => $value->producto_id])
+                    ->decrement('cantidad', $value->cantidad);
+                    $lotes = Lote::where(['producto_id' => $value->producto_id])
+                    ->where('cantidad', '>', 0)
+                    ->orderBy('id')
+                    ->get();
+                    $cantidad_ = $value->cantidad;
+                    foreach ($lotes as $k => $lote) {
+                        $aux = $lote->cantidad - $cantidad_;
+                        if ($aux >= 0) {
+                            Lote::where(['id' => $lote->id])
+                            ->decrement('cantidad', $cantidad_);
+                            $cantidad_ = 0;
+                            break;
+                        }
+                        else {
+                            Lote::where(['id' => $lote->id])
+                            ->decrement('cantidad', $lote->cantidad);
+                            $cantidad_ -= $lote->cantidad;
+                        }
+                    } 
+                }
+                
+            }
+            
+            $pedido->estado = $request->estado;
+            $pedido->save();
+            
+            DB::commit();
+            return response()->json([ 'message' => 'ok' ]);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json([ 'message' => 'error' ], 500);
+        }
     }
     
 }

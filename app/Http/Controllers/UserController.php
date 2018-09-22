@@ -102,6 +102,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->estado = "eliminado";
+        $user->email = "sin email";
+        $user->password = "sin password";
         $user->save();
         return redirect('users');
     }
