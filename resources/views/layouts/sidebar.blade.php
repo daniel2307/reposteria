@@ -142,7 +142,7 @@
                 </li>
                 @endif
 
-                @if(Auth::user()->rol == "administrador" || Auth::user()->rol == "panadero")
+                @if(Auth::user()->rol == "administrador")
                 <li class="menu-item" id="cmi-update-stock">
                     <a class="collapsible-header waves-effect" href="{{ url('update-stock') }}" id="a-update-stock">
                         <i class="fas fa-boxes mr-2"></i>
@@ -175,11 +175,34 @@
                     </a>
                 </li>
 
-                <li class="menu-item" id="cmi-reportes">
-                    <a class="collapsible-header waves-effect" href="{{ url('') }}" id="a-reportes">
+                <li class="menu-item" id="cma-cmp-reporte">
+                    <a class="collapsible-header waves-effect arrow-r" id="a-reporte">
                         <i class="fas fa-print mr-2"></i>
                         Reportes
+                        <i class="fa fa-angle-down rotate-icon"></i>
                     </a>
+                    <div class="collapsible-body" id="css-reporte">
+                        <ul class="sub-menu">
+                            <li class="menu-item" id="cmi-reporte-venta">
+                                <a class="collapsible-header waves-effect" href="{{ url('reporte/venta') }}">Ventas</a>
+                            </li>
+                            <li class="menu-item" id="cmi-reporte-pedido">
+                                <a class="collapsible-header waves-effect" href="{{ url('reporte/pedido') }}">Pedidos</a>
+                            </li>
+                            <li class="menu-item" id="cmi-reporte-producto">
+                                <a class="collapsible-header waves-effect" href="{{ url('reporte/producto') }}">Productos</a>
+                            </li>
+                            <li class="menu-item" id="cmi-reporte-categoria">
+                                <a class="collapsible-header waves-effect" href="{{ url('reporte/categoria') }}">Categorias</a>
+                            </li>
+                            <li class="menu-item" id="cmi-reporte-usuario">
+                                <a class="collapsible-header waves-effect" href="{{ url('reporte/usuario') }}">Usuarios</a>
+                            </li>
+                            <li class="menu-item" id="cmi-reporte-cliente">
+                                <a class="collapsible-header waves-effect" href="{{ url('reporte/cliente') }}">Clientes</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 @endif
 

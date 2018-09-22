@@ -185,4 +185,60 @@ class VentaController extends Controller
             // ->editColumn('cliente_id', function ($model) { return $model->cliente->nombre; })
             ->make(true);
     }
+
+    public function reporteVenta(Request $request)
+    {
+        // dd($request->year);
+        $ventas = Venta::select('fecha', 'total_importe')->get();
+        $date = date("Y-m");
+        if ($request->year && $request->month) {
+            $date = date("Y-m", strtotime($request->year . "-" . $request->month . "-01"));
+        }
+        
+        $array = [];
+
+        foreach ($ventas as $key => $value) {
+            $fecha = date("Y-m", strtotime($value->fecha));
+            if ($fecha == $date) {
+                $array = array_add(
+                    $array, 
+                    $key, 
+                    [date("Y-m-d", strtotime($value->fecha)), $value->total_importe]
+                );
+            }
+        }
+        
+        $data = [];
+
+        for ($i=1; $i <= $this->getMonthDays(date("m", strtotime($date)), date("Y", strtotime($date))); $i++) { 
+            $total = 0;
+            $aux = date("Y-m-d", strtotime($date . "-" . $i));
+            foreach ($array as $key => $value) {
+                if ($aux == $value[0]) {
+                    $total += $value[1];
+                }
+            }
+            $data = array_add($data, $aux, $total);
+        }
+        $años = $this->getYears();
+        $mes = date("m", strtotime($date));
+        $año = date("Y", strtotime($date));
+        return view('reportes.ventas', compact('data', 'años', 'mes', 'año'));
+    }
+
+    private function getMonthDays($Month, $Year) 
+    { 
+        return date("t", mktime(0,0,0,$Month,1,$Year)); 
+    } 
+
+    private function getYears() 
+    { 
+        $ventas = Venta::select('fecha')->get();
+        $collection = collect([]);
+        foreach ($ventas as $key => $value) {
+            $collection->push(date("Y", strtotime($value->fecha)));
+        }
+        return $collection->unique();
+    } 
+    
 }

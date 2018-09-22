@@ -225,7 +225,6 @@ class PedidoController extends Controller
             DB::beginTransaction();
             $pedido = Pedido::findOrFail($request->id);
             if ($request->estado == "entregado") {
-                // return response()->json([ 'message' => $pedido->detalle_pedido]);
                 foreach ($pedido->detalle_pedido as $key => $value) {
                     Producto::where(['id' => $value->producto_id])
                     ->decrement('cantidad', $value->cantidad);

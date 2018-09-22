@@ -31,7 +31,10 @@ Route::middleware(['auth'])->group(function (){
         Route::get('promocion/get/DataTable', 'PromocionController@getDataTable');
 
         Route::resource('update-stock', 'LoteController');
-        Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');   
+        Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');
+
+        Route::get('reporte/venta', 'VentaController@reporteVenta');
+        // Route::get('reporte/venta/{year}/{month}', 'VentaController@reporteVenta');
     });
 
     Route::resource('venta', 'VentaController');
