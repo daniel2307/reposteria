@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2018 a las 19:32:10
+-- Tiempo de generación: 23-09-2018 a las 17:34:56
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -99,7 +99,6 @@ CREATE TABLE `detalle_pedido` (
 --
 
 INSERT INTO `detalle_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `subtotal`, `descripcion`) VALUES
-(1, 1, 3, 2, '200.00', 'sin descrip'),
 (4, 6, 13, 1, '45.00', 'no tiene descripcion'),
 (15, 5, 37, 2, '60.00', 'ddddddddddddd'),
 (16, 5, 4, 2, '20.00', 'aaaaaaaaaaa'),
@@ -217,7 +216,7 @@ INSERT INTO `lote` (`id`, `producto_id`, `cantidad`, `fecha`, `estado`) VALUES
 (28, 13, 50, '2018-09-07 15:02:55', 'activo'),
 (29, 6, 40, '2018-09-07 15:03:13', 'activo'),
 (30, 1, 50, '2018-09-07 15:03:19', 'activo'),
-(31, 3, 59, '2018-09-07 15:03:27', 'activo'),
+(31, 3, 57, '2018-09-07 15:03:27', 'activo'),
 (32, 7, 40, '2018-09-07 15:03:34', 'activo'),
 (33, 10, 60, '2018-09-07 15:03:45', 'activo'),
 (34, 12, 60, '2018-09-07 15:03:53', 'activo'),
@@ -286,11 +285,8 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `cliente_id`, `fecha`, `fecha_entrega`, `hora_entrega`, `acuenta`, `saldo`, `total`, `descuento`, `total_importe`, `tipo`, `estado`, `forma_de_pago`, `comprobante`, `created_at`, `updated_at`) VALUES
-(1, 1, '2018-07-06', '2018-07-07', '11:26:34', NULL, '12.30', '200.00', NULL, NULL, 'tienda', 'espera', 'tienda', NULL, '2018-07-07 01:59:49', '2018-07-07 01:59:49'),
-(2, 7, '2018-07-07', '2018-07-10', '12:30:00', NULL, '30.30', '300.00', NULL, NULL, 'movil', 'entregado', 'banco', NULL, '2018-07-07 02:15:54', '2018-07-07 02:15:54'),
-(3, 6, '2018-08-16', '2018-08-09', '14:02:00', NULL, '12.20', '100.00', NULL, NULL, 'tienda', 'preparado', 'tienda', NULL, '2018-08-15 02:34:40', '2018-08-15 02:34:40'),
-(5, 6, '2018-09-01', '2018-09-27', '12:00:00', '20.00', '80.30', '100.30', '0.00', '100.30', 'tienda', 'espera', 'banco', NULL, '2018-09-01 23:51:09', '2018-09-18 17:19:33'),
-(6, 6, '2018-09-01', '2018-09-27', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'espera', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-02 00:47:55');
+(5, 6, '2018-09-01', '2018-09-27', '12:00:00', '20.00', '80.30', '100.30', '0.00', '100.30', 'tienda', 'espera', 'banco', NULL, '2018-09-01 23:51:09', '2018-09-22 16:01:46'),
+(6, 6, '2018-09-01', '2018-09-28', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'cancelado', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-22 16:05:11');
 
 -- --------------------------------------------------------
 
@@ -350,7 +346,7 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`id`, `categoria_producto_id`, `nombre`, `costo`, `cantidad`, `descripcion`, `duracion`, `imagen`, `estado`, `created_at`, `updated_at`) VALUES
 (1, 1, '5 frutas', '20.30', 50, 'fdsfds', 2, 'UhVirT94oLLLVazILdiX.jpg', 'activo', '2018-06-16 04:17:48', '2018-09-07 19:03:19'),
 (2, 1, 'Trebol', '2.50', 32, 'agdgrutu', 2, NULL, 'activo', '2018-07-20 03:50:46', '2018-09-08 01:14:30'),
-(3, 1, 'frutas extra', '210.00', 59, 'descripcion de torta tres leches', 5, 'MP62H1wzF9ako7yvndQt.jpg', 'activo', '2018-08-17 21:16:24', '2018-09-17 13:31:53'),
+(3, 1, 'frutas extra', '210.00', 57, 'descripcion de torta tres leches', 5, 'MP62H1wzF9ako7yvndQt.jpg', 'activo', '2018-08-17 21:16:24', '2018-09-22 17:22:34'),
 (4, 1, 'mosaico', '10.00', 23, 'asd', NULL, NULL, 'activo', '2018-08-27 07:13:43', '2018-09-17 13:33:18'),
 (5, 1, 'queso', '100.00', 56, 'fgh', NULL, NULL, 'activo', '2018-08-27 07:14:23', '2018-09-08 01:14:44'),
 (6, 1, 'Tarta de queso', '200.00', 40, NULL, NULL, 'ZD1VluaxXtacVKR0cfmy.jpg', 'activo', '2018-08-27 07:15:05', '2018-09-07 19:03:13'),
@@ -424,7 +420,8 @@ INSERT INTO `promocion` (`id`, `producto_id`, `fecha`, `cantidad`, `precio`, `fe
 (4, 37, '2018-08-31 16:36:51', 0, '20.00', '2018-09-18', '2018-10-24', '20:09:00', '20:09:00', 'vigente', '2018-08-31 21:36:51', '2018-09-18 17:16:45'),
 (5, 32, '2018-08-31 16:45:45', 0, '5.00', NULL, NULL, NULL, NULL, 'vigente', '2018-08-31 21:45:45', '2018-09-07 20:59:45'),
 (6, 35, '2018-09-01 22:22:54', 10, '5.00', '2018-09-01', '2018-09-05', NULL, NULL, 'vigente', '2018-09-02 02:22:54', '2018-09-18 16:47:57'),
-(7, 35, '2018-09-18 13:18:28', 20, '5.00', '2018-09-18', '2018-09-20', '00:00:00', '23:59:00', 'vigente', '2018-09-18 17:18:28', '2018-09-18 17:18:28');
+(7, 35, '2018-09-18 13:18:28', 20, '5.00', '2018-09-18', '2018-09-20', '00:00:00', '23:59:00', 'vigente', '2018-09-18 17:18:28', '2018-09-18 17:18:28'),
+(8, 37, '2018-09-18 13:03:22', 10, '20.00', '2018-09-18', '2018-09-20', NULL, NULL, 'vigente', '2018-09-18 17:03:22', '2018-09-18 17:03:22');
 
 -- --------------------------------------------------------
 
@@ -452,11 +449,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `direccion`, `telefono`, `celular`, `email`, `password`, `remember_token`, `rol`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'yCE5afBrzp6wyITjs1hgnAYv3UH7x7SUeHX8aGHRdkDXMy8X19oEboyX5S0y', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
+(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'WTgcP7L0f1pag9jI9wUxUgbHXjYNH2KANHzfO1UWzcA8j9VBseSjXftnbsbP', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
 (2, 'said', 'asdas dsad sas dasd', 234, 234, 'saiddipp@hotmail.com', '$2y$10$unoELXeQi.jZbXNSVj4W2.iNl9PfBpEhcSMqXnSwmbEGByb6oPbBe', 'cJXkk7IFsoC4A1aRQyJgV0skBHSADOdDZdMAJHPGp878PnW1ILmRIfUxH2he', 'administrador', 'activo', '2018-06-09 04:10:41', '2018-06-09 04:10:41'),
-(3, 'gerardo', 'zona norte', 44493245, 78785423, 'gerarld@gmail.com', '$2y$10$b4ln2FA7cc2DxiOjx.k.OOS.W66z14OSpnl7BQ9aChNz5X/RGmD0m', 'FR96JLi7bzCyDys9TDnLYu5xdyZNLd0bUiYP7UJbUUttPUL3pW4KSRDUSOVF', 'administrador', 'activo', '2018-06-12 23:09:24', '2018-06-12 23:09:24'),
-(4, 'said', 'pacata', 354, 654654, 'said.dipp@rnova.net', '$2y$10$0Liw5R6t0ZRr.1s9E3hBN.1tTY6672On7HADwQPWCKuCWC.Kv6pgC', NULL, 'administrador', 'activo', '2018-06-16 04:00:07', '2018-06-16 04:00:07'),
-(5, 'roberto', 'askjfhasjkf', 124115, 334536, 'roberto@gmail.com', '$2y$10$Me0xzo/7u6zw3tZ0JvzWg.UfUzS2qpZ6S.z1dnJo1xycb2TgSbPGK', 'noWbyESlrtJMro0jXbiHpWueRElpTJGmYYg8X2SN15voRoSGNeTUKm6WBzIh', 'administrador', 'activo', '2018-06-18 23:59:15', '2018-06-18 23:59:15'),
+(3, 'gerardo', 'zona norte', 44493245, 78785423, 'sin email', 'sin password', 'FR96JLi7bzCyDys9TDnLYu5xdyZNLd0bUiYP7UJbUUttPUL3pW4KSRDUSOVF', 'administrador', 'eliminado', '2018-06-12 23:09:24', '2018-09-22 16:59:30'),
+(4, 'said', 'pacata', 354, 654654, 'sin email', 'sin password', NULL, 'administrador', 'eliminado', '2018-06-16 04:00:07', '2018-09-22 16:59:20'),
+(5, 'roberto', 'askjfhasjkf', 124115, 334536, 'roberto@gmail.com', '$2y$10$Me0xzo/7u6zw3tZ0JvzWg.UfUzS2qpZ6S.z1dnJo1xycb2TgSbPGK', 'noWbyESlrtJMro0jXbiHpWueRElpTJGmYYg8X2SN15voRoSGNeTUKm6WBzIh', 'administrador', 'activo', '2018-06-18 23:59:15', '2018-09-22 16:52:52'),
 (6, 'said', 'zsfagf', 1231515, 534636, 'saiddipp@hotmail.comsaid', '$2y$10$Fh2FMIdmyJUwFACsjW/f7uCbRHs0rqVkYG7Z8dmLJsqASEOMIq9Hu', NULL, 'administrador', 'activo', '2018-06-19 00:00:43', '2018-06-19 00:00:43'),
 (11, 'vendedor', NULL, NULL, NULL, 'vendedor@vendedor.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', 'K0T2owrR5GtTdP3en5Sy0x1Dsr6OQtOUU2CkpDtijR9d5KoowESGkqNnOaju', 'vendedor', 'activo', '2018-09-15 16:12:51', '2018-09-15 16:12:51');
 
@@ -483,19 +480,19 @@ CREATE TABLE `venta` (
 --
 
 INSERT INTO `venta` (`id`, `cliente_id`, `users_id`, `fecha`, `total`, `descuento`, `total_importe`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '2018-08-23 00:00:00', '630.00', '0.00', '630.00', '2018-08-24 06:28:06', '2018-08-24 06:28:06'),
+(1, 1, 1, '2017-08-23 00:00:00', '630.00', '0.00', '630.00', '2018-08-24 06:28:06', '2018-08-24 06:28:06'),
 (2, 6, 1, '2018-06-22 00:00:00', '210.00', '10.00', '200.00', '2018-06-23 05:32:17', '2018-06-23 05:32:17'),
 (3, 7, 1, '2018-06-22 00:00:00', '442.50', '0.00', '442.50', '2018-06-23 05:39:03', '2018-06-23 05:39:03'),
 (4, 6, 1, '2018-06-22 00:00:00', '20.30', '0.00', '20.30', '2018-06-23 05:08:15', '2018-06-23 05:08:15'),
 (5, 8, 1, '2018-08-26 00:00:00', '420.00', '20.00', '400.00', '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
-(6, 9, 1, '2018-08-26 15:55:53', '121.80', '0.00', '121.80', '2018-08-26 19:55:53', '2018-08-26 19:55:53'),
-(7, 10, 1, '2018-08-26 20:14:02', '25.00', '0.00', '25.00', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
-(8, 8, 1, '2018-09-02 11:28:57', '100.00', '0.00', '100.00', '2018-09-02 15:28:57', '2018-09-02 15:28:57'),
-(9, 8, 1, '2018-09-03 12:20:47', '300.00', '0.00', '300.00', '2018-09-03 16:20:47', '2018-09-03 16:20:47'),
-(11, 7, 1, '2018-09-03 21:57:29', '50.00', '0.00', '50.00', '2018-09-04 01:57:29', '2018-09-04 01:57:29'),
-(12, 7, 1, '2018-09-03 22:45:42', '100.00', '0.00', '100.00', '2018-09-04 02:45:42', '2018-09-04 02:45:42'),
-(13, 10, 11, '2018-09-17 09:31:53', '210.00', '0.00', '210.00', '2018-09-17 13:31:53', '2018-09-17 13:31:53'),
-(14, 7, 11, '2018-09-17 09:33:18', '100.00', '0.00', '100.00', '2018-09-17 13:33:18', '2018-09-17 13:33:18');
+(6, 9, 1, '2018-08-26 00:00:00', '121.80', '0.00', '121.80', '2018-08-26 19:55:53', '2018-08-26 19:55:53'),
+(7, 10, 1, '2018-08-26 00:00:00', '25.00', '0.00', '25.00', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
+(8, 8, 1, '2018-09-02 00:00:00', '100.00', '0.00', '100.00', '2018-09-02 15:28:57', '2018-09-02 15:28:57'),
+(9, 8, 1, '2018-09-03 00:00:00', '300.00', '0.00', '300.00', '2018-09-03 16:20:47', '2018-09-03 16:20:47'),
+(11, 7, 1, '2018-09-03 00:00:00', '50.00', '0.00', '50.00', '2018-09-04 01:57:29', '2018-09-04 01:57:29'),
+(12, 7, 1, '2018-09-03 00:00:00', '100.00', '0.00', '100.00', '2018-09-04 02:45:42', '2018-09-04 02:45:42'),
+(13, 10, 11, '2018-09-17 00:00:00', '210.00', '0.00', '210.00', '2018-09-17 13:31:53', '2018-09-17 13:31:53'),
+(14, 7, 11, '2018-09-17 00:00:00', '100.00', '0.00', '100.00', '2018-09-17 13:33:18', '2018-09-17 13:33:18');
 
 --
 -- Índices para tablas volcadas
@@ -660,7 +657,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `promocion`
 --
 ALTER TABLE `promocion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
