@@ -261,5 +261,67 @@ class PedidoController extends Controller
             return response()->json([ 'message' => 'error' ], 500);
         }
     }
+
+    public function reportePedido(Request $request)
+    {
+        
+        $date = date("Y-m");
+        $tipo = "tienda";
+        $estado = "espera";
+        if ($request->year && $request->month) {
+            $date = date("Y-m", strtotime($request->year . "-" . $request->month . "-01"));
+            $tipo = $request->tipo;
+            $estado = $request->estado;
+        }
+        $pedidos = Pedido::select('fecha_entrega', 'total_importe')->where(['tipo' => $tipo, 'estado' => $estado])->get();
+
+        $array = [];
+
+        foreach ($pedidos as $key => $value) {
+            $fecha = date("Y-m", strtotime($value->fecha_entrega));
+            if ($fecha == $date) {
+                $array = array_add(
+                    $array, 
+                    $key, 
+                    [date("Y-m-d", strtotime($value->fecha_entrega)), $value->total_importe]
+                );
+            }
+        }
+        
+        $data = [];
+
+        for ($i=1; $i <= $this->getMonthDays(date("m", strtotime($date)), date("Y", strtotime($date))); $i++) { 
+            $total = 0;
+            $aux = date("Y-m-d", strtotime($date . "-" . $i));
+            foreach ($array as $key => $value) {
+                if ($aux == $value[0]) {
+                    $total += $value[1];
+                }
+            }
+            $data = array_add($data, $aux, $total);
+        }
+        $años = $this->getYears();
+        $mes = date("m", strtotime($date));
+        $año = date("Y", strtotime($date));
+        $tipo = "tienda";
+        $estado = "espera";
+        return view('reportes.pedidos', compact('data', 'años', 'mes', 'año', 'tipo', 'estado'));
+    }
+
+    private function getMonthDays($Month, $Year) 
+    { 
+        return date("t", mktime(0,0,0,$Month,1,$Year)); 
+    } 
+
+    private function getYears() 
+    { 
+        $pedidos = Pedido::select('fecha_entrega')->get();
+        $collection = collect([]);
+        foreach ($pedidos as $key => $value) {
+            $collection->push(date("Y", strtotime($value->fecha_entrega)));
+        }
+        return $collection->unique();
+    } 
+
     
 }

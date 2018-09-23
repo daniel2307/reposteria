@@ -188,7 +188,6 @@ class VentaController extends Controller
 
     public function reporteVenta(Request $request)
     {
-        // dd($request->year);
         $ventas = Venta::select('fecha', 'total_importe')->get();
         $date = date("Y-m");
         if ($request->year && $request->month) {

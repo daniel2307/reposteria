@@ -185,4 +185,12 @@ class ProductoController extends Controller
         }
         return $data;
     }
+
+    public function reporteProducto()
+    {
+        $data = Producto::select(['producto.nombre as producto', 'categoria_producto.nombre as categoria', 'costo', 'cantidad', 'producto.estado'])
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->get();
+        return view('reportes.productos', compact('data'));
+    }
 }

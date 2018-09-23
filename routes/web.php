@@ -34,7 +34,11 @@ Route::middleware(['auth'])->group(function (){
         Route::get('update-stock/get/DataTable', 'LoteController@getDataTable');
 
         Route::get('reporte/venta', 'VentaController@reporteVenta');
-        // Route::get('reporte/venta/{year}/{month}', 'VentaController@reporteVenta');
+        Route::get('reporte/pedido', 'PedidoController@reportePedido');
+        Route::get('reporte/categoria', 'CategoriaProductoController@reporteCategoria');
+        Route::get('reporte/usuario', 'UserController@reporteUsuario');
+        Route::get('reporte/cliente', 'ClienteController@reporteCliente');
+        Route::get('reporte/producto', 'ProductoController@reporteProducto');
     });
 
     Route::resource('venta', 'VentaController');

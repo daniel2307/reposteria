@@ -122,4 +122,10 @@ class UserController extends Controller
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);
     }
+
+    public function reporteUsuario()
+    {
+        $data = User::select(['name', 'telefono', 'celular', 'email', 'rol', 'estado', 'created_at'])->get();
+        return view('reportes.usuarios', compact('data'));
+    }
 }

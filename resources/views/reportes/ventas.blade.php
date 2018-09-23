@@ -53,7 +53,7 @@
             @foreach($data as $key => $value)
             <tr>
                 <td>{{ $key }}</td>
-                <td>{{ $value }}</td>
+                <td>{{ $value }} Bs</td>
                 @php
                     $total += $value;
                 @endphp
@@ -61,7 +61,7 @@
             @endforeach
             <tr>
                 <td></td>
-                <td><b>{{ $total }}</b></td>
+                <td><b>{{ $total }} Bs</b></td>
             </tr>
         </tbody>
         <tfoot>

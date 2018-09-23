@@ -169,6 +169,17 @@ class CategoriaProductoController extends Controller
             $value->imagen = $value->imagen ? asset('img/categoria/'.$value->imagen) : asset('img/categoria/sid.jpg');
         }
         return $data;
-    }    
+    }  
+    
+    public function reporteCategoria(Request $request)
+    {
+        $estado = "activo";
+        if ($request->estado) {
+            $estado = $request->estado;
+        }
+        $data = CategoriaProducto::select('nombre')->where(['estado' => $estado])->get();
+
+        return view('reportes.categorias', compact('data', 'estado'));
+    }
 
 }

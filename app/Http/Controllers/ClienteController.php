@@ -135,4 +135,10 @@ class ClienteController extends Controller
             ->editColumn('id', 'ID: {{$id}}')
             ->make(true);
     }
+
+    public function reporteCliente()
+    {
+        $data = Cliente::select(['nombre', 'ci', 'telefono', 'celular', 'email', 'created_at'])->get();
+        return view('reportes.clientes', compact('data'));
+    }
 }
