@@ -133,7 +133,7 @@ class PromocionController extends Controller
 
     public function getPromocion() 
     {
-        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'producto.imagen', 'promocion.precio', 'promocion.fecha_inicio', 'promocion.fecha_fin')
+        $data = Promocion::select('promocion.id', 'producto_id', 'nombre', 'producto.imagen', 'producto.descripcion', 'promocion.precio', 'promocion.fecha_inicio', 'promocion.fecha_fin')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
         ->where([
             'promocion.estado' => 'vigente',

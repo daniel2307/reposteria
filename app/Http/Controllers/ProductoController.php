@@ -172,6 +172,20 @@ class ProductoController extends Controller
             ->make(true);
     }
 
+    public function getProductos() 
+    {
+        $data = Producto::select('producto.id', 'producto.nombre as producto', 'categoria_producto.nombre as categoria','producto.descripcion', 'producto.imagen', 'producto.costo', 'producto.cantidad')
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->where([
+            'producto.estado' => 'activo',
+        ])
+        ->get();
+        foreach ($data as $key => $value) {
+            $value->imagen = $value->imagen ? asset('img/producto/'.$value->imagen) : asset('img/producto/sid.jpg');
+        }
+        return response()->json($data);
+    }
+
     public function getProductosByCategoria($categoria_id)
     {
         $data = Producto::select('id', 'nombre', 'costo', 'cantidad', 'descripcion', 'duracion', 'imagen')
@@ -183,7 +197,7 @@ class ProductoController extends Controller
         foreach ($data as $key => $value) {
             $value->imagen = $value->imagen ? asset('img/producto/'.$value->imagen) : asset('img/producto/sid.jpg');
         }
-        return $data;
+        return response()->json($data);
     }
 
     public function reporteProducto()

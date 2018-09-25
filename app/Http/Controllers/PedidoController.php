@@ -64,36 +64,50 @@ class PedidoController extends Controller
                 }
             }
             // insertamos la pedido
-            $pedido = new Pedido;
-            $pedido->cliente_id = $cliente->id;
-            $pedido->fecha = date("Y-m-d");
-            $pedido->fecha_entrega = $request->fecha_entrega;
-            $pedido->hora_entrega = $request->hora_entrega;
-            $pedido->acuenta = $request->acuenta;
-            $pedido->saldo = $request->saldo;
-            $pedido->total = $request->total;
-            $pedido->descuento = $request->descuento;
-            $pedido->total_importe = $request->total_importe;
-            $pedido->tipo = "tienda";
-            $pedido->estado = "espera";
-            $pedido->forma_de_pago = $request->forma_de_pago;
-            $pedido->save();
+            $requestData = $request->all();
+            
+            if (auth('api')->user()) {
+                $requestData = array_add($requestData, 'tipo', 'movil');
+            } else {
+                $requestData = array_add($requestData, 'tipo', 'tienda');
+            }
 
-            foreach ($request->cantidad as $key => $value) {
-                // insertamos el detalle de pedido por cada producto vendido
-                $detalle_pedido = new DetallePedido;
-                $detalle_pedido->descripcion = $request->descripcion[$key];
-                $detalle_pedido->cantidad = $request->cantidad[$key];
-                $detalle_pedido->subtotal = $request->subtotal[$key];
-                $detalle_pedido->pedido_id = $pedido->id;
-                $detalle_pedido->producto_id = $key;
-                $detalle_pedido->save();
+            // seteamos el cliente_id porque podia estar vacio o simplemente remplaza con el mismo valor que tenia
+            array_set($requestData, 'cliente_id', $cliente->id);
+            $requestData = array_add($requestData, 'fecha', date("Y-m-d"));
+            $requestData = array_add($requestData, 'estado', 'espera');
+            $pedido = Pedido::create($requestData);
+
+            $requestData = $request->all();
+            if (auth('api')->user()) {
+                foreach ($request->cantidad as $key => $row) {
+                    foreach ($row as $producto_id => $value) {
+                        $detalle_pedido = new DetallePedido;
+                        $detalle_pedido->descripcion = $request->descripcion[$key][$producto_id];
+                        $detalle_pedido->cantidad = $request->cantidad[$key][$producto_id];
+                        $detalle_pedido->subtotal = $request->subtotal[$key][$producto_id];
+                        $detalle_pedido->pedido_id = $pedido->id;
+                        $detalle_pedido->producto_id = $producto_id;
+                        $detalle_pedido->save();
+                    }
+                }
+            } else {
+                foreach ($request->cantidad as $key => $value) {
+                    // insertamos el detalle de pedido por cada producto vendido
+                    $detalle_pedido = new DetallePedido;
+                    $detalle_pedido->descripcion = $request->descripcion[$key];
+                    $detalle_pedido->cantidad = $request->cantidad[$key];
+                    $detalle_pedido->subtotal = $request->subtotal[$key];
+                    $detalle_pedido->pedido_id = $pedido->id;
+                    $detalle_pedido->producto_id = $key;
+                    $detalle_pedido->save();
+                }
             }
             DB::commit();
-            return redirect('pedido/'.$pedido->id);
+            return auth('api')->user() ? response()->json(['message' => 'Pedido guardado correctamente!!']) : redirect('pedido/'.$pedido->id);
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect('pedido/create');
+            return auth('api')->user() ? response()->json(['message' => 'Error']) : redirect('pedido/create');
         }
     }
 
@@ -106,9 +120,14 @@ class PedidoController extends Controller
      */
     public function show($id)
     {
-        $pedido = Pedido::findOrFail($id);
-
-        return view('pedido.show', compact('pedido'));
+        $pedido = Pedido::select('id', 'cliente_id', 'fecha', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe', 'forma_de_pago', 'estado', 'tipo')
+        ->findOrFail($id);
+        $pedido->detalle_pedido;
+        foreach ($pedido->detalle_pedido as $key => $value) {
+            $value->nombre = Producto::where('id', $value->producto_id)->value('nombre');
+        }
+        
+        return auth('api')->user() ? response()->json($pedido) : view('pedido.show', compact('pedido'));
     }
 
     /**
@@ -323,5 +342,15 @@ class PedidoController extends Controller
         return $collection->unique();
     } 
 
-    
+    public function getPedidoByCliente($cliente_id)
+    {
+        $pedidos = Pedido::select('id', 'fecha', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe', 'forma_de_pago', 'tipo')
+        ->where([
+            ['cliente_id', '=', $cliente_id], 
+            ['estado', '=', 'espera']
+        ])
+        ->get();
+        
+        return response()->json($pedidos);
+    }
 }

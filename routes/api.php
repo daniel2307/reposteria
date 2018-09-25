@@ -34,12 +34,17 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('cliente', 'ClienteController@store');
     Route::post('cliente/{cliente_id}', 'ClienteController@update');
     Route::get('cliente/{cliente_id}/edit', 'ClienteController@edit');
+    Route::post('pedido', 'PedidoController@store');
+    Route::get('pedido/{pedido_id}', 'PedidoController@show');
+    Route::get('pedido/cliente/{cliente_id}', 'PedidoController@getPedidoByCliente');
 
 });
 
+Route::post('cliente', 'ClienteController@store');
 Route::get('getPromocion', 'PromocionController@getPromocion');
+Route::get('getProductos', 'ProductoController@getProductos');
 Route::get('getCategoria', 'CategoriaProductoController@getCategoria');
 Route::get('getProductosByCategoria/{categoria_id}', 'ProductoController@getProductosByCategoria');
+

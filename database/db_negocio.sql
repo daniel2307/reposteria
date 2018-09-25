@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2018 a las 23:01:01
+-- Tiempo de generación: 25-09-2018 a las 22:32:22
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -74,7 +74,7 @@ INSERT INTO `cliente` (`id`, `user_id`, `nombre`, `ci`, `tipo`, `created_at`, `u
 (8, NULL, 'pedro', '789', 'comun', '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
 (9, 12, 'fer', '321', 'comun', '2018-08-26 19:55:53', '2018-09-25 20:56:11'),
 (10, 5, 'carlos', '654', 'comun', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
-(12, 13, 'mariano borda', '123123', 'comun', '2018-09-25 21:16:50', '2018-09-25 20:58:08');
+(18, 18, 'oliver galarga', '55555', 'comun', '2018-09-25 21:04:34', '2018-09-25 21:04:34');
 
 -- --------------------------------------------------------
 
@@ -99,7 +99,9 @@ INSERT INTO `detalle_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `sub
 (4, 6, 13, 1, '45.00', 'no tiene descripcion'),
 (15, 5, 37, 2, '60.00', 'ddddddddddddd'),
 (16, 5, 4, 2, '20.00', 'aaaaaaaaaaa'),
-(17, 5, 1, 1, '20.30', 'wwwwwwwwwwww');
+(17, 5, 1, 1, '20.30', 'wwwwwwwwwwww'),
+(18, 8, 13, 2, '90.00', 'barcos de chocolate'),
+(19, 8, 40, 2, '60.00', 'cisne con miel');
 
 -- --------------------------------------------------------
 
@@ -283,7 +285,8 @@ CREATE TABLE `pedido` (
 
 INSERT INTO `pedido` (`id`, `cliente_id`, `fecha`, `fecha_entrega`, `hora_entrega`, `acuenta`, `saldo`, `total`, `descuento`, `total_importe`, `tipo`, `estado`, `forma_de_pago`, `comprobante`, `created_at`, `updated_at`) VALUES
 (5, 6, '2018-09-01', '2018-09-27', '12:00:00', '20.00', '80.30', '100.30', '0.00', '100.30', 'tienda', 'espera', 'banco', NULL, '2018-09-01 23:51:09', '2018-09-22 16:01:46'),
-(6, 6, '2018-09-01', '2018-09-28', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'cancelado', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-22 16:05:11');
+(6, 6, '2018-09-01', '2018-09-28', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'cancelado', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-22 16:05:11'),
+(8, 10, '2018-09-25', '2018-09-30', '17:00:00', '100.00', '50.00', '100.00', '0.00', '150.00', 'movil', 'espera', 'domicilio', NULL, '2018-09-25 20:39:38', '2018-09-25 20:39:38');
 
 -- --------------------------------------------------------
 
@@ -446,15 +449,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `direccion`, `telefono`, `celular`, `email`, `password`, `remember_token`, `rol`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', '4c0AwE2uVyiforDaOeeuVovMnBfkzA1rBwIfe6upioH3L3pIrWmXuEj4Ao8q', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
-(2, 'said', 'asdas dsad sas dasd', 234, 234, 'saiddipp@hotmail.com', '$2y$10$unoELXeQi.jZbXNSVj4W2.iNl9PfBpEhcSMqXnSwmbEGByb6oPbBe', 'cJXkk7IFsoC4A1aRQyJgV0skBHSADOdDZdMAJHPGp878PnW1ILmRIfUxH2he', 'administrador', 'activo', '2018-06-09 04:10:41', '2018-06-09 04:10:41'),
-(3, 'gerardo', 'zona norte', 44493245, 78785423, 'sin email', 'sin password', 'FR96JLi7bzCyDys9TDnLYu5xdyZNLd0bUiYP7UJbUUttPUL3pW4KSRDUSOVF', 'administrador', 'eliminado', '2018-06-12 23:09:24', '2018-09-22 16:59:30'),
-(4, 'said', 'pacata', 354, 654654, 'sin email', 'sin password', NULL, 'administrador', 'eliminado', '2018-06-16 04:00:07', '2018-09-22 16:59:20'),
+(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'ul6d0ohlaBz9x5MV52GdFPb0vN4d2ysyk7fHhZtwaR7wytigPPKvHb59qBBb', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
 (5, 'roberto', 'askjfhasjkf', 124115, 334536, 'roberto@gmail.com', '$2y$10$Me0xzo/7u6zw3tZ0JvzWg.UfUzS2qpZ6S.z1dnJo1xycb2TgSbPGK', 'noWbyESlrtJMro0jXbiHpWueRElpTJGmYYg8X2SN15voRoSGNeTUKm6WBzIh', 'administrador', 'activo', '2018-06-18 23:59:15', '2018-09-22 16:52:52'),
-(6, 'said', 'zsfagf', 1231515, 534636, 'saiddipp@hotmail.comsaid', '$2y$10$Fh2FMIdmyJUwFACsjW/f7uCbRHs0rqVkYG7Z8dmLJsqASEOMIq9Hu', NULL, 'administrador', 'activo', '2018-06-19 00:00:43', '2018-06-19 00:00:43'),
-(11, 'vendedor', NULL, NULL, NULL, 'vendedor@vendedor.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', '0D52XJ7Z92cqdBJBzhdk5orI5V0j7BHnyqpjB4zua1vNLqlfTeDXpZS0BOxU', 'vendedor', 'activo', '2018-09-15 16:12:51', '2018-09-15 16:12:51'),
-(12, NULL, NULL, NULL, 7777777, 'fer@fer.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', NULL, 'cliente', 'activo', '2018-09-25 20:56:11', '2018-09-25 20:56:39'),
-(13, NULL, '<javascript>alert(\'hi!!\');</javascript>', NULL, NULL, 'mariano@borda.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', 'rNMNpoHVZBEmIQaXBQzJOSvjGIk9n6PIhIarx0531gqbCLwDeqL7BMVaetEh', 'cliente', 'activo', '2018-09-25 20:58:08', '2018-09-25 20:58:08');
+(11, 'vendedor', NULL, NULL, NULL, 'vendedor@vendedor.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', 'SQj9tmDgrHlA6LvfvotSlrm58xAV2rsT1ptKm6KEogCorO1lIcGRzjlEwg7K', 'vendedor', 'activo', '2018-09-15 16:12:51', '2018-09-15 16:12:51'),
+(12, 'fer', NULL, NULL, 7777777, 'fer@fer.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', NULL, 'cliente', 'activo', '2018-09-25 20:56:11', '2018-09-25 20:56:39'),
+(18, 'oliver', 'zona chimba', 4444444, 7777777, 'oliver@galarga.com', '$2y$10$psVNnNiWIj2XJIgiyXd3pO3t28lVAO4KubbPbaV7iaBtlEEyJeyyq', NULL, 'cliente', 'activo', '2018-09-25 21:04:34', '2018-09-25 21:04:34');
 
 -- --------------------------------------------------------
 
@@ -603,13 +602,13 @@ ALTER TABLE `categoria_producto`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -639,7 +638,7 @@ ALTER TABLE `lote`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `preparado`
@@ -663,7 +662,7 @@ ALTER TABLE `promocion`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`

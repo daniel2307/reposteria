@@ -43,27 +43,35 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $message = NULL;
         if ($this->verifyEmail($request['email'])) {
-            Session::flash('message','el Email se encuentra registrado!! Por favor use otro Email.');
-            return redirect('cliente/create');
+            $message = "el Email se encuentra registrado!! Por favor use otro Email.";
         }
         if ($this->verifyCI($request['ci'])) {
-            Session::flash('message','el CI se encuentra registrado!!.');
-            return redirect('cliente/create');
+            $message = "el CI se encuentra registrado!!.";
         }
+        if ($message) {
+            if (auth('api')) {
+                return response()->json(['message' => $message]);
+            } else {
+                Session::flash($message);
+                return redirect('cliente/create');
+            }
+        }
+
         $requestData = $request->all();
         $requestData = array_add($requestData, 'tipo', 'comun');
         $requestData = array_add($requestData, 'rol', 'cliente');
         
         if ($request['direccion'] || $request['telefono'] || $request['celular'] || $request['email']) {
-            array_set($array, 'password', Hash::make($request['password']));
+            array_set($requestData, 'password', Hash::make($request['password']));
             $user = User::create($requestData);
             $requestData = array_add($requestData, 'user_id', $user->id);
         }
         $cliente = Cliente::create($requestData);
-        if (auth('api')->user()) {
+        if (auth('api')) {
             return response()->json([
-                'message' => 'Usuario registrado', 
+                'message' => 'Cliente registrado', 
             ]);
         }
         return redirect('cliente');
