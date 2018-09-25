@@ -12,20 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('getPromocion', 'PromocionController@getPromocion');
-
-Route::post('cliente', 'ClienteController@store');
-Route::post('cliente/{cliente_id}', 'ClienteController@update');
-Route::get('cliente/{cliente_id}/edit', 'ClienteController@edit');
-Route::get('getCategoria', 'CategoriaProductoController@getCategoria');
-
-Route::get('getProductosByCategoria/{categoria_id}', 'ProductoController@getProductosByCategoria');
-
 Route::group([
 
     'middleware' => 'api',
@@ -37,5 +23,23 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::post('cliente', 'AuthController@cliente');
 
 });
+
+
+Route::group([
+
+    'middleware' => ['api', 'auth:api'],
+
+], function ($router) {
+
+    Route::post('cliente', 'ClienteController@store');
+    Route::post('cliente/{cliente_id}', 'ClienteController@update');
+    Route::get('cliente/{cliente_id}/edit', 'ClienteController@edit');
+
+});
+
+Route::get('getPromocion', 'PromocionController@getPromocion');
+Route::get('getCategoria', 'CategoriaProductoController@getCategoria');
+Route::get('getProductosByCategoria/{categoria_id}', 'ProductoController@getProductosByCategoria');

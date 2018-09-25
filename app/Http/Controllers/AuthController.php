@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Cliente;
 
 class AuthController extends Controller
 {
@@ -24,6 +26,12 @@ class AuthController extends Controller
      */
     public function login()
     {
+        // controlar que solo clientes puedan entrar mediante la api
+        $rol = User::where('email', request('email'))->value('rol');
+        if ($rol != 'cliente') {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        
         $credentials = request(['email', 'password']);
 
         if (! $token = auth('api')->attempt($credentials)) {
@@ -40,9 +48,21 @@ class AuthController extends Controller
      */
     public function me()
     {
-        // if(Auth::guard('admin')->check())
-        //                                     Admin
         return response()->json(auth('api')->user());
+    }
+
+    /**
+     * Get the authenticated User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function cliente()
+    {
+        $cliente = Cliente::select('cliente.id', 'user_id', 'nombre', 'ci', 'name', 'direccion', 'telefono', 'celular', 'email')
+        ->join('users', 'cliente.user_id', '=', 'users.id')
+        ->where('users.email', auth('api')->user()->email)
+        ->first();
+        return response()->json($cliente);
     }
 
     /**

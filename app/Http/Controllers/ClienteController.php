@@ -61,11 +61,9 @@ class ClienteController extends Controller
             $requestData = array_add($requestData, 'user_id', $user->id);
         }
         $cliente = Cliente::create($requestData);
-        if ($request->key == "pasteleria_el_amor_es_dulce") {
+        if (auth('api')->user()) {
             return response()->json([
                 'message' => 'Usuario registrado', 
-                'id' => $cliente->id,
-                '_token' => csrf_token(),
             ]);
         }
         return redirect('cliente');
@@ -94,7 +92,7 @@ class ClienteController extends Controller
     public function edit($id, $key = NULL)
     {
         $cliente = Cliente::findOrFail($id);
-        if ($key == "pasteleria_el_amor_es_dulce") {
+        if (auth('api')->user()) {
             return response()->json(['cliente' => $cliente]);
         }
         return view('cliente.edit', compact('cliente'));
@@ -130,13 +128,14 @@ class ClienteController extends Controller
                 $user->update($requestData);
             } else {
                 // no tiene registro en user, se crea uno nuevo
+                $requestData = array_add($requestData, 'rol', 'cliente');
                 $user = User::create($requestData);
                 $requestData = array_add($requestData, 'user_id', $user->id);
             }
         }
 
         $cliente->update($requestData);
-        if ($request->key == "pasteleria_el_amor_es_dulce") {
+        if (auth('api')->user()) {
             return response()->json(['message' => 'Usuario modificado']);
         }
         return redirect('cliente');
@@ -179,7 +178,9 @@ class ClienteController extends Controller
 
     public function reporteCliente()
     {
-        $data = Cliente::select(['nombre', 'ci', 'telefono', 'celular', 'email', 'created_at'])->get();
+        $data = Cliente::select(['nombre', 'ci', 'telefono', 'celular', 'email', 'cliente.created_at'])
+        ->leftJoin('users', 'cliente.user_id', '=', 'users.id')
+        ->get();
         return view('reportes.clientes', compact('data'));
     }
 

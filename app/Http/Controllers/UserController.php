@@ -115,7 +115,8 @@ class UserController extends Controller
 
     public function getDataTable()
     {
-        $model = User::select(['id', 'name', 'celular', 'email', 'rol'])->where(['estado' => 'activo']);
+        $model = User::select(['id', 'name', 'celular', 'email', 'rol'])
+        ->where([['estado', '=', 'activo'],['rol', '<>', 'cliente']]);
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {

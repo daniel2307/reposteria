@@ -143,7 +143,7 @@ class PromocionController extends Controller
         foreach ($data as $key => $value) {
             $value->imagen = $value->imagen ? asset('img/producto/'.$value->imagen) : asset('img/producto/sid.jpg');
         }
-        return $data;
+        return response()->json($data);
     }
 
     public function setEstado(Request $request) 

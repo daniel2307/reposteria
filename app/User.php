@@ -25,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'rol', 'estado',
     ];
 
     public function venta()
@@ -52,4 +52,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function cliente()
+    {
+        return $this->hasOne('App\Cliente', 'id', 'cliente_id');
+    }    
 }
