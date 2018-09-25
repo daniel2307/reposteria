@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2018 a las 17:34:56
+-- Tiempo de generación: 25-09-2018 a las 23:01:01
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -55,12 +55,9 @@ INSERT INTO `categoria_producto` (`id`, `nombre`, `imagen`, `estado`) VALUES
 
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `ci` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `telefono` int(11) DEFAULT NULL,
-  `celular` int(11) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
   `tipo` enum('frecuente','comun') DEFAULT 'comun',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -70,14 +67,14 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id`, `nombre`, `ci`, `direccion`, `telefono`, `celular`, `email`, `tipo`, `created_at`, `updated_at`) VALUES
-(1, 'dario', '123', 'sdfsd', 2423, 234, 'asdasd@asd.com', 'comun', '2018-06-16 02:56:19', '2018-08-31 20:49:34'),
-(6, 'juan', '456', 'dsfsdfds', 4567, 675, 'juan@juan.com', 'comun', '2018-08-01 02:24:00', '2018-08-01 02:24:00'),
-(7, 'filemon', '987', 'sin dir', 4567736, 77652353, 'filemon@filemon.com', 'comun', '2018-08-24 05:34:36', '2018-08-24 05:34:36'),
-(8, 'pedro', '789', NULL, NULL, NULL, NULL, NULL, '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
-(9, 'fer', '321', NULL, NULL, NULL, NULL, NULL, '2018-08-26 19:55:53', '2018-08-26 19:55:53'),
-(10, 'carlos', '654', NULL, NULL, NULL, NULL, NULL, '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
-(11, 'boris777', '7777777', NULL, NULL, NULL, NULL, 'comun', '2018-08-31 20:52:42', '2018-08-31 20:55:44');
+INSERT INTO `cliente` (`id`, `user_id`, `nombre`, `ci`, `tipo`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'dario', '123', 'comun', '2018-06-16 02:56:19', '2018-08-31 20:49:34'),
+(6, NULL, 'juan', '456', 'comun', '2018-08-01 02:24:00', '2018-08-01 02:24:00'),
+(7, NULL, 'filemon', '987', 'comun', '2018-08-24 05:34:36', '2018-08-24 05:34:36'),
+(8, NULL, 'pedro', '789', 'comun', '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
+(9, 12, 'fer', '321', 'comun', '2018-08-26 19:55:53', '2018-09-25 20:56:11'),
+(10, 5, 'carlos', '654', 'comun', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
+(12, 13, 'mariano borda', '123123', 'comun', '2018-09-25 21:16:50', '2018-09-25 20:58:08');
 
 -- --------------------------------------------------------
 
@@ -438,7 +435,7 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
-  `rol` enum('administrador','vendedor','panadero') DEFAULT NULL,
+  `rol` enum('administrador','vendedor','cliente') DEFAULT NULL,
   `estado` enum('activo','eliminado') NOT NULL DEFAULT 'activo',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -449,13 +446,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `direccion`, `telefono`, `celular`, `email`, `password`, `remember_token`, `rol`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', 'WTgcP7L0f1pag9jI9wUxUgbHXjYNH2KANHzfO1UWzcA8j9VBseSjXftnbsbP', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
+(1, 'admin', 'nose', 23422, 324324, 'admin@admin.com', '$2y$10$XHNiWCcsSw0CMI//DjD5NelCB7o8eoVg5DphbqGcnPbrRm5PisDCO', '4c0AwE2uVyiforDaOeeuVovMnBfkzA1rBwIfe6upioH3L3pIrWmXuEj4Ao8q', 'administrador', 'activo', '2018-06-09 03:59:30', '2018-06-09 03:59:30'),
 (2, 'said', 'asdas dsad sas dasd', 234, 234, 'saiddipp@hotmail.com', '$2y$10$unoELXeQi.jZbXNSVj4W2.iNl9PfBpEhcSMqXnSwmbEGByb6oPbBe', 'cJXkk7IFsoC4A1aRQyJgV0skBHSADOdDZdMAJHPGp878PnW1ILmRIfUxH2he', 'administrador', 'activo', '2018-06-09 04:10:41', '2018-06-09 04:10:41'),
 (3, 'gerardo', 'zona norte', 44493245, 78785423, 'sin email', 'sin password', 'FR96JLi7bzCyDys9TDnLYu5xdyZNLd0bUiYP7UJbUUttPUL3pW4KSRDUSOVF', 'administrador', 'eliminado', '2018-06-12 23:09:24', '2018-09-22 16:59:30'),
 (4, 'said', 'pacata', 354, 654654, 'sin email', 'sin password', NULL, 'administrador', 'eliminado', '2018-06-16 04:00:07', '2018-09-22 16:59:20'),
 (5, 'roberto', 'askjfhasjkf', 124115, 334536, 'roberto@gmail.com', '$2y$10$Me0xzo/7u6zw3tZ0JvzWg.UfUzS2qpZ6S.z1dnJo1xycb2TgSbPGK', 'noWbyESlrtJMro0jXbiHpWueRElpTJGmYYg8X2SN15voRoSGNeTUKm6WBzIh', 'administrador', 'activo', '2018-06-18 23:59:15', '2018-09-22 16:52:52'),
 (6, 'said', 'zsfagf', 1231515, 534636, 'saiddipp@hotmail.comsaid', '$2y$10$Fh2FMIdmyJUwFACsjW/f7uCbRHs0rqVkYG7Z8dmLJsqASEOMIq9Hu', NULL, 'administrador', 'activo', '2018-06-19 00:00:43', '2018-06-19 00:00:43'),
-(11, 'vendedor', NULL, NULL, NULL, 'vendedor@vendedor.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', 'K0T2owrR5GtTdP3en5Sy0x1Dsr6OQtOUU2CkpDtijR9d5KoowESGkqNnOaju', 'vendedor', 'activo', '2018-09-15 16:12:51', '2018-09-15 16:12:51');
+(11, 'vendedor', NULL, NULL, NULL, 'vendedor@vendedor.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', '0D52XJ7Z92cqdBJBzhdk5orI5V0j7BHnyqpjB4zua1vNLqlfTeDXpZS0BOxU', 'vendedor', 'activo', '2018-09-15 16:12:51', '2018-09-15 16:12:51'),
+(12, NULL, NULL, NULL, 7777777, 'fer@fer.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', NULL, 'cliente', 'activo', '2018-09-25 20:56:11', '2018-09-25 20:56:39'),
+(13, NULL, '<javascript>alert(\'hi!!\');</javascript>', NULL, NULL, 'mariano@borda.com', '$2y$10$9Cb7Gk3I20GKARSk2gwAc.7n0SisMuM.ExHE7J6mGHKOaQmb8YAsu', 'rNMNpoHVZBEmIQaXBQzJOSvjGIk9n6PIhIarx0531gqbCLwDeqL7BMVaetEh', 'cliente', 'activo', '2018-09-25 20:58:08', '2018-09-25 20:58:08');
 
 -- --------------------------------------------------------
 
@@ -508,7 +507,8 @@ ALTER TABLE `categoria_producto`
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indices de la tabla `detalle_pedido`
@@ -603,7 +603,7 @@ ALTER TABLE `categoria_producto`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -663,7 +663,7 @@ ALTER TABLE `promocion`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
@@ -674,6 +674,12 @@ ALTER TABLE `venta`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `detalle_pedido`
