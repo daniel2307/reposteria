@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Hash;
 use App\User;
+Use Session;
 
 class UserController extends Controller
 {
@@ -36,6 +37,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if ($this->verifyEmail($request['email'])) {
+            Session::flash('message','el Email se encuentra registrado!! Por favor use otro Email.');
+            return redirect('users/create');
+        }
         User::create([
             'name' => $request['name'],
             'direccion' => $request['direccion'],
@@ -127,5 +132,11 @@ class UserController extends Controller
     {
         $data = User::select(['name', 'telefono', 'celular', 'email', 'rol', 'estado', 'created_at'])->get();
         return view('reportes.usuarios', compact('data'));
+    }
+
+    private function verifyEmail($email)
+    {
+        $existe = User::where(['email' => $email])->first();
+        return $existe ? true : false;
     }
 }

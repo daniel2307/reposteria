@@ -9,7 +9,6 @@ class Cliente extends Authenticatable
 {
     use Notifiable;
 
-    protected $guard = 'api';
     /**
      * The database table used by the model.
      *
@@ -29,7 +28,7 @@ class Cliente extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'ci', 'direccion', 'telefono', 'celular', 'email', 'tipo'];
+    protected $fillable = ['user_id', 'nombre', 'ci', 'tipo'];
 
     public function venta()
     {
@@ -40,4 +39,10 @@ class Cliente extends Authenticatable
     {
         return $this->hasMany('App\Pedido', 'cliente_id');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }  
+
 }

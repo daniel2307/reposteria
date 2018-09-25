@@ -17,14 +17,8 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $cliente->direccion or '' }}" autocomplete="off">
+            <input type="text" id="direccion" name="direccion" class="form-control" value="{{ $cliente->user->direccion or '' }}" autocomplete="off">
             <label for="direccion">Direccion</label>
-        </div>
-    </div>
-    <div class="col">
-        <div class="md-form">
-            <input type="text" id="telefono" name="telefono" class="form-control" value="{{ $cliente->telefono or '' }}" autocomplete="off">
-            <label for="telefono">Telefono</label>
         </div>
     </div>
 </div>
@@ -32,14 +26,29 @@
 <div class="form-row">
     <div class="col">
         <div class="md-form">
-            <input type="text" id="celular" name="celular" class="form-control" value="{{ $cliente->celular or '' }}" autocomplete="off">
-            <label for="celular">Celular</label>
+            <input type="text" id="telefono" name="telefono" class="form-control" value="{{ $cliente->user->telefono or '' }}" autocomplete="off">
+            <label for="telefono">Telefono</label>
         </div>
     </div>
     <div class="col">
         <div class="md-form">
-            <input type="email" id="email" name="email" class="form-control" value="{{ $cliente->email or '' }}" autocomplete="off">
+            <input type="text" id="celular" name="celular" class="form-control" value="{{ $cliente->user->celular or '' }}" autocomplete="off">
+            <label for="celular">Celular</label>
+        </div>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col">
+        <div class="md-form">
+            <input type="email" id="email" name="email" class="form-control" value="{{ $cliente->user->email or '' }}" autocomplete="off">
             <label for="email">Email</label>
+        </div>
+    </div>
+    <div class="col">
+        <div class="md-form">
+            <input type="password" id="password" name="password" class="form-control" value="" autocomplete="new-password">
+            <label for="password">Password</label>
         </div>
     </div>
 </div>

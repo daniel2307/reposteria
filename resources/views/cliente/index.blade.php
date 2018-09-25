@@ -66,11 +66,11 @@
             serverSide: true,
             ajax: '{{ url("cliente/get/DataTable") }}',
             columns: [
-                {data: 'id', name: 'id'},
+                {data: 'id', name: 'cliente.id'},
                 {data: 'nombre', name: 'nombre'},
                 {data: 'ci', name: 'ci'},
-                {data: 'celular', name: 'celular'},
-                {data: 'email', name: 'email'},
+                {data: 'celular', name: 'users.celular'},
+                {data: 'email', name: 'users.email'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             order: [[ 0, 'desc' ]],

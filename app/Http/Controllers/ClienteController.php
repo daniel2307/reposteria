@@ -6,8 +6,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Cliente;
+use App\User;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Hash;
 
 class ClienteController extends Controller
 {
@@ -40,8 +43,23 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        if ($this->verifyEmail($request['email'])) {
+            Session::flash('message','el Email se encuentra registrado!! Por favor use otro Email.');
+            return redirect('cliente/create');
+        }
+        if ($this->verifyCI($request['ci'])) {
+            Session::flash('message','el CI se encuentra registrado!!.');
+            return redirect('cliente/create');
+        }
         $requestData = $request->all();
         $requestData = array_add($requestData, 'tipo', 'comun');
+        $requestData = array_add($requestData, 'rol', 'cliente');
+        
+        if ($request['direccion'] || $request['telefono'] || $request['celular'] || $request['email']) {
+            array_set($array, 'password', Hash::make($request['password']));
+            $user = User::create($requestData);
+            $requestData = array_add($requestData, 'user_id', $user->id);
+        }
         $cliente = Cliente::create($requestData);
         if ($request->key == "pasteleria_el_amor_es_dulce") {
             return response()->json([
@@ -92,9 +110,31 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $requestData = $request->all();
-        
         $cliente = Cliente::findOrFail($id);
+        if ($this->verifyEmail($request['email'], $cliente->user_id)) {
+            Session::flash('message','el Email se encuentra registrado!! Por favor use otro Email.');
+            return redirect('cliente/'.$cliente->id.'/edit');
+        }
+        if ($this->verifyCI($request['ci'], $cliente->id)) {
+            Session::flash('message','el CI se encuentra registrado!!.');
+            return redirect('cliente/'.$cliente->id.'/edit');
+        }
+
+        $requestData = $request->all();
+
+        if ($request['direccion'] || $request['telefono'] || $request['celular'] || $request['email']) {
+            array_set($array, 'password', Hash::make($request['password']));
+            if ($cliente->user_id) {
+                // tiene un registro en user, lo modificamos
+                $user = User::findOrFail($cliente->user_id);
+                $user->update($requestData);
+            } else {
+                // no tiene registro en user, se crea uno nuevo
+                $user = User::create($requestData);
+                $requestData = array_add($requestData, 'user_id', $user->id);
+            }
+        }
+
         $cliente->update($requestData);
         if ($request->key == "pasteleria_el_amor_es_dulce") {
             return response()->json(['message' => 'Usuario modificado']);
@@ -123,7 +163,8 @@ class ClienteController extends Controller
     
     public function getDataTable()
     {
-        $model = Cliente::select(['id', 'nombre', 'ci', 'celular', 'email']);
+        $model = Cliente::select(['cliente.id', 'nombre', 'ci', 'users.celular', 'users.email'])
+        ->leftJoin('users', 'cliente.user_id', '=', 'users.id');
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
@@ -140,5 +181,23 @@ class ClienteController extends Controller
     {
         $data = Cliente::select(['nombre', 'ci', 'telefono', 'celular', 'email', 'created_at'])->get();
         return view('reportes.clientes', compact('data'));
+    }
+
+    private function verifyEmail($email, $user_id = NULL)
+    {
+        $existe = $user_id ?
+        User::where([['email', '=', $email], ['id', '<>', $user_id]])->first() :
+        User::where(['email' => $email])->first();
+        
+        return $existe ? true : false;
+    }
+
+    private function verifyCI($ci, $id = NULL)
+    {
+        $existe = $id ? 
+        Cliente::where([['ci', '=', $ci], ['id', '<>', $id]])->first() : 
+        Cliente::where(['ci' => $ci])->first();
+
+        return $existe ? true : false;
     }
 }

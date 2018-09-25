@@ -13,6 +13,15 @@
 
         <p><small class="red-text">* Obligatorio</small></p>
 
+        @if(Session::has('message'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{Session::get('message')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
         <form method="POST" class="text-center" action="{{ url('/users') }}" accept-charset="UTF-8" style="color: #757575;">
             @include('usuario.form', ['submitButtonText' => 'GUARDAR'])
         </form>

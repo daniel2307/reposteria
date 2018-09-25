@@ -35,19 +35,19 @@
                     </tr>
                     <tr>
                         <th scope="row">Direccion</th>
-                        <td>{{ $cliente->direccion }}</td>
+                        <td>{{ isset($cliente->user) ? $cliente->user->direccion : '' }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Telefono</th>
-                        <td>{{ $cliente->telefono }}</td>
+                        <td>{{ isset($cliente->user) ? $cliente->user->telefono : '' }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Celular</th>
-                        <td>{{ $cliente->celular }}</td>
+                        <td>{{ isset($cliente->user) ? $cliente->user->celular : '' }}</td>
                     </tr>
                     <tr>
                         <th scope="row">Email</th>
-                        <td>{{ $cliente->email }}</td>
+                        <td>{{ isset($cliente->user) ? $cliente->user->email : '' }}</td>
                     </tr>
                 </tbody>
             </table>
