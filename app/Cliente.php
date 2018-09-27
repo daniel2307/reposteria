@@ -28,7 +28,7 @@ class Cliente extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'nombre', 'ci', 'tipo'];
+    protected $fillable = ['user_id', 'nombre', 'ci', 'tipo', 'estado'];
 
     public function venta()
     {

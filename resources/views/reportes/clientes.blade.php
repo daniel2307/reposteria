@@ -15,6 +15,7 @@
                 <th class="th-sm">TELEFONO</th>
                 <th class="th-sm">CELULAR</th>
                 <th class="th-sm">EMAIL</th>
+                <th class="th-sm">ESTADO</th>
                 <th class="th-sm">CREADO</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{ $value->telefono }}</td>
                 <td>{{ $value->celular }}</td>
                 <td>{{ $value->email }}</td>
+                <td>{{ $value->estado }}</td>
                 <td>{{ $value->created_at }}</td>
             </tr>
             @endforeach
@@ -39,6 +41,7 @@
                 <th>TELEFONO</th>
                 <th>CELULAR</th>
                 <th>EMAIL</th>
+                <th>ESTADO</th>
                 <th>CREADO</th>
             </tr>
         </tfoot>

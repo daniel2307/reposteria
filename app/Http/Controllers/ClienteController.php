@@ -158,8 +158,18 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        Cliente::destroy($id);
-
+        $cliente = Cliente::findOrFail($id);
+        $cliente->estado = "eliminado";
+        $cliente->save();
+        // HAY QUE VER SI UN CLIENTE ES ELIMINADO YA NO PUEDE ENTRAR EN LA APP MOVIL
+        if ($cliente->user_id) {
+            $user = User::findOrFail($cliente->user_id);
+            $user->estado = "eliminado";
+            $user->email = "sin email";
+            $user->password = "sin password";
+            $user->save();
+        }
+        
         return redirect('cliente');
     }
 
@@ -171,7 +181,8 @@ class ClienteController extends Controller
     public function getDataTable()
     {
         $model = Cliente::select(['cliente.id', 'nombre', 'ci', 'users.celular', 'users.email'])
-        ->leftJoin('users', 'cliente.user_id', '=', 'users.id');
+        ->leftJoin('users', 'cliente.user_id', '=', 'users.id')
+        ->where('cliente.estado', 'activo');
 
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
@@ -186,7 +197,7 @@ class ClienteController extends Controller
 
     public function reporteCliente()
     {
-        $data = Cliente::select(['nombre', 'ci', 'telefono', 'celular', 'email', 'cliente.created_at'])
+        $data = Cliente::select(['nombre', 'ci', 'telefono', 'celular', 'email', 'cliente.estado', 'cliente.created_at'])
         ->leftJoin('users', 'cliente.user_id', '=', 'users.id')
         ->get();
         return view('reportes.clientes', compact('data'));

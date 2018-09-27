@@ -322,8 +322,6 @@ class PedidoController extends Controller
         $años = $this->getYears();
         $mes = date("m", strtotime($date));
         $año = date("Y", strtotime($date));
-        $tipo = "tienda";
-        $estado = "espera";
         return view('reportes.pedidos', compact('data', 'años', 'mes', 'año', 'tipo', 'estado'));
     }
 
@@ -344,10 +342,10 @@ class PedidoController extends Controller
 
     public function getPedidoByCliente($cliente_id)
     {
-        $pedidos = Pedido::select('id', 'fecha', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe', 'forma_de_pago', 'tipo')
+        $pedidos = Pedido::select('id', 'fecha', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe', 'forma_de_pago', 'tipo', 'estado')
         ->where([
             ['cliente_id', '=', $cliente_id], 
-            ['estado', '=', 'espera']
+            // ['estado', '=', 'espera']
         ])
         ->get();
         
