@@ -121,13 +121,17 @@ class PedidoController extends Controller
     public function show($id)
     {
         $pedido = Pedido::select('id', 'cliente_id', 'fecha', 'fecha_entrega', 'hora_entrega', 'acuenta', 'saldo', 'total', 'descuento', 'total_importe', 'forma_de_pago', 'estado', 'tipo')
-        ->findOrFail($id);
-        $pedido->detalle_pedido;
-        foreach ($pedido->detalle_pedido as $key => $value) {
-            $value->nombre = Producto::where('id', $value->producto_id)->value('nombre');
+        ->where('id', $id)
+        ->first();//findOrFail
+        if ($pedido) {
+            $pedido->detalle_pedido;
+            foreach ($pedido->detalle_pedido as $key => $value) {
+                $value->nombre = Producto::where('id', $value->producto_id)->value('nombre');
+            }
+            
+            return auth('api')->user() ? response()->json($pedido) : view('pedido.show', compact('pedido'));
         }
-        
-        return auth('api')->user() ? response()->json($pedido) : view('pedido.show', compact('pedido'));
+        return auth('api')->user() ? response()->json(['message' => 'Error'], 401) : redirect('pedido');
     }
 
     /**

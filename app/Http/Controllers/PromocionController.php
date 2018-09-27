@@ -48,7 +48,7 @@ class PromocionController extends Controller
     {
         $requestData = $request->all();
         $requestData = array_add($requestData, 'fecha', date("Y-m-d H:i:s"));
-        $requestData = array_add($requestData, 'estado', 'vigente');
+        $requestData = array_add($requestData, 'estado', 'espera');
         Promocion::create($requestData);
 
         return redirect('promocion');
@@ -108,7 +108,7 @@ class PromocionController extends Controller
      */
     public function destroy($id)
     {
-        Promocion::destroy($id);
+        // Promocion::destroy($id);
 
         return redirect('promocion')->with('flash_message', 'Promocion deleted!');
     }

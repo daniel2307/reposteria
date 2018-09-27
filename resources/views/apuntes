@@ -1,7 +1,8 @@
 LINK PARA EL POSTMAN
 https://www.getpostman.com/collections/b58551e890e8d5fe0309
 
-
+para correr el cron de laravel
+php artisan schedule:run >> /dev/null 2>&1
 
 
 https://yajrabox.com/docs/laravel-datatables/master/add-column
