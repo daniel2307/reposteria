@@ -5,100 +5,39 @@ para correr el cron de laravel
 php artisan schedule:run >> /dev/null 2>&1
 
 
-https://yajrabox.com/docs/laravel-datatables/master/add-column
-https://datatables.yajrabox.com/eloquent/add-edit-remove-column
 
 tartamiel.com
 
-https://laraget.com/blog/select2-and-laravel-ajax-autocomplete
-https://styde.net/etiquetas-dinamicas-con-select2-y-ajax-en-laravel/
-http://www.codebyjigs.com/select2-laravel/
-https://laracasts.com/discuss/channels/general-discussion/select2-ajax-on-laravel?page=1
-https://hdtuto.com/article/php-laravel-select2-js-example-from-scratch
+// para habilitar los eventos
+SET GLOBAL event_scheduler = ON;
 
+// detiene todos los eventos
+SET GLOBAL event_scheduler = OFF;
 
-// return datatables()->of(User::query())->toJson();
-// return datatables()->of(DB::table('users'))->toJson();
-// return datatables()->of(User::all())->toJson();
+// para mostrar todos los eventos que estan corriendo
+SHOW events;
 
-// return datatables()->eloquent(User::query())->toJson();
-// return datatables()->query(DB::table('users'))->toJson();
-// return datatables()->collection(User::all())->toJson();
+// para eliminar un evento 
+DROP EVENT eventoPromocion;
 
-// return datatables(User::query())->toJson();
-// return datatables(DB::table('users'))->toJson();
-// return datatables(User::all())->toJson();
+// este es el evento que se ejecuta
+DELIMITER //
 
-api/login => email y nommbre del cliente
-api/updateCliente => todos los datos que tenga el cliente en su form
+CREATE EVENT eventoPromocion
+ON SCHEDULE EVERY 1 MINUTE
+DO
+BEGIN
+ update promocion set estado = 'vigente' 
+ where estado = 'espera'
+ and fecha_inicio < CURDATE()
+ or (fecha_inicio = CURDATE()
+ and hora_inicio <= CURTIME());
 
-api/pedido => manda los datos del pedido ya sea promocion o productos normales, para los 2 seria lo mismo
+ update promocion set estado = 'expirado' 
+ where estado = 'vigente'
+ and fecha_fin < CURDATE()
+ or (fecha_fin = CURDATE()
+ and hora_fin <= CURTIME());
+END //
 
-
-                <li class="menu-item" id="cma-cmp-gs"> <!-- current-menu-ancestor current-menu-parent menu-item-has-children -->
-                    <a class="collapsible-header waves-effect arrow-r" id="a-gs"> <!-- active -->
-                        <i class="fa fa-download"></i>
-                        Getting started
-                        <i class="fa fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body"  style="display: block;">
-                        <ul class="sub-menu">
-                            <li class="menu-item" >
-                                <a class="collapsible-header waves-effect" href="#">Home page</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">About MDB</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Download</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="menu-item">
-                    <a class="collapsible-header waves-effect arrow-r">
-                        <i class="fas fa-print mr-2"></i>Reportes<i class="fa fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body">
-                        <ul class="sub-menu">
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Demonstration</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Animations</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" href="#">Background Image</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="menu-item  current-menu-ancestor current-menu-parent menu-item-has-children active">
-                    <a class="collapsible-header waves-effect arrow-r active">
-                        <i class="fa  fa-th-large"></i>Layout<i class="fa fa-angle-down rotate-icon"></i>
-                    </a>
-                    <div class="collapsible-body" style="display: block;">
-                        <ul class="sub-menu">
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" >Layout overview</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" >Grid usage</a>
-                            </li>
-                            <li class="menu-item current-menu-item">
-                                <a class="collapsible-header waves-effect" >Grid examples</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" >Media object</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" >Media queries</a>
-                            </li>
-                            <li class="menu-item">
-                                <a class="collapsible-header waves-effect" >Utilities for layout</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+DELIMITER ;

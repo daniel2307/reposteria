@@ -29,11 +29,7 @@ class PromocionController extends Controller
      */
     public function create()
     {
-        $productos = Producto::select('producto.id', 'costo', 'cantidad', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
-        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
-        ->where(['producto.estado' => 'activo'])
-        ->orderBy('producto.nombre')
-        ->get();
+        $productos = (new Producto())->getProductos();
         return view('promocion.create', compact('productos'));
     }
 

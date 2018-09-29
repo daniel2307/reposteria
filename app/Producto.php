@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Promocion;
+use DB;
 
 class Producto extends Model
 {
@@ -36,5 +38,26 @@ class Producto extends Model
     {
         return $this->hasOne('App\CategoriaProducto', 'id', 'categoria_producto_id');
     }
+
+    public function getProductos()
+    {
+        $productos = $this->select('producto.id', 'costo', 'cantidad', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->where(['producto.estado' => 'activo'])
+        ->orderBy('producto.nombre')
+        ->get();
+        foreach ($productos as $key => $value) {
+            $precio = Promocion::where([
+                ['estado', '=', 'vigente'],
+                ['producto_id', '=', $value->id],
+            ])->value('precio');
+
+            if ($precio) {
+                $value->costo = $precio;
+            }
+        }
+        return $productos;
+    }
+    
     
 }
