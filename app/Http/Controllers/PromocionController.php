@@ -44,6 +44,14 @@ class PromocionController extends Controller
     {
         $requestData = $request->all();
         $requestData = array_add($requestData, 'fecha', date("Y-m-d H:i:s"));
+        
+        if (!$request->hora_inicio) {
+            array_set($requestData, 'hora_inicio', '00:00:00');
+        }
+        if (!$request->hora_fin) {
+            array_set($requestData, 'hora_fin', '00:00:00');
+        }
+        
         $requestData = array_add($requestData, 'estado', 'espera');
         Promocion::create($requestData);
 
@@ -111,10 +119,10 @@ class PromocionController extends Controller
 
     public function getDataTable()
     {
-        $model = Promocion::select('promocion.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'promocion.precio', 'promocion.fecha_inicio', 'promocion.fecha_fin')
+        $model = Promocion::select('promocion.id', 'producto.nombre', 'categoria_producto.nombre as categoria', 'promocion.precio', 'promocion.fecha_inicio', 'promocion.fecha_fin', 'promocion.estado')
         ->join('producto', 'promocion.producto_id', '=', 'producto.id')
         ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
-        ->where(['promocion.estado' => 'vigente']);
+        ->where('promocion.estado', '<>', 'expirado');
         return datatables()->of($model)
             ->addColumn('action', function ($model) {
                 return 

@@ -27,6 +27,9 @@
                 <th class="th-sm">Fecha Fin
                     <i class="fa fa-sort float-right" aria-hidden="true"></i>
                 </th>
+                <th class="th-sm">Estado
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
                 <th class="th-sm">accion
                 </th>
             </tr>
@@ -42,6 +45,7 @@
                 <th>Precio</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
+                <th>Estado</th>
                 <th>accion</th>
             </tr>
         </tfoot>
@@ -76,6 +80,7 @@
                 {data: 'precio', name: 'precio'},
                 {data: 'fecha_inicio', name: 'fecha_inicio'},
                 {data: 'fecha_fin', name: 'fecha_fin'},
+                {data: 'estado', name: 'estado'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             order: [[ 0, 'desc' ]],

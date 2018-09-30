@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-09-2018 a las 22:32:22
+-- Tiempo de generación: 30-09-2018 a las 04:20:14
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -32,7 +32,7 @@ CREATE TABLE `categoria_producto` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `imagen` varchar(45) DEFAULT NULL,
-  `estado` enum('activo','inactivo') DEFAULT 'activo'
+  `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -59,6 +59,7 @@ CREATE TABLE `cliente` (
   `nombre` varchar(45) DEFAULT NULL,
   `ci` varchar(45) DEFAULT NULL,
   `tipo` enum('frecuente','comun') DEFAULT 'comun',
+  `estado` enum('activo','eliminado') NOT NULL DEFAULT 'activo',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -67,14 +68,14 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id`, `user_id`, `nombre`, `ci`, `tipo`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'dario', '123', 'comun', '2018-06-16 02:56:19', '2018-08-31 20:49:34'),
-(6, NULL, 'juan', '456', 'comun', '2018-08-01 02:24:00', '2018-08-01 02:24:00'),
-(7, NULL, 'filemon', '987', 'comun', '2018-08-24 05:34:36', '2018-08-24 05:34:36'),
-(8, NULL, 'pedro', '789', 'comun', '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
-(9, 12, 'fer', '321', 'comun', '2018-08-26 19:55:53', '2018-09-25 20:56:11'),
-(10, 5, 'carlos', '654', 'comun', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
-(18, 18, 'oliver galarga', '55555', 'comun', '2018-09-25 21:04:34', '2018-09-25 21:04:34');
+INSERT INTO `cliente` (`id`, `user_id`, `nombre`, `ci`, `tipo`, `estado`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'dario', '123', 'comun', 'activo', '2018-06-16 02:56:19', '2018-08-31 20:49:34'),
+(6, NULL, 'juan', '456', 'comun', 'activo', '2018-08-01 02:24:00', '2018-08-01 02:24:00'),
+(7, NULL, 'filemon', '987', 'comun', 'activo', '2018-08-24 05:34:36', '2018-08-24 05:34:36'),
+(8, NULL, 'pedro', '789', 'comun', 'activo', '2018-08-26 19:53:54', '2018-08-26 19:53:54'),
+(9, 12, 'fer', '321', 'comun', 'activo', '2018-08-26 19:55:53', '2018-09-25 20:56:11'),
+(10, 5, 'carlos', '654', 'comun', 'activo', '2018-08-27 00:14:02', '2018-08-27 00:14:02'),
+(18, 18, 'oliver galarga', '55555', 'comun', 'activo', '2018-09-25 21:04:34', '2018-09-25 21:04:34');
 
 -- --------------------------------------------------------
 
@@ -99,9 +100,7 @@ INSERT INTO `detalle_pedido` (`id`, `pedido_id`, `producto_id`, `cantidad`, `sub
 (4, 6, 13, 1, '45.00', 'no tiene descripcion'),
 (15, 5, 37, 2, '60.00', 'ddddddddddddd'),
 (16, 5, 4, 2, '20.00', 'aaaaaaaaaaa'),
-(17, 5, 1, 1, '20.30', 'wwwwwwwwwwww'),
-(18, 8, 13, 2, '90.00', 'barcos de chocolate'),
-(19, 8, 40, 2, '60.00', 'cisne con miel');
+(17, 5, 1, 1, '20.30', 'wwwwwwwwwwww');
 
 -- --------------------------------------------------------
 
@@ -154,14 +153,6 @@ CREATE TABLE `his_cantidad` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `his_cantidad`
---
-
-INSERT INTO `his_cantidad` (`id`, `producto_id`, `cantidad_anterior`, `cantidad_actual`, `fecha`, `tipo`, `created_at`, `updated_at`) VALUES
-(1, 2, 22, 32, '2018-07-25 00:00:00', 'entrada', '2018-07-26 03:29:05', '2018-07-26 03:29:05'),
-(2, 1, 4, 8, '2018-07-25 00:00:00', 'entrada', '2018-07-26 03:35:48', '2018-07-26 03:35:48');
-
 -- --------------------------------------------------------
 
 --
@@ -179,6 +170,16 @@ CREATE TABLE `ingredientes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `ingredientes`
+--
+
+INSERT INTO `ingredientes` (`id`, `producto_id`, `nombre_ingrediente`, `cantidad`, `unidad_medida`, `descripcion`, `created_at`, `updated_at`) VALUES
+(1, 1, 'arina', '20', 'kilogramo', 'sin descrip', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
+(2, 1, 'arina', '20', 'kilogramo', 'sin descrip', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
+(3, 1, 'arina', '20', 'kilogramo', 'sin descrip', '2018-08-27 04:00:00', '2018-08-27 04:00:00'),
+(4, 1, 'arina', '20', 'kilogramo', 'sin descrip', '2018-08-27 04:00:00', '2018-08-27 04:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -190,7 +191,7 @@ CREATE TABLE `lote` (
   `producto_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
-  `estado` enum('activo','inactivo') NOT NULL
+  `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -269,10 +270,10 @@ CREATE TABLE `pedido` (
   `acuenta` decimal(11,2) DEFAULT '0.00',
   `saldo` decimal(11,2) DEFAULT '0.00',
   `total` decimal(11,2) DEFAULT '0.00',
-  `descuento` decimal(11,2) DEFAULT '0.00',
+  `descuento` decimal(11,2) NOT NULL DEFAULT '0.00',
   `total_importe` decimal(11,2) DEFAULT '0.00',
   `tipo` enum('tienda','movil') DEFAULT NULL,
-  `estado` enum('espera','preparado','entregado','cancelado') DEFAULT NULL,
+  `estado` enum('espera','preparado','entregado','cancelado') NOT NULL DEFAULT 'espera',
   `forma_de_pago` enum('tienda','banco','domicilio') DEFAULT NULL,
   `comprobante` varchar(45) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -285,8 +286,7 @@ CREATE TABLE `pedido` (
 
 INSERT INTO `pedido` (`id`, `cliente_id`, `fecha`, `fecha_entrega`, `hora_entrega`, `acuenta`, `saldo`, `total`, `descuento`, `total_importe`, `tipo`, `estado`, `forma_de_pago`, `comprobante`, `created_at`, `updated_at`) VALUES
 (5, 6, '2018-09-01', '2018-09-27', '12:00:00', '20.00', '80.30', '100.30', '0.00', '100.30', 'tienda', 'espera', 'banco', NULL, '2018-09-01 23:51:09', '2018-09-22 16:01:46'),
-(6, 6, '2018-09-01', '2018-09-28', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'cancelado', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-22 16:05:11'),
-(8, 10, '2018-09-25', '2018-09-30', '17:00:00', '100.00', '50.00', '100.00', '0.00', '150.00', 'movil', 'espera', 'domicilio', NULL, '2018-09-25 20:39:38', '2018-09-25 20:39:38');
+(6, 6, '2018-09-01', '2018-09-28', '11:00:00', '40.00', '5.00', '45.00', '0.00', '45.00', 'tienda', 'cancelado', 'domicilio', NULL, '2018-09-02 00:47:55', '2018-09-22 16:05:11');
 
 -- --------------------------------------------------------
 
@@ -402,9 +402,9 @@ CREATE TABLE `promocion` (
   `precio` decimal(11,2) DEFAULT '0.00',
   `fecha_inicio` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
-  `hora_inicio` time DEFAULT '00:00:00',
-  `hora_fin` time DEFAULT '00:00:00',
-  `estado` enum('vigente','expirado') DEFAULT NULL,
+  `hora_inicio` time NOT NULL DEFAULT '00:00:00',
+  `hora_fin` time NOT NULL DEFAULT '00:00:00',
+  `estado` enum('espera','vigente','expirado') NOT NULL DEFAULT 'espera',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -414,14 +414,13 @@ CREATE TABLE `promocion` (
 --
 
 INSERT INTO `promocion` (`id`, `producto_id`, `fecha`, `cantidad`, `precio`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `hora_fin`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 1, '2018-07-06 00:00:00', 0, '12.30', NULL, NULL, NULL, NULL, 'expirado', '2018-07-07 03:32:18', '2018-09-18 16:53:02'),
-(2, 1, '2018-07-07 00:00:00', 0, '10.00', NULL, NULL, NULL, NULL, 'vigente', '2018-07-07 03:37:59', '2018-09-18 14:30:52'),
-(3, 1, '2018-08-14 00:00:00', 0, '5.00', '2018-09-18', '2018-09-18', '13:00:00', '20:59:00', 'vigente', '2018-08-15 02:35:39', '2018-09-18 17:22:14'),
-(4, 37, '2018-08-31 16:36:51', 0, '20.00', '2018-09-18', '2018-10-24', '20:09:00', '20:09:00', 'vigente', '2018-08-31 21:36:51', '2018-09-18 17:16:45'),
-(5, 32, '2018-08-31 16:45:45', 0, '5.00', NULL, NULL, NULL, NULL, 'vigente', '2018-08-31 21:45:45', '2018-09-07 20:59:45'),
-(6, 35, '2018-09-01 22:22:54', 10, '5.00', '2018-09-01', '2018-09-05', NULL, NULL, 'vigente', '2018-09-02 02:22:54', '2018-09-18 16:47:57'),
-(7, 35, '2018-09-18 13:18:28', 20, '5.00', '2018-09-18', '2018-09-20', '00:00:00', '23:59:00', 'vigente', '2018-09-18 17:18:28', '2018-09-18 17:18:28'),
-(8, 37, '2018-09-18 13:03:22', 10, '20.00', '2018-09-18', '2018-09-20', NULL, NULL, 'vigente', '2018-09-18 17:03:22', '2018-09-18 17:03:22');
+(3, 1, '2018-08-14 00:00:00', 0, '5.00', '2018-09-18', '2018-09-18', '13:00:00', '20:59:00', 'expirado', '2018-08-15 02:35:39', '2018-09-28 23:59:40'),
+(4, 37, '2018-08-31 16:36:51', 0, '20.00', '2018-09-29', '2018-10-24', '12:00:00', '20:09:00', 'vigente', '2018-08-31 21:36:51', '2018-09-28 23:59:39'),
+(7, 35, '2018-09-18 13:18:28', 20, '5.00', '2018-09-29', '2018-09-20', '15:00:00', '23:59:00', 'expirado', '2018-09-18 17:18:28', '2018-09-28 23:59:40'),
+(9, 1, '2018-09-27 19:45:15', 10, '10.00', '2018-09-27', '2018-09-27', '13:00:00', '20:00:00', 'expirado', '2018-09-27 23:45:15', '2018-09-28 23:59:40'),
+(10, 33, '2018-09-29 21:08:19', 70, '15.00', '2018-09-29', '2018-09-29', '21:10:00', '21:15:00', 'expirado', '2018-09-30 01:08:19', '2018-09-30 01:08:19'),
+(11, 13, '2018-09-29 21:33:34', 50, '30.00', '2018-09-29', '2018-09-30', '00:00:00', '00:00:00', 'vigente', '2018-09-30 01:33:34', '2018-09-30 01:33:34'),
+(12, 21, '2018-09-29 22:03:00', 69, '40.00', '2018-09-29', '2018-09-30', '00:00:00', '00:00:00', 'espera', '2018-09-30 02:03:00', '2018-09-30 02:03:00');
 
 -- --------------------------------------------------------
 
@@ -438,7 +437,7 @@ CREATE TABLE `users` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
-  `rol` enum('administrador','vendedor','cliente') DEFAULT NULL,
+  `rol` enum('administrador','vendedor','cliente') NOT NULL,
   `estado` enum('activo','eliminado') NOT NULL DEFAULT 'activo',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -608,7 +607,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -620,13 +619,13 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `his_cantidad`
 --
 ALTER TABLE `his_cantidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `lote`
@@ -638,7 +637,7 @@ ALTER TABLE `lote`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `preparado`
@@ -656,7 +655,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `promocion`
 --
 ALTER TABLE `promocion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -742,6 +741,26 @@ ALTER TABLE `promocion`
 ALTER TABLE `venta`
   ADD CONSTRAINT `fk_venta_cliente1` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_venta_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `eventoPromocion` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-09-29 14:44:24' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+ update promocion set estado = 'vigente' 
+ where estado = 'espera'
+ and fecha_inicio < CURDATE()
+ or (fecha_inicio = CURDATE()
+ and hora_inicio <= CURTIME());
+
+ update promocion set estado = 'expirado' 
+ where estado = 'vigente'
+ and fecha_fin < CURDATE()
+ or (fecha_fin = CURDATE()
+ and hora_fin <= CURTIME());
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

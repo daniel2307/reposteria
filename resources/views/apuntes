@@ -6,7 +6,8 @@ php artisan schedule:run >> /dev/null 2>&1
 
 
 
-tartamiel.com
+
+tartamiel.com => sacar imagenes de aqui
 
 // para habilitar los eventos
 SET GLOBAL event_scheduler = ON;
