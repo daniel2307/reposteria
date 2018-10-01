@@ -105,7 +105,7 @@
                 @if(Auth::user()->rol == "vendedor")
                 <li class="menu-item" id="cma-cmp-pedido">
                     <a class="collapsible-header waves-effect arrow-r" id="a-pedido">
-                        <i class="fas fa-percentage mr-2"></i>
+                        <i class="fas fa-user-clock mr-2"></i>
                         Pedidos
                         <i class="fa fa-angle-down rotate-icon"></i>
                     </a>
@@ -161,13 +161,6 @@
                 @endif
 
                 @if(Auth::user()->rol == "administrador")
-                <li class="menu-item" id="cmi-users">
-                    <a class="collapsible-header waves-effect" href="{{ url('') }}" id="a-users">
-                        <i class="fas fa-users mr-2"></i>
-                        historial de clientes
-                    </a>
-                </li>
-
                 <li class="menu-item" id="cmi-pedido-pendiente">
                     <a class="collapsible-header waves-effect" href="{{ url('pedido-pendiente') }}" id="a-pedido-pendiente">
                         <i class="fas fa-boxes mr-2"></i>

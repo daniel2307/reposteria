@@ -36,4 +36,33 @@ class Pedido extends Model
     {
         return $this->hasMany('App\DetallePedido', 'pedido_id');
     }
+
+    public function getDia()
+    {
+        return $this->where([['fecha_entrega', '=', date('Y-m-d')], ['estado', '=', 'entregado']])->sum('total_importe');
+    }
+
+    public function getMes()
+    {
+        $pedidos = $this->select('fecha_entrega', 'total_importe')->get();
+        $total = 0;
+        foreach ($pedidos as $key => $pedido) {
+            if (date('Y-m', strtotime($pedido->fecha_entrega)) == date('Y-m')) {
+                $total += $pedido->total_importe;
+            }
+        }
+        return $total;
+    }
+
+    public function getAño()
+    {
+        $pedidos = $this->select('fecha_entrega', 'total_importe')->get();
+        $total = 0;
+        foreach ($pedidos as $key => $pedido) {
+            if (date('Y', strtotime($pedido->fecha_entrega)) == date('Y')) {
+                $total += $pedido->total_importe;
+            }
+        }
+        return $total;
+    }
 }

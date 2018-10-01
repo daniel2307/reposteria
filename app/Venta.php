@@ -41,4 +41,33 @@ class Venta extends Model
     {
         return $this->hasMany('App\DetalleVenta', 'venta_id');
     }
+
+    public function getDia()
+    {
+        return $this->where('fecha', '=', date('Y-m-d'))->sum('total_importe');
+    }
+
+    public function getMes()
+    {
+        $ventas = $this->select('fecha', 'total_importe')->get();
+        $total = 0;
+        foreach ($ventas as $key => $venta) {
+            if (date('Y-m', strtotime($venta->fecha)) == date('Y-m')) {
+                $total += $venta->total_importe;
+            }
+        }
+        return $total;
+    }
+
+    public function getAño()
+    {
+        $ventas = $this->select('fecha', 'total_importe')->get();
+        $total = 0;
+        foreach ($ventas as $key => $venta) {
+            if (date('Y', strtotime($venta->fecha)) == date('Y')) {
+                $total += $venta->total_importe;
+            }
+        }
+        return $total;
+    }
 }

@@ -62,7 +62,7 @@ class VentaController extends Controller
             }
             // insertamos la venta
             $venta = new Venta;
-            $venta->fecha = date("Y-m-d H:i:s");
+            $venta->fecha = date("Y-m-d");
             $venta->total = $request->total;
             $venta->descuento = $request->descuento;
             $venta->total_importe = $request->total_importe;
