@@ -43,4 +43,6 @@ END //
 
 DELIMITER ;
 
-errores en users datatable
+
+venta al imprimir el precio unitario muestyra el precio sin promocion
+implementar put para clientes api
