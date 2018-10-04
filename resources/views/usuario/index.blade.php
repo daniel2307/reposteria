@@ -69,10 +69,6 @@
                 {data: 'celular', name: 'celular'},
                 {data: 'email', name: 'email'},
                 {data: 'rol', name: 'rol'},
-                // { data: function ( row, type, set ) {
-                //     console.log(row);
-                    
-                // } },
                 {data: 'action', name: 'action', orderable: false, searchable: false}
             ],
             order: [[ 0, 'desc' ]],

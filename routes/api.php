@@ -34,7 +34,7 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('cliente/{cliente_id}', 'ClienteController@update');
+    Route::put('cliente/{cliente_id}', 'ClienteController@update');
     Route::get('cliente/{cliente_id}/edit', 'ClienteController@edit');
     Route::post('pedido', 'PedidoController@store');
     Route::get('pedido/{pedido_id}', 'PedidoController@show');

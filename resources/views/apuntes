@@ -30,15 +30,21 @@ DO
 BEGIN
  update promocion set estado = 'vigente' 
  where estado = 'espera'
- and fecha_inicio < CURDATE()
- or (fecha_inicio = CURDATE()
- and hora_inicio <= CURTIME());
+ and fecha_inicio < CURDATE();
+
+ update promocion set estado = 'vigente' 
+ where estado = 'espera'
+ and fecha_inicio = CURDATE()
+ and hora_inicio <= CURTIME();
 
  update promocion set estado = 'expirado' 
  where estado = 'vigente'
- and fecha_fin < CURDATE()
- or (fecha_fin = CURDATE()
- and hora_fin <= CURTIME());
+ and fecha_fin < CURDATE();
+
+ update promocion set estado = 'expirado' 
+ where estado = 'vigente'
+ and fecha_fin = CURDATE()
+ and hora_fin <= CURTIME();
 END //
 
 DELIMITER ;

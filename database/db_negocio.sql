@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2018 a las 04:07:11
+-- Tiempo de generación: 04-10-2018 a las 18:06:09
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -419,8 +419,9 @@ INSERT INTO `promocion` (`id`, `producto_id`, `fecha`, `cantidad`, `precio`, `fe
 (7, 35, '2018-09-18 13:18:28', 20, '5.00', '2018-09-29', '2018-09-20', '15:00:00', '23:59:00', 'expirado', '2018-09-18 17:18:28', '2018-09-28 23:59:40'),
 (9, 1, '2018-09-27 19:45:15', 10, '10.00', '2018-09-27', '2018-09-27', '13:00:00', '20:00:00', 'expirado', '2018-09-27 23:45:15', '2018-09-28 23:59:40'),
 (10, 33, '2018-09-29 21:08:19', 70, '15.00', '2018-09-29', '2018-09-29', '21:10:00', '21:15:00', 'expirado', '2018-09-30 01:08:19', '2018-09-30 01:08:19'),
-(11, 13, '2018-09-29 21:33:34', 50, '30.00', '2018-09-29', '2018-09-30', '00:00:00', '00:00:00', 'vigente', '2018-09-30 01:33:34', '2018-09-30 01:33:34'),
-(12, 21, '2018-09-29 22:03:00', 69, '40.00', '2018-09-29', '2018-09-30', '00:00:00', '00:00:00', 'espera', '2018-09-30 02:03:00', '2018-09-30 02:03:00');
+(11, 13, '2018-09-29 21:33:34', 50, '30.00', '2018-09-29', '2018-09-30', '00:00:00', '00:00:00', 'expirado', '2018-09-30 01:33:34', '2018-09-30 01:33:34'),
+(12, 21, '2018-09-29 22:03:00', 69, '40.00', '2018-09-29', '2018-09-30', '00:00:00', '00:00:00', 'expirado', '2018-09-30 02:03:00', '2018-09-30 02:03:00'),
+(13, 17, '2018-10-04 11:49:20', 78, '40.00', '2018-10-04', '2018-10-04', '11:50:00', '11:52:00', 'expirado', '2018-10-04 15:49:20', '2018-10-04 15:49:20');
 
 -- --------------------------------------------------------
 
@@ -655,7 +656,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `promocion`
 --
 ALTER TABLE `promocion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -749,15 +750,21 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` EVENT `eventoPromocion` ON SCHEDULE EVERY 1 MINUTE STARTS '2018-09-29 14:44:24' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
  update promocion set estado = 'vigente' 
  where estado = 'espera'
- and fecha_inicio < CURDATE()
- or (fecha_inicio = CURDATE()
- and hora_inicio <= CURTIME());
+ and fecha_inicio < CURDATE();
+
+ update promocion set estado = 'vigente' 
+ where estado = 'espera'
+ and fecha_inicio = CURDATE()
+ and hora_inicio <= CURTIME();
 
  update promocion set estado = 'expirado' 
  where estado = 'vigente'
- and fecha_fin < CURDATE()
- or (fecha_fin = CURDATE()
- and hora_fin <= CURTIME());
+ and fecha_fin < CURDATE();
+
+ update promocion set estado = 'expirado' 
+ where estado = 'vigente'
+ and fecha_fin = CURDATE()
+ and hora_fin <= CURTIME();
 END$$
 
 DELIMITER ;
