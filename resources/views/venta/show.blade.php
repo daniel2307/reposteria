@@ -44,7 +44,7 @@
                                     <tr>
                                         <td>{{ $value->producto->nombre }}</td>
                                         <td>{{ $value->cantidad }}</td>
-                                        <td>{{ $value->producto->costo }}</td>
+                                        <td>{{ round($value->subtotal / $value->cantidad , 2) }}</td>
                                         <td>{{ $value->subtotal }}</td>
                                     </tr>
                                     @endforeach

@@ -32,8 +32,14 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        $productos = (new Producto())->getProductos();
-        return view('pedido.create', compact('productos'));
+        // $productos = (new Producto())->getProductos();
+        $productos = Producto::select('producto.id', 'costo', 'cantidad', DB::raw('CONCAT(producto.nombre, " [ ", categoria_producto.nombre, " ]") as producto')) //'producto.nombre', 'categoria_producto.nombre as categoria', 
+        ->join('categoria_producto', 'producto.categoria_producto_id', '=', 'categoria_producto.id')
+        ->where(['producto.estado' => 'activo'])
+        ->orderBy('producto.nombre')
+        ->get();
+        return view
+        ('pedido.create', compact('productos'));
     }
 
     /**
