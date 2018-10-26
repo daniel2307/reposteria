@@ -71,7 +71,8 @@ class ClienteController extends Controller
         $cliente = Cliente::create($requestData);
         if (auth('api')) {
             return response()->json([
-                'message' => 'Cliente registrado', 
+                'message' => 'Cliente registrado',
+                'cliente_id' => $cliente->id,
             ]);
         }
         return redirect('cliente');
